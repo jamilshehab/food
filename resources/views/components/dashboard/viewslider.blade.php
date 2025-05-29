@@ -61,7 +61,7 @@
                 {{ $slider->links() }}
             </div>
         @else
-            <p class="text-gray-600 text-center text-xl mt-8">No Tickets Found.</p>
+            <p class="text-gray-600 text-center text-xl mt-8">No Items Found.</p>
         @endif
     </div>
 </x-app-layout>
