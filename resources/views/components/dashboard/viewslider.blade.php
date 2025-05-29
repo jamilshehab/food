@@ -9,7 +9,7 @@
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Content</th>
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Image</th>
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Submitted On</th>
-                            <th class="px-6 py-3 text-center text-sm font-semibold text-gray-700">Actions</th>
+                            {{-- <th class="px-6 py-3 text-center text-sm font-semibold text-gray-700">Actions</th> --}}
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200">
