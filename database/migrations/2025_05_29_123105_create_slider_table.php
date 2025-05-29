@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete(action: 'cascade');
             $table->text('slider_content')->text('')->nullable();
             $table->string('slider_image');    
-            $table->string('anchor')->nullable();
+            $table->string('anchor_link')->nullable();
             $table->string('anchor_text')->nullable();
             $table->timestamps();
         });
