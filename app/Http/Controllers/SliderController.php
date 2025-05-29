@@ -22,6 +22,7 @@ class SliderController extends Controller
     public function create()
     {
         //
+        return view('components.dashboard.form.addslider');
     }
 
     /**
