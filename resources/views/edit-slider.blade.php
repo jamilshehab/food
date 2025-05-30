@@ -1,12 +1,12 @@
 <x-app-layout>
 <div x-data="{ showSidebar: false }" class="relative flex w-full flex-col md:flex-row">
     <div x-cloak x-show="showSidebar" class="fixed inset-0 z-10 bg-surface-dark/10 backdrop-blur-xs md:hidden" aria-hidden="true" x-on:click="showSidebar = false" x-transition.opacity></div>
+
     <x-dashboard.sidebar/>
     <!-- main content  -->
     <div id="main-content" class="h-svh w-full overflow-y-auto p-4 bg-white dark:bg-neutral-950">
-        <x-dashboard.form.addslider/>
+     <x-dashboard.form.editslider/>
     </div>
-
     <!-- toggle button for small screen  -->
     <button class="fixed right-4 top-4 z-20 rounded-full bg-primary p-4 md:hidden text-on-primary dark:bg-primary-dark dark:text-on-primary-dark" x-on:click="showSidebar = ! showSidebar">
         <svg x-show="showSidebar" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-5" aria-hidden="true">
@@ -19,3 +19,5 @@
     </button>
 </div>
 </x-app-layout>
+
+ 
