@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Slider;
 use Illuminate\Http\Request;
-
-class SliderController extends Controller
+use Illuminate\Support\Facades\Storage;
+ class SliderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,11 @@ class SliderController extends Controller
     public function index()
     {
        $sliders = Slider::where('user_id', auth()->id())->latest()->paginate(8);
+<<<<<<< HEAD
         return view('home', compact('sliders'));
+=======
+        return view('slider', compact('sliders'));
+>>>>>>> 2dabd66284e257c731d4f4a90344e32b3173408a
     }
 
     /**
@@ -21,59 +25,48 @@ class SliderController extends Controller
      */
     public function create()
     {
-        //
-        return view('components.dashboard.form.addslider');
+        return view('add-slider');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
+    /**store the items below */
     public function store(Request $request)
    {
+     
     $validated = $request->validate([
         'slider_title' => 'required|string|max:255',
         'slider_content' => 'required|string',
         'anchor_link' => 'nullable|url',
         'anchor_text' => 'nullable|string|max:255',
-        'detail' => 'required|string',
         'slider_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
     ]);
 
-    $input = $request->except('slider_image'); // Get all except image first
+    // Handle file upload
+    if ($request->hasFile('slider_image')) {
+        $fileName = 'slider_'.md5(date('YmdHis')).'.'.$request->file('slider_image')->extension();
+        $request->file('slider_image')->storeAs('public/sliders', $fileName);
+        $validated['slider_image'] = 'sliders/'.$fileName; // Include folder path
+    }
+
+    // Add user_id to validated data
+    $validated['user_id'] = auth()->id();
+
+    Slider::create($validated);
     
-    if ($image = $request->file('slider_image')) {
-        $destinationPath = public_path('images/');
-        
-        // Create directory if it doesn't exist
-        if (!file_exists($destinationPath)) {
-            mkdir($destinationPath, 0777, true);
-        }
-         
-        $profileImage = 'slider_'.md5(date('YmdHis')).'.'.$image->extension();
-        
-        $image->move($destinationPath, $profileImage);
-        $input['slider_image'] = $profileImage;
-    }
-
-    // Assuming you're saving to a model
-    $slider = Slider::create($input);
-    return redirect()->back()->with('success', 'Slider created successfully');
+    return redirect()->route('slider.view')->with('success', 'Slider created successfully!');
 }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
-    {
-        //
+    { 
+     $slider=Slider::findOrFail($id);
+     $user=auth()->user();
+
+     if($slider->user_id !== $user->id){
+     return redirect()->back()->with('error', 'Not Authourized');
+     }
+
+     return view('sliders.edit-slider', compact('slider'));
+
     }
 
     /**
@@ -81,7 +74,31 @@ class SliderController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+    $slider = Slider::findOrFail($id);
+    $user = auth()->user();
+
+    // Authorization check (assuming sliders have a user_id column)
+    if ($slider->user_id !== $user->id) {
+        return redirect()->back()->with('error', 'Not Authorized');
+    }
+
+   $validated = $request->validate([
+        'slider_title' => 'required|string|max:255',
+        'slider_content' => 'required|string',
+        'anchor_link' => 'nullable|url',
+        'anchor_text' => 'nullable|string|max:255',
+        'slider_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ]);
+
+    // Handle file upload
+    if ($request->hasFile('slider_image')) {
+        $fileName = 'slider_'.md5(date('YmdHis')).'.'.$request->file('slider_image')->extension();
+        $request->file('slider_image')->storeAs('public/sliders', $fileName);
+        $validated['slider_image'] = $fileName; // Store only filename
+    }
+
+    $slider->update($validated);
+    return redirect()->route('slider.view')->with('success', 'Slider updated successfully!');
     }
 
     /**

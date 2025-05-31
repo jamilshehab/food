@@ -1,4 +1,4 @@
-  <form method="POST" action="{{ route('problems.store') }}" enctype="multipart/form-data">
+  <form method="POST" action="{{ route('slider.store') }}" enctype="multipart/form-data">
                 @csrf
 
                 <div>
@@ -24,7 +24,25 @@
                         class="block w-full mt-1 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-slate-800 file:text-white hover:file:bg-slate-700" />
                     <x-input-error :messages="$errors->get('slider_image')" class="mt-2" />       
                 </div>
- 
+                 
+                 <!-- Anchor Link -->
+            <div class="mt-4">
+                <x-input-label for="anchor_link" :value="__('Button Link (Optional)')" />
+                <x-text-input id="anchor_link" name="anchor_link" type="url" 
+                    :value="old('anchor_link')" 
+                    class="mt-1 block w-full" />
+                <x-input-error :messages="$errors->get('anchor_link')" class="mt-2" />
+            </div>
+
+            <!-- Anchor Text -->
+            <div class="mt-4">
+                <x-input-label for="anchor_text" :value="__('Button Text (Optional)')" />
+                <x-text-input id="anchor_text" name="anchor_text" type="text" 
+                     :value="old('anchor_text')" 
+                     class="mt-1 block w-full" />
+                <x-input-error :messages="$errors->get('anchor_text')" class="mt-2" />
+            </div>
+
                 <!-- Submit Button -->
                 <div class="mt-6">
                     <button type="submit"
