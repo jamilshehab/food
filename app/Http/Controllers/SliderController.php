@@ -13,11 +13,7 @@ use Illuminate\Support\Facades\Storage;
     public function index()
     {
        $sliders = Slider::where('user_id', auth()->id())->latest()->paginate(8);
-<<<<<<< HEAD
-        return view('home', compact('sliders'));
-=======
         return view('slider', compact('sliders'));
->>>>>>> 2dabd66284e257c731d4f4a90344e32b3173408a
     }
 
     /**
