@@ -13,7 +13,7 @@ class SliderController extends Controller
     public function index()
     {
        $sliders = Slider::where('user_id', auth()->id())->latest()->paginate(8);
-        return view('index-2', compact('sliders'));
+        return view('home', compact('sliders'));
     }
 
     /**
