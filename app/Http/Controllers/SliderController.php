@@ -53,13 +53,16 @@ use Illuminate\Support\Facades\Storage;
      */
     public function edit(string $id)
     { 
+  
      $slider=Slider::findOrFail($id);
      $user=auth()->user();
+
     if($slider->user_id !== $user->id){
      return redirect()->back()->with('error', 'Not Authourized');
      }
 
-     return view('slider.edit', compact('slider'));
+     
+     return view('slider.edit')->with(['slider' => $slider]);
 
     }
 

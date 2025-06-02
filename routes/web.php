@@ -20,9 +20,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/addslider',[SliderController::class,'store'])->name('slider.store');
     Route::patch('/editslider',[SliderController::class,'update'])->name('slider.update');
     Route::get('/sliders/{id}/edit', [SliderController::class, 'edit'])->name('slider.edit');
-
-// Update a problem
-Route::put('/sliders/{id}', [SliderController::class, 'update'])->name('slider.update');
+    Route::put('/sliders/{id}', [SliderController::class, 'update'])->name('slider.update');
 
     Route::delete('/sliders/{id}', [SliderController::class, 'destroy'])->name('slider.destroy'); 
     Route::get('/viewabout',[AboutController::class,'index'])->name('about.view');

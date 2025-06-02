@@ -25,7 +25,7 @@
                 <!-- Image Upload -->
                 <div class="mt-4">
                     <x-input-label for="slider_image" :value="__('Upload Image')" />
-                    <input type="file" multiple ="images[]" id="image"   
+                    <input type="file" name ="images[]" multiple  id="image"   
                         class="block w-full mt-1 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-slate-800 file:text-white hover:file:bg-slate-700" />
                     <x-input-error :messages="$errors->get('images')" class="mt-2" /> 
                       {{-- @if($about->image)

@@ -30,8 +30,7 @@
                                         <img src="{{ asset('storage/' . $menu->image) }}" 
                                              alt="Slider Image" 
                                              class="w-16 h-auto rounded-md">
-                                    @else
-                                        —
+                                    
                                     @endif
                                 </td>
                                 

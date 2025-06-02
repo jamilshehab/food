@@ -19,20 +19,22 @@
                     </thead>
                     <tbody class="divide-y divide-gray-200">
                              <tr class="hover:bg-gray-50">
-                                <td class="px-6 py-4 text-sm text-gray-800">{{ Str::limit($aboutsection->title, 4) }}</td>
-                                <td class="px-6 py-4 text-sm text-gray-800">{{ Str::limit($aboutsection->content, limit: 15) }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">{{ Str::limit($about->title, 4) }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">{{ Str::limit($about->content, limit: 15) }}</td>
                                 <td class="px-6 py-4 text-sm text-gray-800">
-                                    @if($aboutsection->image)
-                                        <img src="{{ asset('storage/' . $aboutsection->image) }}" 
+                                    @if($about->image)
+                                        @foreach($about as $image)
+                                        <img src="{{ asset('storage/' . $image->image) }}" 
                                              alt="Slider Image" 
                                              class="w-16 h-auto rounded-md">
+                                        @endforeach
                                     @else
                                         —
                                     @endif
                                 </td>
                                 
                                 <td class="px-6 py-4 text-sm text-gray-600">
-                                    {{ $aboutsection->created_at->format('M d, Y H:i') }}
+                                    {{ $about->created_at->format('M d, Y H:i') }}
                                 </td>
                                 <td class="px-6 py-4 text-center space-x-2">
                                     
@@ -74,3 +76,4 @@
     </button>
 </div>
 </x-app-layout>
+ 

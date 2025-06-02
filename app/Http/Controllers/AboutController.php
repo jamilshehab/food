@@ -11,22 +11,19 @@ class AboutController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        //
-        $user=auth()->id();
-        $about=About::where('user_id', $user)->get();
-        return view('about.view', compact(var_name: 'about'));
-    }
+{
+    $about = About::where('user_id', auth()->id())->first();
 
+    return view('about.view', compact('about'));
+}
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        $user = auth()->id();
-        $about = About::where('user_id', $user)->first();
+       
 
-       return view('about.add' ,compact('about'));
+       return view('about.add' );
     }
 
     /**
