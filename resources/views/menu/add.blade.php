@@ -25,8 +25,9 @@
                 <div class="mt-4">
                     <x-input-label for="content" :value="__('Content')" />
                     <textarea id="description" name="description" rows="4"
-                        class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                        placeholder="your content" :value="old('description')" required > </textarea>
+                     class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                     placeholder="your content"
+                      required>{{ old('description') }}</textarea>
                     <x-input-error :messages="$errors->get('description')" class="mt-2" />
                 </div>
 
