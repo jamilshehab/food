@@ -38,7 +38,10 @@
                         class="block w-full mt-1 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-slate-800 file:text-white hover:file:bg-slate-700" />
                     <x-input-error :messages="$errors->get('image')" class="mt-2" /> 
                 </div>
-              
+
+                  <img id="preview" class="my-4 w-20 h-20" src="" alt="Image preview will appear here">
+
+                
                 <div class="mt-6">
                     <button type="submit"
                         class="w-full px-4 py-3 font-bold text-white bg-slate-800 rounded-md hover:bg-slate-700 transition duration-200">
@@ -58,4 +61,5 @@
         <span class="sr-only">sidebar toggle</span>
     </button>
 </div>
+<script src="{{ asset(path: 'assets/js/image-display.js') }}"></script>
 </x-app-layout>

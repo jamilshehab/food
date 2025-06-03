@@ -18,4 +18,5 @@
         <span class="sr-only">sidebar toggle</span>
     </button>
 </div>
+
 </x-app-layout>

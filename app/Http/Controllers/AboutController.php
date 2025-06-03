@@ -29,7 +29,7 @@ class AboutController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-   public function store(Request $request)
+ public function store(Request $request)
 {
     $validated = $request->validate([
         'title' => 'required|string|max:255',
@@ -37,14 +37,18 @@ class AboutController extends Controller
         'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
     ]);
 
+    // Create About entry
     $about = About::create(array_merge($validated, [
         'user_id' => auth()->id()
     ]));
 
-    $imagePaths = [];
     if ($request->hasFile('images')) {
+        $imagePaths = [];
+
         foreach ($request->file('images') as $image) {
-            $path = $image->store('public/about', 'public');
+            // Store in 'about' directory of public disk
+            $path = $image->store('about', 'public');  // Corrected here
+
             $imagePaths[] = [
                 'about_id' => $about->id,
                 'images' => $path,
@@ -53,13 +57,12 @@ class AboutController extends Controller
             ];
         }
 
+        // Bulk insert image records
         AboutImage::insert($imagePaths);
     }
 
     return redirect()->route('about.view')->with('success', 'About created successfully with images.');
 }
-
-     
 
     /**
      * Show the form for editing the specified resource.

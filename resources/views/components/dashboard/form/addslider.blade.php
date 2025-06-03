@@ -23,9 +23,8 @@
                     <input type="file" name="slider_image" id="slider_image"   
                         class="block w-full mt-1 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-slate-800 file:text-white hover:file:bg-slate-700" />
                     <x-input-error :messages="$errors->get('slider_image')" class="mt-2" /> 
-                     
-                     
-                </div>
+                   <img id="preview" class="my-4 w-20 h-20" src="" alt="Image preview will appear here">
+               </div>
                  
                  <!-- Anchor Link -->
             <div class="mt-4">
