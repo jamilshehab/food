@@ -25,8 +25,12 @@
              
          <link href="{{ asset('assets/libs/swiper/css/swiper.min.css') }}" rel="stylesheet">
  
-        <link href="{{ asset('assets/css/tailwind.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset(path: 'assets/css/tailwind.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
+        <link href="{{ asset(path: 'assets/css/style.min.css') }}" rel="stylesheet" type="text/css">
+
+        <!-- #region -->
         <!-- Styles / Scripts -->
         {{-- @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
             @vite(['resources/css/app.css', 'resources/js/app.js'])  
@@ -39,5 +43,8 @@
     <script src="{{ asset('assets/libs/feather-icons/feather.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins.init.js') }}"></script>
     <script src="{{ asset('assets/libs/swiper/js/swiper.min.js') }}"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
     <script src="{{ asset('assets/js/app.js') }}"></script>
+    <script src="{{ asset('assets/js/script.js') }}"></script>
 </html>

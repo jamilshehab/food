@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
      */
     public function index()
     {
-       $sliders = Slider::where('user_id', auth()->id())->latest()->paginate(8);
+       $sliders = Slider::where(column: 'user_id', operator: '=', value: auth()->id())->latest()->paginate(8);
         return view('slider.slider', compact('sliders'));
     }
 
@@ -26,7 +26,6 @@ use Illuminate\Support\Facades\Storage;
     /**store the items below */
     public function store(Request $request)
    {
-     
     $validated = $request->validate([
         'slider_title' => 'required|string|max:255',
         'slider_content' => 'required|string',

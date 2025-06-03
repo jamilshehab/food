@@ -16,8 +16,8 @@
             <!-- Logo container-->
             <a class="logo" href="index.html">
                 <span class="inline-block dark:hidden">
-                    <img src="{{asset('assets/images/logo-dark.png')}}" class="l-dark" alt="">
-                    <img src="{{asset('assets/images/logo-light.png')}}" class="l-light" alt="">
+                    <img src="{{asset('assets/images/logo/logo-dark.png')}}" class="l-dark" alt="">
+                    <img src="{{asset('assets/images/logo/logo-light.png')}}" class="l-light" alt="">
                 </span>
                 <img src="{{asset('assets/images/logo-light.png')}}" class="hidden dark:inline-block" alt="">
             </a>
@@ -50,64 +50,59 @@
 
                     <li><a href="#about" class="menu-item">Our Story</a></li>
 
-                    <li class="menu-item"><a href="#"> Menus </a><span></li>
+                    <li ><a href="#menu" class="menu-item"> Menus </a><span></li>
+                    <li ><a href="{{route('dashboard')}}" class="menu-item"> Dashboard </a><span></li>
 
-                 </ul><!--end navigation menu-->
-            </div><!--end navigation-->
-        </div><!--end container-->
-    </nav><!--end header-->
-    <!-- End Navbar -->
-
+                 </ul> 
+            </div> 
+        </div> 
+    </nav> 
+ 
     <!-- Start Hero -->
    <section class="swiper-slider-hero relative block h-screen" id="home">
-            <div class="swiper-container absolute end-0 top-0 w-full h-full">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide flex items-center overflow-hidden">
-                        <div class="slide-inner absolute end-0 top-0 w-full h-full slide-bg-image flex items-center bg-center;" data-background="assets/images/bg/bg1.jpg">
-                            <div class="absolute inset-0 bg-slate-900/60"></div>
-                            <div class="container relative">
-                                <div class="grid grid-cols-1">
-                                    <h1 class="font-semibold lg:leading-normal leading-normal text-4xl lg:text-6xl text-white mb-5">Taste The <br> Difference</h1>
-                                    <p class="text-white/70 text-lg max-w-xl">My veggie-packed take on a deli-style pasta salad! I swap spiralized summer squash for half the noodles and a creamy tahini dressing.</p>
-                                
-                                    <div class="mt-8">
-                                        <a href="menu-one.html" class="py-2 px-5 inline-block tracking-wide align-middle duration-500 text-base text-center text-amber-500 hover:text-white bg-transparent hover:bg-amber-500 border border-amber-500">View Our Menu</a>
-                                    </div>
-                                </div><!--end grid-->
-                            </div><!--end container-->
-                        </div><!-- end slide-inner --> 
-                    </div> <!-- end swiper-slide -->
+    <div class="swiper-container absolute end-0 top-0 w-full h-full">
+        <div class="swiper-wrapper">
+            @foreach ($sliders as $slider)
+                <div class="swiper-slide flex items-center overflow-hidden">
+                    <div class="slide-inner absolute end-0 top-0 w-full h-full slide-bg-image flex items-center bg-center bg-cover bg-no-repeat"
+                        style="background-image: url('{{ asset('storage/' . $slider->slider_image) }}')">  
+                        <div class="absolute inset-0 bg-slate-900/60"></div>
+                        <div class="container relative">
+                            <div class="grid grid-cols-1">
+                                <h1 class="font-semibold lg:leading-normal leading-normal text-4xl lg:text-6xl text-white mb-5">
+                                    {{ $slider->slider_title }}
+                                </h1>
+                                <p class="text-white/70 text-lg max-w-xl">
+                                    {{ $slider->slider_content }}
+                                </p>
 
-                    <div class="swiper-slide flex items-center overflow-hidden">
-                        <div class="slide-inner absolute end-0 top-0 w-full h-full slide-bg-image flex items-center bg-center;" data-background="assets/images/bg/bg2.jpg">
-                            <div class="absolute inset-0 bg-slate-900/60"></div>
-                            <div class="container relative">
-                                <div class="grid grid-cols-1">
-                                    <h1 class="font-semibold lg:leading-normal leading-normal text-4xl lg:text-6xl text-white mb-5">Taste The <br> Everyone</h1>
-                                    <p class="text-white/70 text-lg max-w-xl">My veggie-packed take on a deli-style pasta salad! I swap spiralized summer squash for half the noodles and a creamy tahini dressing.</p>
-                                
-                                    <div class="mt-8">
-                                        <a href="reservation.html" class="py-2 px-5 inline-block tracking-wide align-middle duration-500 text-base text-center text-amber-500 hover:text-white bg-transparent hover:bg-amber-500 border border-amber-500">Book A Table</a>
-                                    </div>
-                                </div><!--end grid-->
-                            </div><!--end container-->
-                        </div><!-- end slide-inner --> 
-                    </div> <!-- end swiper-slide -->
-                </div>
-                <!-- end swiper-wrapper -->
+                                <div class="mt-8">
+                                    <a href="{{ $slider->anchor_link }}"
+                                       class="py-2 px-5 inline-block tracking-wide align-middle duration-500 text-base text-center text-amber-500 hover:text-white bg-transparent hover:bg-amber-500 border border-amber-500">
+                                        {{ $slider->anchor_text }}
+                                    </a>
+                                </div>
+                            </div><!--end grid-->
+                        </div><!--end container-->
+                    </div><!-- end slide-inner --> 
+                </div> <!-- end swiper-slide -->
+            @endforeach
+        </div>
+        <!-- end swiper-wrapper -->
 
-                <!-- swipper controls -->
-                <!-- <div class="swiper-pagination"></div> -->
-                <div class="swiper-button-next bg-transparent size-[35px] leading-[35px] -mt-[30px] bg-none border border-solid border-white/50 text-white hover:bg-amber-500 hover:border-amber-500 rounded-full text-center"></div>
-                <div class="swiper-button-prev bg-transparent size-[35px] leading-[35px] -mt-[30px] bg-none border border-solid border-white/50 text-white hover:bg-amber-500 hover:border-amber-500 rounded-full text-center"></div>
-            </div><!--end container-->
-        </section><!--end section-->
+        <!-- Swiper controls -->
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-next bg-transparent size-[35px] leading-[35px] -mt-[30px] bg-none border border-solid border-white/50 text-white hover:bg-amber-500 hover:border-amber-500 rounded-full text-center"></div>
+        <div class="swiper-button-prev bg-transparent size-[35px] leading-[35px] -mt-[30px] bg-none border border-solid border-white/50 text-white hover:bg-amber-500 hover:border-amber-500 rounded-full text-center"></div>
+    </div><!--end container-->
+</section>
+<!--end section-->
     <!-- End Hero -->
 
-    <section class="relative md:py-24 py-16">
+    <section class="relative md:py-24 py-16" id="about">
         <div class="container relative">
             <div class="grid md:grid-cols-12 grid-cols-1 gap-6 items-center">
-                <div class="lg:col-span-4 md:col-span-12 lg:order-2">
+                <div class="lg:col-span-4 md:col-span-12 lg:order-2" data-aos="fade-down">
                     <div class="text-center">
                         <!-- <h6 class="uppercase font-semibold">About Us</h6> -->
 
@@ -122,19 +117,16 @@
                             of cocktails, spirits, beers and wines are all made with integrity and offer something for
                             every guest.</p>
 
-                        <div class="mt-4">
-                            <a href="aboutus.html" class="hover:text-amber-500 h6">Read More <i
-                                    class="mdi mdi-arrow-right"></i></a>
-                        </div>
+                        
                     </div>
                 </div>
 
-                <div class="lg:col-span-4 md:col-span-6 lg:order-1">
-                    <img src="assets/images/menu/m1.jpg" class="rounded shadow dark:shadow-gray-800" alt="">
+                <div class="lg:col-span-4 md:col-span-6 lg:order-1" data-aos="fade-down">
+                    <img src="{{asset('assets/images/about/m1.jpg')}}" class="rounded shadow dark:shadow-gray-800" alt="">
                 </div>
 
-                <div class="lg:col-span-4 md:col-span-6 lg:order-3">
-                    <img src="assets/images/menu/m2.jpg" class="rounded shadow dark:shadow-gray-800" alt="">
+                <div class="lg:col-span-4 md:col-span-6 lg:order-3" data-aos="fade-down">
+                    <img src="{{asset('assets/images/about/m2.jpg')}}" class="rounded shadow dark:shadow-gray-800" alt="">
                 </div>
             </div>
         </div>
@@ -146,142 +138,49 @@
 
     <!-- End -->
 
-    <section class="relative py-36 bg-[url('../../assets/images/bg/pages.html')] bg-no-repeat bg-fixed bg-top bg-cover">
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/50 to-slate-900"></div>
-        <div class="absolute bottom-0 start-0 end-0 text-center px-3">
-            <h4 class="md:text-3xl text-2xl md:leading-normal leading-normal font-semibold text-white mb-6">Our Menus
-            </h4>
-        </div>
-    </section>
+    <section class="relative py-36 bg-no-repeat bg-fixed bg-top bg-cover" data-aos="fade-down" 
+         style="background-image: url('{{ asset('assets/images/bg/pages.jpg') }}')" 
+         id="menu">
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/50 to-slate-900"></div>
+    <div class="absolute bottom-0 start-0 end-0 text-center px-3">
+        <h4 class="md:text-3xl text-2xl md:leading-normal leading-normal font-semibold text-white mb-6">
+            Our Menus
+        </h4>
+    </div>
+</section>
 
     <!-- Start -->
-    <section class="relative md:py-24 py-16">
-        <div class="container relative">
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="flex items-center">
-                    <img src="assets/images/menu/1.jpg"
-                        class="rounded-full size-16 mx-auto group-hover:animate-[spin_10s_linear_infinite]" alt="">
+      <section class="relative md:py-24 py-16">
+    <div class="container relative">
+        <div class="grid md:grid-cols-2 gap-6">
+
+            @foreach ($menus as $menu)
+                <div class="flex items-center" key="{{ $menu->id }}" data-aos="fade-down">
+                    <img src="{{ asset('storage/' . $menu->image) }}"
+                         class="rounded-full size-16 mx-auto group-hover:animate-[spin_10s_linear_infinite]"
+                         alt="">
 
                     <div class="ms-3 w-full">
-                        <div
-                            class="flex justify-between items-center pb-2 border-b border-gray-100 dark:border-gray-800">
-                            <a href="#" class="text-lg h5 block hover:text-amber-500 duration-500">Black bean dip</a>
-                            <h5 class="text-amber-500 font-medium">$25.00</h5>
+                        <div class="flex justify-between items-center pb-2 border-b border-gray-100 dark:border-gray-800">
+                            <a href="#" class="text-lg h5 block hover:text-amber-500 duration-500">
+                                {{ $menu->name }}
+                            </a>
+                            <h5 class="text-amber-500 font-medium">
+                                {{ $menu->price }} $
+                            </h5>
                         </div>
 
-                        <p class="text-slate-400 mt-2">A reader will be distracted by the readable</p>
+                        <p class="text-slate-400 mt-2">
+                            {{ $menu->description }}
+                        </p>
                     </div>
-                </div><!--end content-->
+                </div>
+            @endforeach
 
-                <div class="flex items-center">
-                    <img src="assets/images/menu/2.jpg"
-                        class="rounded-full size-16 mx-auto group-hover:animate-[spin_10s_linear_infinite]" alt="">
-
-                    <div class="ms-3 w-full">
-                        <div
-                            class="flex justify-between items-center pb-2 border-b border-gray-100 dark:border-gray-800">
-                            <a href="#" class="text-lg h5 block hover:text-amber-500 duration-500">Onion Pizza</a>
-                            <h5 class="text-amber-500 font-medium">$25.00</h5>
-                        </div>
-
-                        <p class="text-slate-400 mt-2">A reader will be distracted by the readable</p>
-                    </div>
-                </div><!--end content-->
-
-                <div class="flex items-center">
-                    <img src="assets/images/menu/3.jpg"
-                        class="rounded-full size-16 mx-auto group-hover:animate-[spin_10s_linear_infinite]" alt="">
-
-                    <div class="ms-3 w-full">
-                        <div
-                            class="flex justify-between items-center pb-2 border-b border-gray-100 dark:border-gray-800">
-                            <a href="#" class="text-lg h5 block hover:text-amber-500 duration-500">Chicken Breast</a>
-                            <h5 class="text-amber-500 font-medium">$25.00</h5>
-                        </div>
-
-                        <p class="text-slate-400 mt-2">A reader will be distracted by the readable</p>
-                    </div>
-                </div><!--end content-->
-
-                <div class="flex items-center">
-                    <img src="assets/images/menu/4.jpg"
-                        class="rounded-full size-16 mx-auto group-hover:animate-[spin_10s_linear_infinite]" alt="">
-
-                    <div class="ms-3 w-full">
-                        <div
-                            class="flex justify-between items-center pb-2 border-b border-gray-100 dark:border-gray-800">
-                            <a href="#" class="text-lg h5 block hover:text-amber-500 duration-500">Veg Pizza</a>
-                            <h5 class="text-amber-500 font-medium">$25.00</h5>
-                        </div>
-
-                        <p class="text-slate-400 mt-2">A reader will be distracted by the readable</p>
-                    </div>
-                </div><!--end content-->
-
-                <div class="flex items-center">
-                    <img src="assets/images/menu/5.jpg"
-                        class="rounded-full size-16 mx-auto group-hover:animate-[spin_10s_linear_infinite]" alt="">
-
-                    <div class="ms-3 w-full">
-                        <div
-                            class="flex justify-between items-center pb-2 border-b border-gray-100 dark:border-gray-800">
-                            <a href="#" class="text-lg h5 block hover:text-amber-500 duration-500">Cordon Bleu</a>
-                            <h5 class="text-amber-500 font-medium">$25.00</h5>
-                        </div>
-
-                        <p class="text-slate-400 mt-2">A reader will be distracted by the readable</p>
-                    </div>
-                </div><!--end content-->
-
-                <div class="flex items-center">
-                    <img src="assets/images/menu/6.jpg"
-                        class="rounded-full size-16 mx-auto group-hover:animate-[spin_10s_linear_infinite]" alt="">
-
-                    <div class="ms-3 w-full">
-                        <div
-                            class="flex justify-between items-center pb-2 border-b border-gray-100 dark:border-gray-800">
-                            <a href="#" class="text-lg h5 block hover:text-amber-500 duration-500">Boerewors</a>
-                            <h5 class="text-amber-500 font-medium">$25.00</h5>
-                        </div>
-
-                        <p class="text-slate-400 mt-2">A reader will be distracted by the readable</p>
-                    </div>
-                </div><!--end content-->
-
-                <div class="flex items-center">
-                    <img src="assets/images/menu/7.jpg"
-                        class="rounded-full size-16 mx-auto group-hover:animate-[spin_10s_linear_infinite]" alt="">
-
-                    <div class="ms-3 w-full">
-                        <div
-                            class="flex justify-between items-center pb-2 border-b border-gray-100 dark:border-gray-800">
-                            <a href="#" class="text-lg h5 block hover:text-amber-500 duration-500">Tarte Tatin</a>
-                            <h5 class="text-amber-500 font-medium">$25.00</h5>
-                        </div>
-
-                        <p class="text-slate-400 mt-2">A reader will be distracted by the readable</p>
-                    </div>
-                </div><!--end content-->
-
-                <div class="flex items-center">
-                    <img src="assets/images/menu/8.jpg"
-                        class="rounded-full size-16 mx-auto group-hover:animate-[spin_10s_linear_infinite]" alt="">
-
-                    <div class="ms-3 w-full">
-                        <div
-                            class="flex justify-between items-center pb-2 border-b border-gray-100 dark:border-gray-800">
-                            <a href="#" class="text-lg h5 block hover:text-amber-500 duration-500">Green Tea</a>
-                            <h5 class="text-amber-500 font-medium">$25.00</h5>
-                        </div>
-
-                        <p class="text-slate-400 mt-2">A reader will be distracted by the readable</p>
-                    </div>
-                </div><!--end content-->
-            </div>
-        </div><!--end container-->
-
-        
-    </section><!--end section-->
+        </div>
+    </div>
+</section>
+     <!--end section-->
     <!-- End -->
 
     <!-- Footer Start -->
@@ -321,31 +220,24 @@
                             </div>
 
                             <ul class="list-none text-center mt-6">
-                                <li class="inline"><a href="https://1.envato.market/veganfry" target="_blank"
-                                        class="size-8 inline-flex items-center justify-center tracking-wide align-middle text-base border border-gray-800 hover:border-amber-500 rounded-md hover:bg-amber-500"><i
-                                            data-feather="shopping-cart" class="size-4 align-middle"
-                                            title="Buy Now"></i></a></li>
-                                <li class="inline"><a href="https://dribbble.com/shreethemes" target="_blank"
-                                        class="size-8 inline-flex items-center justify-center tracking-wide align-middle text-base border border-gray-800 hover:border-amber-500 rounded-md hover:bg-amber-500"><i
-                                            data-feather="dribbble" class="size-4 align-middle"
-                                            title="dribbble"></i></a></li>
-                                <li class="inline"><a href="http://linkedin.com/company/shreethemes" target="_blank"
+                                 
+                                <li class="inline"><a href="#" target="_blank"
                                         class="size-8 inline-flex items-center justify-center tracking-wide align-middle text-base border border-gray-800 hover:border-amber-500 rounded-md hover:bg-amber-500"><i
                                             data-feather="linkedin" class="size-4 align-middle"
                                             title="Linkedin"></i></a></li>
-                                <li class="inline"><a href="https://www.facebook.com/shreethemes" target="_blank"
+                                <li class="inline"><a href="#" target="_blank"
                                         class="size-8 inline-flex items-center justify-center tracking-wide align-middle text-base border border-gray-800 hover:border-amber-500 rounded-md hover:bg-amber-500"><i
                                             data-feather="facebook" class="size-4 align-middle"
                                             title="facebook"></i></a></li>
-                                <li class="inline"><a href="https://www.instagram.com/shreethemes/" target="_blank"
+                                <li class="inline"><a href="#" target="_blank"
                                         class="size-8 inline-flex items-center justify-center tracking-wide align-middle text-base border border-gray-800 hover:border-amber-500 rounded-md hover:bg-amber-500"><i
                                             data-feather="instagram" class="size-4 align-middle"
                                             title="instagram"></i></a></li>
-                                <li class="inline"><a href="https://twitter.com/shreethemes" target="_blank"
+                                <li class="inline"><a href="#" target="_blank"
                                         class="size-8 inline-flex items-center justify-center tracking-wide align-middle text-base border border-gray-800 hover:border-amber-500 rounded-md hover:bg-amber-500"><i
                                             data-feather="twitter" class="size-4 align-middle" title="twitter"></i></a>
                                 </li>
-                                <li class="inline"><a href="mailto:support@shreethemes.in"
+                                <li class="inline"><a href="#"
                                         class="size-8 inline-flex items-center justify-center tracking-wide align-middle text-base border border-gray-800 hover:border-amber-500 rounded-md hover:bg-amber-500"><i
                                             data-feather="mail" class="size-4 align-middle" title="email"></i></a></li>
                             </ul><!--end icon-->
@@ -360,8 +252,8 @@
                 <div class="grid md:grid-cols-1">
                     <p class="mb-0">©
                         <script>document.write(new Date().getFullYear())</script> Veganfry. Design with <i
-                            class="mdi mdi-heart text-red-600"></i> by <a href="https://shreethemes.in/" target="_blank"
-                            class="text-reset">Shreethemes</a>.
+                            class="mdi mdi-heart text-red-600"></i> by <a href="#" target="_blank"
+                            class="text-reset">Jamil Shehab</a>.
                     </p>
                 </div><!--end grid-->
             </div><!--end container-->

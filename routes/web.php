@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Route;
 
  
 Route::middleware('auth')->group(function () {
-    Route::get('/',  [HomeController::class,'index'])->name('home');
+    Route::get('/',  [HomeController::class,'slider'])->name('home');
+    Route::get('/menu',  [HomeController::class,'menu'])->name('menus');
+
     Route::get('/dashboard', [DashboardController::class,'dashboard'])->name('dashboard');
     //sliders
     
