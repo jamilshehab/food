@@ -47,7 +47,7 @@
             <!-- Anchor Link -->
             <div class="mt-4">
                 <x-input-label for="anchor_link" :value="__('Button Link (Optional)')" />
-                <x-text-input id="anchor_link" name="anchor_link" type="url" 
+                <x-text-input id="anchor_link" name="anchor_link" type="text" 
                     value="{{ old('anchor_link', $slider->anchor_link) }}" 
                     class="mt-1 block w-full" />
                 <x-input-error :messages="$errors->get('anchor_link')" class="mt-2" />

@@ -81,8 +81,8 @@ use Illuminate\Support\Facades\Storage;
    $validated = $request->validate([
         'slider_title' => 'required|string|max:255',
         'slider_content' => 'required|string',
-        'anchor_link' => 'nullable|string',
-        'anchor_text' => 'nullable|string|max:255',
+        'anchor_link' => 'required|string',
+        'anchor_text' => 'required|string|max:255',
         'slider_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
     ]);
 
