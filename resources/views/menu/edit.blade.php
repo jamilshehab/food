@@ -11,17 +11,25 @@
         <form method="POST" action="{{ route('menu.update', $menu->id) }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
+
             <div>
                 <x-input-label for="title" :value="__('Slider Title')" />
-                <x-text-input id="title" name="slider_title" type="text" 
+                <x-text-input id="title" name="title" type="text" 
                     value="{{ old('title', $menu->title) }}" 
                     class="mt-1 block w-full" required />
                 <x-input-error :messages="$errors->get('title')" class="mt-2" />
             </div>
-
+             <div>
+                <x-input-label for="price" :value="__('Price Title')" />
+                <x-text-input id="price" name="price" type="number" 
+                    value="{{ old('price', $menu->price) }}" 
+                    class="mt-1 block w-full" required />
+                <x-input-error :messages="$errors->get('price')" class="mt-2" />
+            </div>
+            <!-- #region -->
             <!-- Content -->
             <div class="mt-4">
-                <x-input-label for="description" :value="__('Content')" />
+                <x-input-label for="content" :value="__('Content')" />
                 <textarea id="description" name="description" rows="4"
                     class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     required>{{ old('description', $menu->description) }}</textarea>
@@ -32,7 +40,7 @@
             <div class="mt-4">
                 <x-input-label :value="__('Current Image')" />
                 <img src="{{ asset('storage/' . $menu->image) }}" 
-                     alt="" class="h-40 mt-2 rounded">
+                     alt="Current Slider Image" class="h-40 mt-2 rounded">
             </div>
 
             <!-- New Image -->
@@ -42,11 +50,11 @@
                     class="block w-full mt-1 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-slate-800 file:text-white hover:file:bg-slate-700" />
                 <x-input-error :messages="$errors->get('image')" class="mt-2" />
             </div>
- 
+
             <div class="mt-6">
                 <button type="submit"
                     class="w-full px-4 py-3 font-bold text-white bg-slate-800 rounded-md hover:bg-slate-700 transition duration-200">
-                    {{ __('Update Slider') }}
+                    {{ __('Update Menu') }}
                 </button>
             </div>
         </form>

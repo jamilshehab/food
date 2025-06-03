@@ -58,7 +58,8 @@ use Illuminate\Support\Facades\Storage;
 
     if($slider->user_id !== $user->id){
      return redirect()->back()->with('error', 'Not Authourized');
-     }
+    
+    }
 
      
      return view('slider.edit')->with(['slider' => $slider]);
@@ -70,8 +71,9 @@ use Illuminate\Support\Facades\Storage;
      */
     public function update(Request $request, string $id)
     {
-    $slider = Slider::findOrFail($id);
     $user = auth()->user();
+    $slider = Slider::findOrFail($id);
+    
 
     // Authorization check (assuming sliders have a user_id column)
     if ($slider->user_id !== $user->id) {
@@ -103,8 +105,8 @@ use Illuminate\Support\Facades\Storage;
     public function destroy(string $id)
     {
         //
-        $slider=Slider::findOrFail($id);
         $user = auth()->user();
+        $slider=Slider::findOrFail($id);
         if ($slider->user_id !== $user->id) {
             return redirect()->back()->with('error', 'Not Authorized');
     }
