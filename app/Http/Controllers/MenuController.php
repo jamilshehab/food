@@ -110,6 +110,12 @@ class MenuController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $menu=Menu::findOrFail($id);
+        $user = auth()->user();
+        if ($menu->user_id !== $user->id) {
+            return redirect()->back()->with('error', 'Not Authorized');
+       }
+       $menu->delete();
+       return redirect()->route('menu.view')->with('success','menu deleted');
     }
 }

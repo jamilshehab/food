@@ -33,7 +33,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/sliders/{id}/edit', [MenuController::class, 'edit'])->name('menu.edit');
     Route::put('/sliders/{id}', [MenuController::class, 'update'])->name('menu.update');
-    
+    Route::delete('/menu/{id}', [MenuController::class, 'destroy'])->name('menu.destroy'); 
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

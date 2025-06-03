@@ -39,12 +39,12 @@
                                 </td>
                                 <td class="px-6 py-4 text-center space-x-2">
                                     
-                                    {{-- <a href="{{ route('slider.edit', $menu->id) }}" 
+                                    <a href="{{ route('menu.edit', $menu->id) }}" 
                                        class="inline-block px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700">
                                         Edit
-                                    </a> --}}
+                                    </a>
 
-                                    {{-- <form action="{{ route('slider.destroy', $slider->id) }}" method="POST"
+                                    <form action="{{ route('menu.destroy', $menu->id) }}" method="POST"
                                           onsubmit="return confirm('Are you sure you want to delete this?');"
                                           class="inline-block">
                                         @csrf
@@ -52,7 +52,7 @@
                                         <button type="submit" class="px-3 py-1 bg-red-600 text-white text-sm rounded hover:bg-red-700">
                                             Delete
                                         </button>
-                                    </form> --}}
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
