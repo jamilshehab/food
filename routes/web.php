@@ -31,6 +31,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/addmenu', action:[MenuController::class,'create'])->name('menu.create');
     Route::post('/addmenu',[MenuController::class,'store'])->name('menu.store');
 
+    Route::get('/sliders/{id}/edit', [MenuController::class, 'edit'])->name('menu.edit');
+    Route::put('/sliders/{id}', [MenuController::class, 'update'])->name('menu.update');
+    
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

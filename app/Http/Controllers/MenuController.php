@@ -40,7 +40,7 @@ class MenuController extends Controller
 ]);
     // Handle file upload
     if ($request->hasFile('image')) {
-     $validated['image'] = $request->file('image')->store('menu/images', 'public');         
+      $validated['image'] = $request->file('image')->store('menu/images', 'public');         
     }
 
     // Add user_id to validated data
@@ -65,6 +65,12 @@ class MenuController extends Controller
     public function edit(string $id)
     {
         //
+        $user=auth()->user();
+        $menu = Menu::findOrFail($id);
+        if($menu->user_id !== $user->id){
+        return redirect()->back()->with('error', 'Not Authourized');
+        }
+        return view('menu.edit')->with(['menu' => $menu]);
     }
 
     /**
@@ -73,6 +79,30 @@ class MenuController extends Controller
     public function update(Request $request, string $id)
     {
         //
+    $user = auth()->user();
+    $menu = Menu::findOrFail($id);
+  
+    // Authorization check (assuming sliders have a user_id column)
+    if ($menu->user_id !== $user->id) {
+        return redirect()->back()->with('error', 'Not Authorized');
+    }
+
+   $validated = $request->validate([
+        'title' => 'required|string|max:255',
+        'description' => 'required|string',
+        'price' => 'nullable|integer',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ]);
+   
+    // Handle file upload
+    if ($request->hasFile('image')) {
+        $fileName = 'slider_'.md5(date('YmdHis')).'.'.$request->file('image')->extension();
+        $request->file('image')->storeAs('public/menu', $fileName);
+        $validated['image'] = $fileName; // Store only filename
+    }
+
+    $menu->update($validated);
+    return redirect()->route('menu.view')->with('success', 'Menu Updated Successfully!');
     }
 
     /**
