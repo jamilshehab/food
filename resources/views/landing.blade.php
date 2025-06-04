@@ -151,7 +151,7 @@
                     <div class="ms-3 w-full">
                         <div class="flex justify-between items-center pb-2 border-b border-gray-100 dark:border-gray-800">
                             <a href="#" class="text-lg h5 block hover:text-amber-500 duration-500">
-                                {{ $menu->name }}
+                                {{ $menu->title }}
                             </a>
                             <h5 class="text-amber-500 font-medium">
                                 {{ $menu->price }} $
