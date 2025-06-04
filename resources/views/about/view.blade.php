@@ -23,9 +23,9 @@
                                 <td class="px-6 py-4 text-sm text-gray-800">{{ Str::limit($about->content, limit: 15) }}</td>
                                 <td class="px-6 py-4 text-sm text-gray-800">
                                     @if($about->images)
-    $about = About::where(column: 'user_id', operator: '=', value: auth()->id())->get()->first();
+                                    <img src="{{ asset('storage/' . $about->images) }}" 
                                     alt="About Image" 
-                                   class="w-16 h-auto rounded-md">
+                                   class="w-16 h-auto rounded-md"/>
                                   @else
                                     —
                                  @endif

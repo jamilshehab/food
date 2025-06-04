@@ -31,12 +31,13 @@
             </div>
 
             <!-- Current Image -->
-            <div class="mt-4">
+             <div class="mt-4">
                 <x-input-label :value="__('Current Image')" />
-                <img src="{{ asset('storage/' . $about->image) }}" 
+                <img src="{{ asset('storage/' . $about->images) }}" 
                      alt="Current Slider Image" class="h-40 mt-2 rounded">
             </div>
 
+       
             <!-- New Image -->
             <div class="mt-4">
                 <x-input-label for="image" :value="__('New Image (Leave empty to keep current)')" />

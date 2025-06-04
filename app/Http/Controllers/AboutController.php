@@ -51,7 +51,7 @@ class AboutController extends Controller
     public function edit(string $id)
     {
         $about=About::findOrFail($id);
-         if($about->user_id !== $about->id){
+         if($about->user_id !== auth()->user()->id){
         return redirect()->back()->with('error', 'Not Authourized');
         }
         return view('about.edit')->with(['about' => $about]);
