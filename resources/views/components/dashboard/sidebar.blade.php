@@ -41,9 +41,7 @@
                     <li class="px-1 py-0.5 first:mt-2">
                         <a href="{{ route('about.create')}}" class="flex items-center rounded-radius gap-2 px-2 py-1.5 text-sm text-on-surface underline-offset-2 hover:bg-primary/5 hover:text-on-surface-strong focus:outline-hidden focus-visible:underline">Add About</a>
                     </li>
-                      {{-- <li class="px-1 py-0.5 first:mt-2">
-                        <a href="{{ route('slider.edit') }}" class="flex items-center rounded-radius gap-2 px-2 py-1.5 text-sm text-on-surface underline-offset-2 hover:bg-primary/5 hover:text-on-surface-strong focus:outline-hidden focus-visible:underline">Add Slider</a>
-                    </li> --}}
+                    
                 </ul>
                </div>
 
@@ -63,9 +61,7 @@
                     <li class="px-1 py-0.5 first:mt-2">
                         <a href="{{ route('menu.create')}}" class="flex items-center rounded-radius gap-2 px-2 py-1.5 text-sm text-on-surface underline-offset-2 hover:bg-primary/5 hover:text-on-surface-strong focus:outline-hidden focus-visible:underline">Add Menu</a>
                     </li>
-                      {{-- <li class="px-1 py-0.5 first:mt-2">
-                        <a href="{{ route('slider.edit') }}" class="flex items-center rounded-radius gap-2 px-2 py-1.5 text-sm text-on-surface underline-offset-2 hover:bg-primary/5 hover:text-on-surface-strong focus:outline-hidden focus-visible:underline">Add Slider</a>
-                    </li> --}}
+                    
                 </ul>
                </div>
         </div>

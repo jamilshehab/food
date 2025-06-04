@@ -58,44 +58,32 @@
         </div> 
     </nav> 
  
-    <!-- Start Hero -->
-   <section class="swiper-slider-hero relative block h-screen" id="home">
-    <div class="swiper-container absolute end-0 top-0 w-full h-full">
-        <div class="swiper-wrapper">
-            @foreach ($sliders as $slider)
-                <div class="swiper-slide flex items-center overflow-hidden">
-                    <div class="slide-inner absolute end-0 top-0 w-full h-full slide-bg-image flex items-center bg-center bg-cover bg-no-repeat"
-                        style="background-image: url('{{ asset('storage/' . $slider->slider_image) }}')">  
-                        <div class="absolute inset-0 bg-slate-900/60"></div>
-                        <div class="container relative">
-                            <div class="grid grid-cols-1">
-                                <h1 class="font-semibold lg:leading-normal leading-normal text-4xl lg:text-6xl text-white mb-5">
-                                    {{ $slider->slider_title }}
-                                </h1>
-                                <p class="text-white/70 text-lg max-w-xl">
-                                    {{ $slider->slider_content }}
-                                </p>
-
-                                <div class="mt-8">
-                                    <a href="{{ $slider->anchor_link }}"
-                                       class="py-2 px-5 inline-block tracking-wide align-middle duration-500 text-base text-center text-amber-500 hover:text-white bg-transparent hover:bg-amber-500 border border-amber-500">
-                                        {{ $slider->anchor_text }}
-                                    </a>
-                                </div>
-                            </div><!--end grid-->
-                        </div><!--end container-->
-                    </div><!-- end slide-inner --> 
-                </div> <!-- end swiper-slide -->
-            @endforeach
-        </div>
-        <!-- end swiper-wrapper -->
-
-        <!-- Swiper controls -->
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-next bg-transparent size-[35px] leading-[35px] -mt-[30px] bg-none border border-solid border-white/50 text-white hover:bg-amber-500 hover:border-amber-500 rounded-full text-center"></div>
-        <div class="swiper-button-prev bg-transparent size-[35px] leading-[35px] -mt-[30px] bg-none border border-solid border-white/50 text-white hover:bg-amber-500 hover:border-amber-500 rounded-full text-center"></div>
-    </div><!--end container-->
-</section>
+     
+<section class="swiper-slider-hero relative block h-screen" id="home">
+            <div class="swiper-container absolute end-0 top-0 w-full h-full">
+                <div class="swiper-wrapper">
+                    @foreach ($sliders as $slider)
+                        <div class="swiper-slide flex items-center overflow-hidden">
+                        <div class="slide-inner absolute end-0 top-0 w-full h-full slide-bg-image flex items-center bg-center;"                         style="background-image: url('{{ asset('storage/' . $slider->slider_image) }}')">  
+>
+                            <div class="absolute inset-0 bg-slate-900/60"></div>
+                            <div class="container relative">
+                                <div class="grid grid-cols-1">
+                                    <h1 class="font-semibold lg:leading-normal leading-normal text-4xl lg:text-6xl text-white mb-5">{{ $slider->slider_title }}</h1>
+                                    <p class="text-white/70 text-lg max-w-xl">{{$slider->slider_content }}</p>    
+                                    <div class="mt-8">
+                                        <a href="{{ $slider->anchor_link }}" class="py-2 px-5 inline-block tracking-wide align-middle duration-500 text-base text-center text-amber-500 hover:text-white bg-transparent hover:bg-amber-500 border border-amber-500"> {{ $slider->anchor_text }}</a>
+                                    </div>
+                                </div><!--end grid-->
+                            </div><!--end container-->
+                        </div><!-- end slide-inner --> 
+                    </div>
+                    @endforeach
+                </div>
+                 <div class="swiper-button-next bg-transparent size-[35px] leading-[35px] -mt-[30px] bg-none border border-solid border-white/50 text-white hover:bg-amber-500 hover:border-amber-500 rounded-full text-center"></div>
+                <div class="swiper-button-prev bg-transparent size-[35px] leading-[35px] -mt-[30px] bg-none border border-solid border-white/50 text-white hover:bg-amber-500 hover:border-amber-500 rounded-full text-center"></div>
+            </div><!--end container-->
+        </section>
 <!--end section-->
     <!-- End Hero -->
 
