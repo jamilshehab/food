@@ -106,23 +106,15 @@
                     <div class="text-left">
                         <!-- <h6 class="uppercase font-semibold">About Us</h6> -->
 
-                        <h4 class="text-3xl font-semibold">Our Story</h4>
-
-                        <p class="text-slate-400 mt-6">Our buzzy food-hall style concept is inspired by international
-                            dining styles, especially in Asia. Explore the following fast-action food stations as busy
-                            chefs perform.</p>
-                        <p class="text-slate-400 mt-3">Enjoy a verdant Garden to Glass experience. It’s in the view,
-                            it’s reflected in the design, and it infuses many drinks. In fact, all our delicious fresh
-                            ingredients are sustainably picked from our Jemima’s Kitchen Garden. Our flourishing range
-                            of cocktails, spirits, beers and wines are all made with integrity and offer something for
-                            every guest.</p>
+                        <h4 class="text-3xl font-semibold">{{$about->title}}</h4>
+                          <p class="text-slate-400 mt-3">{{$about->content}}</p>
                         
                     </div>
                 </div>
 
                
                 <div class="lg:col-span-6 md:col-span-6 lg:order-3" data-aos="fade-down">
-                    <img src="{{asset('assets/images/about/m2.jpg')}}" class="rounded shadow dark:shadow-gray-800" alt="">
+                    <img src="{{ asset('storage/' . $about->images) }}" class="rounded shadow dark:shadow-gray-800" alt="">
                 </div>
             </div>
         </div>

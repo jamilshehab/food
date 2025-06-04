@@ -5,7 +5,7 @@
     <!-- main content  -->
     <div id="main-content" class="h-svh w-full overflow-y-auto p-4 bg-white dark:bg-neutral-950">
         <div class="container px-4 mx-auto py-12">
-        @if($about && $about->count() > 0)
+        @if($about)
             <div class="overflow-x-auto">
                 <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-sm">
                     <thead class="bg-gray-100">
@@ -22,15 +22,13 @@
                                 <td class="px-6 py-4 text-sm text-gray-800">{{ Str::limit($about->title, 4) }}</td>
                                 <td class="px-6 py-4 text-sm text-gray-800">{{ Str::limit($about->content, limit: 15) }}</td>
                                 <td class="px-6 py-4 text-sm text-gray-800">
-                                    @if($about->image)
-                                        @foreach($about as $image)
-                                        <img src="{{ asset('storage/' . $image->image) }}" 
-                                             alt="Slider Image" 
-                                             class="w-16 h-auto rounded-md">
-                                        @endforeach
-                                    @else
-                                        —
-                                    @endif
+                                    @if($about->images)
+    $about = About::where(column: 'user_id', operator: '=', value: auth()->id())->get()->first();
+                                    alt="About Image" 
+                                   class="w-16 h-auto rounded-md">
+                                  @else
+                                    —
+                                 @endif
                                 </td>
                                 
                                 <td class="px-6 py-4 text-sm text-gray-600">
@@ -38,10 +36,12 @@
                                 </td>
                                 <td class="px-6 py-4 text-center space-x-2">
                                     
+                                    
                                     <a href="{{ route('about.edit', $about->id) }}" 
                                        class="inline-block px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700">
                                         Edit
                                     </a>
+
 
                                     <form action="{{ route('about.destroy', $about->id) }}" method="POST"
                                           onsubmit="return confirm('Are you sure you want to delete this?');"

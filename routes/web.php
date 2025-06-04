@@ -11,9 +11,8 @@ use Illuminate\Support\Facades\Route;
 
  
 Route::middleware('auth')->group(function () {
-    Route::get('/',  [HomeController::class,'slider'])->name('home');
-    Route::get('/menu',  [HomeController::class,'menu'])->name('menus');
-
+    Route::get('/',  [HomeController::class,'index'])->name('home');
+    
     Route::get('/dashboard', [DashboardController::class,'dashboard'])->name('dashboard');
     //sliders
     
@@ -27,7 +26,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/sliders/{id}', [SliderController::class, 'destroy'])->name('slider.destroy'); 
     Route::get('/viewabout',[AboutController::class,'index'])->name('about.view');
     Route::get('/addabout', action:[AboutController::class,'create'])->name('about.create');
+    Route::get('/about/{id}/edit', [AboutController::class, 'edit'])->name('about.edit');
+    Route::put('/about/{id}', [AboutController::class, 'update'])->name('about.update');
     Route::post('/addabout',[AboutController::class,'store'])->name('about.store');
+    Route::delete('/about/{id}', [AboutController::class, 'destroy'])->name('about.destroy'); 
 
     Route::get('/viewmenu',[MenuController::class,'index'])->name('menu.view');
     Route::get('/addmenu', action:[MenuController::class,'create'])->name('menu.create');

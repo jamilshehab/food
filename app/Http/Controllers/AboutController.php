@@ -12,9 +12,8 @@ class AboutController extends Controller
      */
     public function index()
 {
-    $about = About::where('user_id', auth()->id())->first();
-
-    return view('about.view', compact('about'));
+    $about = About::where(column: 'user_id', operator: '=', value: auth()->id())->get()->first();
+     return view('about.view', compact('about'));
 }
     /**
      * Show the form for creating a new resource.
@@ -36,6 +35,7 @@ class AboutController extends Controller
         'content' => 'required|string',
         'images' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
     ]);
+    $validated['user_id'] = auth()->id();
 
     if ($request->hasFile('images')) {
      $validated['images'] = $request->file('images')->store('about/images', 'public');         
