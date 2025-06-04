@@ -346,11 +346,11 @@ try {
     // DATA BACKGROUND IMAGE
     var swiper = new Swiper(".swiper-container", swiperOptions);
 
-    let data = document.querySelectorAll(".slide-bg-image")
-    data.forEach((e) => {
-        e.style.backgroundImage =
-        `url(${e.getAttribute('data-background')})`;
-    })
+    // let data = document.querySelectorAll(".slide-bg-image")
+    // data.forEach((e) => {
+    //     e.style.backgroundImage =
+    //     `url(${e.getAttribute('data-background')})`;
+    // })
 } catch (err) {
 
 }

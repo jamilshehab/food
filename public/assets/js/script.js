@@ -1,4 +1,5 @@
 AOS.init({
+<<<<<<< HEAD
     duration: 1200,
 });
 const swiper = new Swiper(".swiper-container", {
@@ -13,3 +14,10 @@ const swiper = new Swiper(".swiper-container", {
     },
     speed: 1000,
 });
+=======
+  duration: 1200,
+})
+
+   
+  
+>>>>>>> bfecfabc2714be9b2b6e16186235bb528f132114

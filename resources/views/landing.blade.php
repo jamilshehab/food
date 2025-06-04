@@ -89,32 +89,20 @@
 
     <section class="relative md:py-24 py-16" id="about">
         <div class="container relative">
-            <div class="grid md:grid-cols-12 grid-cols-1 gap-6 items-center">
-                <div class="lg:col-span-4 md:col-span-12 lg:order-2" data-aos="fade-down">
-                    <div class="text-center">
+            <div class="grid md:grid-cols-12 grid-cols-1 gap-6  ">
+                <div class="lg:col-span-6 md:col-span-12 lg:order-2" data-aos="fade-down">
+                    <div class="text-left">
                         <!-- <h6 class="uppercase font-semibold">About Us</h6> -->
 
-                        <h4 class="text-3xl font-semibold">Our Story</h4>
-
-                        <p class="text-slate-400 mt-6">Our buzzy food-hall style concept is inspired by international
-                            dining styles, especially in Asia. Explore the following fast-action food stations as busy
-                            chefs perform.</p>
-                        <p class="text-slate-400 mt-3">Enjoy a verdant Garden to Glass experience. It’s in the view,
-                            it’s reflected in the design, and it infuses many drinks. In fact, all our delicious fresh
-                            ingredients are sustainably picked from our Jemima’s Kitchen Garden. Our flourishing range
-                            of cocktails, spirits, beers and wines are all made with integrity and offer something for
-                            every guest.</p>
-
+                        <h4 class="text-3xl font-semibold">{{$about->title}}</h4>
+                          <p class="text-slate-400 mt-3">{{$about->content}}</p>
                         
                     </div>
                 </div>
 
-                <div class="lg:col-span-4 md:col-span-6 lg:order-1" data-aos="fade-down">
-                    <img src="{{asset('assets/images/about/m1.jpg')}}" class="rounded shadow dark:shadow-gray-800" alt="">
-                </div>
-
-                <div class="lg:col-span-4 md:col-span-6 lg:order-3" data-aos="fade-down">
-                    <img src="{{asset('assets/images/about/m2.jpg')}}" class="rounded shadow dark:shadow-gray-800" alt="">
+               
+                <div class="lg:col-span-6 md:col-span-6 lg:order-3" data-aos="fade-down">
+                    <img src="{{ asset('storage/' . $about->images) }}" class="rounded shadow dark:shadow-gray-800" alt="">
                 </div>
             </div>
         </div>
@@ -151,7 +139,7 @@
                     <div class="ms-3 w-full">
                         <div class="flex justify-between items-center pb-2 border-b border-gray-100 dark:border-gray-800">
                             <a href="#" class="text-lg h5 block hover:text-amber-500 duration-500">
-                                {{ $menu->name }}
+                                {{ $menu->title }}
                             </a>
                             <h5 class="text-amber-500 font-medium">
                                 {{ $menu->price }} $
@@ -186,9 +174,9 @@
 
                             <div class="text-center">
                                 <h5 class="tracking-[1px] text-gray-100 font-medium text-lg mb-4">Reservation</h5>
-                                <p class="mb-2"><a href="tel:+152534-468-854" class="text-gray-200/80">+152
+                                <p class="mb-2"><a href="#" class="text-gray-200/80">+152
                                         534-468-854</a></p>
-                                <p class="mb-0"><a href="mailto:contact@example.com"
+                                <p class="mb-0"><a href="#"
                                         class="text-gray-200/80">contact@example.com</a></p>
                             </div>
 

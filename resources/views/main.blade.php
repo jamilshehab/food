@@ -23,10 +23,11 @@
     <!-- Main Css -->
          <link href="{{ asset('assets/libs/mdi/font/css/materialdesignicons.min.css') }}" rel="stylesheet" type="text/css">
              
-         <link href="{{ asset('assets/libs/swiper/css/swiper.min.css') }}" rel="stylesheet">
  
         <link href="{{ asset(path: 'assets/css/tailwind.min.css') }}" rel="stylesheet" type="text/css">
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+        <link href="{{ asset('assets/libs/swiper/css/swiper.min.css') }}" rel="stylesheet">
+        {{-- <link href="{{ asset('assets/libs/swiper/css/swiper-bundle.min.css') }}" rel="stylesheet"> --}}
 
         <link href="{{ asset(path: 'assets/css/style.min.css') }}" rel="stylesheet" type="text/css">
 
@@ -41,10 +42,10 @@
     </body>
     <script src="{{ asset('assets/libs/tobii/js/tobii.min.js') }}"></script>
     <script src="{{ asset('assets/libs/feather-icons/feather.min.js') }}"></script>
-    <script src="{{ asset('assets/js/plugins.init.js') }}"></script>
     <script src="{{ asset('assets/libs/swiper/js/swiper.min.js') }}"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+     <script src="{{ asset('assets/js/plugins.init.js') }}"></script>
 
-    <script src="{{ asset('assets/js/app.js') }}"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="{{ asset('assets/js/script.js') }}"></script>
+    <script src="{{ asset('assets/js/app.js') }}"></script>
 </html>

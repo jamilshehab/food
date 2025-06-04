@@ -12,9 +12,8 @@ class AboutController extends Controller
      */
     public function index()
 {
-    $about = About::where('user_id', auth()->id())->first();
-
-    return view('about.view', compact('about'));
+    $about = About::where(column: 'user_id', operator: '=', value: auth()->id())->get()->first();
+     return view('about.view', compact('about'));
 }
     /**
      * Show the form for creating a new resource.
@@ -34,33 +33,15 @@ class AboutController extends Controller
     $validated = $request->validate([
         'title' => 'required|string|max:255',
         'content' => 'required|string',
-        'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'images' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
     ]);
-
-    // Create About entry
-    $about = About::create(array_merge($validated, [
-        'user_id' => auth()->id()
-    ]));
+    $validated['user_id'] = auth()->id();
 
     if ($request->hasFile('images')) {
-        $imagePaths = [];
-
-        foreach ($request->file('images') as $image) {
-            // Store in 'about' directory of public disk
-            $path = $image->store('about', 'public');  // Corrected here
-
-            $imagePaths[] = [
-                'about_id' => $about->id,
-                'images' => $path,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ];
-        }
-
-        // Bulk insert image records
-        AboutImage::insert($imagePaths);
+     $validated['images'] = $request->file('images')->store('about/images', 'public');         
     }
 
+    About::create($validated);
     return redirect()->route('about.view')->with('success', 'About created successfully with images.');
 }
 
@@ -69,7 +50,11 @@ class AboutController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $about=About::findOrFail($id);
+         if($about->user_id !== auth()->user()->id){
+        return redirect()->back()->with('error', 'Not Authourized');
+        }
+        return view('about.edit')->with(['about' => $about]);
     }
 
     /**
@@ -77,7 +62,30 @@ class AboutController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+    $user = auth()->user();
+    $about = About::findOrFail($id);
+  
+    // Authorization check (assuming sliders have a user_id column)
+    if ($about->user_id !== $user->id) {
+        return redirect()->back()->with('error', 'Not Authorized');
+    }
+
+   $validated = $request->validate([
+        'title' => 'required|string|max:255',
+        'content' => 'required|string',
+        'images' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ]);
+   
+    // Handle file upload
+    if ($request->hasFile('images')) {
+        $fileName = 'about_'.md5(date('YmdHis')).'.'.$request->file('image')->extension();
+        $request->file('images')->storeAs('public/about', $fileName);
+        $validated['images'] = $fileName; // Store only filename
+    }
+
+    $about->update($validated);
+    return redirect()->route('about.view')->with('success', 'About Updated Successfully!');
     }
 
     /**
@@ -86,5 +94,12 @@ class AboutController extends Controller
     public function destroy(string $id)
     {
         //
+        $about=About::findOrFail($id);
+        $user = auth()->user();
+        if ($about->user_id !== $user->id) {
+            return redirect()->back()->with('error', 'Not Authorized');
+       }
+       $about->delete();
+       return redirect()->route('about.view')->with('success','about deleted');
     }
 }
