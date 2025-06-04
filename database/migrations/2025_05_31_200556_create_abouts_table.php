@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('abouts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->unique(); // Creates column AND adds unique constraint
+            $table->foreignId('user_id')->nullable()->constrained();
             $table->string('title');
             $table->text('content')->nullable();
+            $table->string('images')->nullable();
             $table->timestamps();
         });
     }

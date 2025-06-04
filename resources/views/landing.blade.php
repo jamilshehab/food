@@ -101,9 +101,9 @@
 
     <section class="relative md:py-24 py-16" id="about">
         <div class="container relative">
-            <div class="grid md:grid-cols-12 grid-cols-1 gap-6 items-center">
-                <div class="lg:col-span-4 md:col-span-12 lg:order-2" data-aos="fade-down">
-                    <div class="text-center">
+            <div class="grid md:grid-cols-12 grid-cols-1 gap-6  ">
+                <div class="lg:col-span-6 md:col-span-12 lg:order-2" data-aos="fade-down">
+                    <div class="text-left">
                         <!-- <h6 class="uppercase font-semibold">About Us</h6> -->
 
                         <h4 class="text-3xl font-semibold">Our Story</h4>
@@ -116,16 +116,12 @@
                             ingredients are sustainably picked from our Jemima’s Kitchen Garden. Our flourishing range
                             of cocktails, spirits, beers and wines are all made with integrity and offer something for
                             every guest.</p>
-
                         
                     </div>
                 </div>
 
-                <div class="lg:col-span-4 md:col-span-6 lg:order-1" data-aos="fade-down">
-                    <img src="{{asset('assets/images/about/m1.jpg')}}" class="rounded shadow dark:shadow-gray-800" alt="">
-                </div>
-
-                <div class="lg:col-span-4 md:col-span-6 lg:order-3" data-aos="fade-down">
+               
+                <div class="lg:col-span-6 md:col-span-6 lg:order-3" data-aos="fade-down">
                     <img src="{{asset('assets/images/about/m2.jpg')}}" class="rounded shadow dark:shadow-gray-800" alt="">
                 </div>
             </div>
@@ -198,9 +194,9 @@
 
                             <div class="text-center">
                                 <h5 class="tracking-[1px] text-gray-100 font-medium text-lg mb-4">Reservation</h5>
-                                <p class="mb-2"><a href="tel:+152534-468-854" class="text-gray-200/80">+152
+                                <p class="mb-2"><a href="#" class="text-gray-200/80">+152
                                         534-468-854</a></p>
-                                <p class="mb-0"><a href="mailto:contact@example.com"
+                                <p class="mb-0"><a href="#"
                                         class="text-gray-200/80">contact@example.com</a></p>
                             </div>
 
