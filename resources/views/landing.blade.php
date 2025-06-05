@@ -80,6 +80,7 @@
                     </div>
                     @endforeach
                 </div>
+                <div class="swiper-pagination"></div>
                  <div class="swiper-button-next bg-transparent size-[35px] leading-[35px] -mt-[30px] bg-none border border-solid border-white/50 text-white hover:bg-amber-500 hover:border-amber-500 rounded-full text-center"></div>
                 <div class="swiper-button-prev bg-transparent size-[35px] leading-[35px] -mt-[30px] bg-none border border-solid border-white/50 text-white hover:bg-amber-500 hover:border-amber-500 rounded-full text-center"></div>
             </div><!--end container-->
