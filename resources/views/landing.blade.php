@@ -74,9 +74,9 @@
                                     <div class="mt-8">
                                         <a href="{{ $slider->anchor_link }}" class="py-2 px-5 inline-block tracking-wide align-middle duration-500 text-base text-center text-amber-500 hover:text-white bg-transparent hover:bg-amber-500 border border-amber-500"> {{ $slider->anchor_text }}</a>
                                     </div>
-                                </div><!--end grid-->
-                            </div><!--end container-->
-                        </div><!-- end slide-inner --> 
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     @endforeach
                 </div>
