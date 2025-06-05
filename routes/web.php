@@ -14,12 +14,34 @@ Route::middleware('auth')->group(function () {
     Route::get('/',  [HomeController::class,'index'])->name('home');
     
     Route::get('/dashboard', [DashboardController::class,'dashboard'])->name('dashboard');
-   
-     
-    Route::resource('slider',SliderController::class)->except('show');
-    Route::resource('about',AboutController::class)->except('show');
-    Route::resource('menu',MenuController::class)->except('show');
-    
+    //sliders
+    Route::resource('slider',SliderController::class)->names([
+        'index'   => 'slider.view',
+        'create'  => 'slider.create',
+        'store'   => 'slider.store',
+        'edit'    => 'slider.edit',
+        'update'  => 'slider.update',
+        'destroy' => 'slider.destroy',
+    ])->except('show');
+     //about
+     Route::resource('about',AboutController::class)->names([
+        'index'   => 'about.view',
+        'create'  => 'about.create',
+        'store'   => 'about.store',
+        'edit'    => 'about.edit',
+        'update'  => 'about.update',
+        'destroy' => 'about.destroy',
+     ])->except('show');
+       //menu
+       Route::resource('menu',MenuController::class)->names([
+        'index'   => 'menu.view',
+        'create'  => 'menu.create',
+        'store'   => 'menu.store',
+        'edit'    => 'menu.edit',
+        'update'  => 'menu.update',
+        'destroy' => 'menu.destroy',
+     ])->except('show');
+
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
