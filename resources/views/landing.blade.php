@@ -14,7 +14,7 @@
     <nav id="topnav" class="defaultscroll is-sticky">
         <div class="container relative">
             <!-- Logo container-->
-            <a class="logo" href="index.html">
+            <a class="logo" href="#home">
                 <span class="inline-block dark:hidden">
                     <img src="{{asset('assets/images/logo/logo-dark.png')}}" class="l-dark" alt="">
                     <img src="{{asset('assets/images/logo/logo-light.png')}}" class="l-light" alt="">
@@ -44,14 +44,14 @@
             <div id="navigation">
                 <!-- Navigation Menu-->
                 <ul class="navigation-menu nav-light justify-end">
-                    <li class="menu-item">
-                        <a href="#">Home</a> 
+                    <li class="menu-item active">
+                        <a href="#home">Home</a> 
                     </li>
 
-                    <li><a href="#about" class="menu-item">Our Story</a></li>
+                    <li class="menu-item"><a href="#about">Our Story</a></li>
 
-                    <li ><a href="#menu" class="menu-item"> Menus </a><span></li>
-                    <li ><a href="{{route('dashboard')}}" class="menu-item"> Dashboard </a><span></li>
+                    <li class="menu-item"><a href="#menu"> Menus </a><span></li>
+                    <li ><a href="{{route('dashboard')}}" > Dashboard </a><span></li>
 
                  </ul> 
             </div> 
@@ -59,7 +59,7 @@
     </nav> 
  
      
-<section class="swiper-slider-hero relative block h-screen" id="home">
+<section class="swiper-slider-hero relative block h-screen restaurant-section" id="home">
             <div class="swiper-container absolute end-0 top-0 w-full h-full">
                 <div class="swiper-wrapper">
                     @foreach ($sliders as $slider)
@@ -88,14 +88,14 @@
 <!--end section-->
     <!-- End Hero -->
 
-    <section class="relative md:py-24 py-16" id="about">
+    <section class="restaurant-section relative md:py-24 py-16" id="about">
         <div class="container relative">
             <div class="grid md:grid-cols-12 grid-cols-1 gap-6  ">
                 <div class="lg:col-span-6 md:col-span-12 lg:order-2" data-aos="fade-down">
                     <div class="text-left">
                         <!-- <h6 class="uppercase font-semibold">About Us</h6> -->
 
-                        <h4 class="text-3xl font-semibold">{{$about->title}}</h4>
+                        <h6 class="uppercase text-3xl font-semibold">{{$about->title}}</h6>
                           <p class="text-slate-400 mt-3">{{$about->content}}</p>
                         
                     </div>
@@ -115,7 +115,7 @@
 
     <!-- End -->
 
-    <section class="relative py-36 bg-no-repeat bg-fixed bg-top bg-cover" data-aos="fade-down" 
+    <section class="restaurant-section relative py-36 bg-no-repeat bg-fixed bg-top bg-cover" data-aos="fade-down" 
          style="background-image: url('{{ asset('assets/images/bg/pages.jpg') }}')" 
          id="menu">
     <div class="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/50 to-slate-900"></div>
@@ -127,7 +127,7 @@
 </section>
 
     <!-- Start -->
-      <section class="relative md:py-24 py-16">
+      <section class="restaurant-section relative md:py-24 py-16">
     <div class="container relative">
         <div class="grid md:grid-cols-2 gap-6">
 
