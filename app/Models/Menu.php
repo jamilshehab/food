@@ -7,7 +7,7 @@ use App\Models\User;
 class Menu extends Model
 {
     //
-    protected $fillable=['title','description','image','price','user_id'];
+    protected $fillable=['title','description','ingredients','image','price','user_id'];
 
     public function user(){
         return $this->belongsTo(User::class);

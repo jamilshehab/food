@@ -14,6 +14,7 @@
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Content</th>
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Price</th>
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Image</th>
+                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Ingredients</th>
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Submitted On</th>
                             {{-- <th class="px-6 py-3 text-center text-sm font-semibold text-gray-700">Actions</th> --}}
                         </tr>
@@ -24,7 +25,6 @@
                                 <td class="px-6 py-4 text-sm text-gray-800">{{ Str::limit($menu->title, 4) }}</td>
                                 <td class="px-6 py-4 text-sm text-gray-800">{{ Str::limit($menu->description) }}</td>
                                 <td class="px-6 py-4 text-sm text-gray-800">{{ Str::limit($menu->price, limit: 15) }}</td>
-
                                 <td class="px-6 py-4 text-sm text-gray-800">
                                     @if($menu->image)
                                         <img src="{{ asset('storage/' . $menu->image) }}" 
@@ -33,7 +33,9 @@
                                     
                                     @endif
                                 </td>
-                                
+
+                                <td class="px-6 py-4 text-sm text-gray-800">{{ Str::limit($menu->ingredients, limit: 15) }}</td>
+
                                 <td class="px-6 py-4 text-sm text-gray-600">
                                     {{ $menu->created_at->format('M d, Y H:i') }}
                                 </td>

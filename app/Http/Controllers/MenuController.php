@@ -35,6 +35,7 @@ class MenuController extends Controller
   $validated = $request->validate([
     'title' => 'required|string|max:255',
     'description' => 'required|string',
+    'ingredients'=>'required|string',
     'price' => 'nullable|integer',
     'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 ]);
@@ -90,6 +91,7 @@ class MenuController extends Controller
    $validated = $request->validate([
         'title' => 'required|string|max:255',
         'description' => 'required|string',
+        'ingredients'=>'required|string',
         'price' => 'nullable|integer',
         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
     ]);

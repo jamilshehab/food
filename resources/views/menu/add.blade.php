@@ -15,20 +15,29 @@
                 </div>
 
                 <div>
-                    <x-input-label for="title" :value="__('Menu Price')" />
-                    <x-text-input id="title" name="price" type="number" placeholder="Menu Price"
+                    <x-input-label for="price" :value="__('Price')" />
+                    <x-text-input id="price" name="price" type="number" placeholder="Menu Price"
                         class="mt-1 block w-full" :value="old('price')" required autofocus />
                     <x-input-error :messages="$errors->get('price')" class="mt-2" />
                 </div>
+        
+                
 
                 <!-- Content -->
                 <div class="mt-4">
-                    <x-input-label for="content" :value="__('Content')" />
+                    <x-input-label for="description" :value="__('Description')" />
                     <textarea id="description" name="description" rows="4"
                      class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                     placeholder="your content"
+                     placeholder="your description"
                       required>{{ old('description') }}</textarea>
                     <x-input-error :messages="$errors->get('description')" class="mt-2" />
+                </div>
+                
+                <div>
+                    <x-input-label for="ingredients" :value="__('Menu Ingredients')" />
+                    <x-text-input id="ingredients" name="ingredients" type="text" placeholder="Menu Ingredients"
+                        class="mt-1 block w-full" :value="old('ingredients')" required autofocus />
+                    <x-input-error :messages="$errors->get('ingredients')" class="mt-2" />
                 </div>
 
                 <!-- Image Upload -->

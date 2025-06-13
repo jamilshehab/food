@@ -150,6 +150,9 @@
                         <p class="text-slate-400 mt-2">
                             {{ $menu->description }}
                         </p>
+                           <p class="text-slate-400 mt-2">
+                            {{ $menu->ingredients }}
+                        </p>
                     </div>
                 </div>
             @endforeach
