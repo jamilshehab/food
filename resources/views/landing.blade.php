@@ -138,10 +138,16 @@
                          alt="">
 
                     <div class="ms-3 w-full">
-                        <div class="flex justify-between items-center pb-2 border-b border-gray-100 dark:border-gray-800">
-                            <a href="#" class="text-lg h5 block hover:text-amber-500 duration-500">
-                                {{ $menu->title }}
-                            </a>
+                        <div class="flex justify-between items-center pb-2 border-b border-gray-100 dark:border-gray-800">           
+                               <button
+                    class="openModal"
+                    data-title="{{ $menu->title }}"
+                    data-description="{{ $menu->description }}"
+                    data-ingredients="{{ $menu->ingredients }}"
+                    data-image="{{ asset('storage/' . $menu->image) }}"
+                >
+                    {{ $menu->title }}
+                </button>
                             <h5 class="text-amber-500 font-medium">
                                 {{ $menu->price }} $
                             </h5>
@@ -151,7 +157,7 @@
                             {{ $menu->description }}
                         </p>
                            <p class="text-slate-400 mt-2">
-                            {{ $menu->ingredients }}
+                           Ingredients : {{ $menu->ingredients }}
                         </p>
                     </div>
                 </div>
@@ -242,7 +248,31 @@
     <!-- Footer End -->
     <!-- Switcher -->
     
-  
+    <div id="modal" class="hidden fixed inset-0 bg-[#0000009e] flex justify-center items-center z-50">
+    <div class="relative bg-white max-w-sm w-full rounded overflow-hidden shadow-lg">
+        <button id="closeModal"
+                class="absolute top-2 right-2 text-gray-500 hover:text-red-500 text-xl font-bold">
+            &times;
+        </button>
+
+        <img id="modalImage" class="w-full object-cover rounded-full" src="" alt="Modal Image">
+
+        <div class="px-6 py-4">
+            <div id="modalTitle" class="font-bold text-xl mb-2"></div>
+            <p id="modalDescription" class="text-gray-700 text-base"></p>
+        </div>
+
+        <div class="px-6 pt-4 pb-6">
+            <span id="modalIngredients" class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700"></span>
+        </div>
+
+        <div class="flex justify-center gap-4 items-center my-4">
+            <button class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5">Add To Cart</button>
+            <button id="closeModalButton" class="text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-2.5">Close</button>
+        </div>
+    </div>
+</div>
+
     <!-- LTR & RTL Mode Code -->
 
     <!-- Back to top -->
