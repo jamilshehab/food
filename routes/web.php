@@ -14,7 +14,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/',  [HomeController::class,'index'])->name('home');
     
     Route::get('/dashboard', [DashboardController::class,'dashboard'])->name('dashboard');
-    //sliders
+    
     Route::resource('slider',SliderController::class)->names([
         'index'   => 'slider.view',
         'create'  => 'slider.create',
@@ -23,8 +23,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         'update'  => 'slider.update',
         'destroy' => 'slider.destroy',
     ])->except('show');
-     //about
-     Route::resource('about',AboutController::class)->names([
+ 
+    Route::resource('about',AboutController::class)->names([
         'index'   => 'about.view',
         'create'  => 'about.create',
         'store'   => 'about.store',
@@ -32,7 +32,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         'update'  => 'about.update',
         'destroy' => 'about.destroy',
      ])->except('show');
-       //menu
+        
        Route::resource('menu',MenuController::class)->names([
         'index'   => 'menu.view',
         'create'  => 'menu.create',
