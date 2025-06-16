@@ -3,97 +3,60 @@
     <div x-cloak x-show="showSidebar" class="fixed inset-0 z-10 bg-surface-dark/10 backdrop-blur-xs md:hidden" aria-hidden="true" x-on:click="showSidebar = false" x-transition.opacity></div>
     <x-dashboard.sidebar/>
     <!-- main content  -->
-    <div id="main-content" class="h-svh w-full overflow-y-auto p-4 bg-white dark:bg-neutral-950">
-          <form method="POST" action="{{ route('slider.store') }}" enctype="multipart/form-data">
-                @csrf
+     <div id="main-content" class="h-svh w-full overflow-y-auto p-4 bg-white dark:bg-neutral-950">
+        <form method="POST" action="{{ route('about.store') }}" enctype="multipart/form-data">
+            @csrf
 
-                <div>
-                    <x-input-label for="slider_title" :value="__('Open Hpurs Days')" />
-                    <x-text-input id="slider_title" name="open_hours_weekdays" type="text" placeholder="Open Hours days"
-                        class="mt-1 block w-full" :value="old('open_hours_weekdays')" required autofocus />
-                    <x-input-error :messages="$errors->get('open_hours_weekdays')" class="mt-2" />
-                </div>
-                  <div>
-                    <x-input-label for="slider_title" :value="__('Reservation Title')" />
-                    <x-text-input id="reservation_title" name="reservation_title" type="text" placeholder="Reservation Title"
-                        class="mt-1 block w-full" :value="old('reservation_title')" required autofocus />
-                    <x-input-error :messages="$errors->get('reservation_title')" class="mt-2" />
-                </div>
-                  <div>
-                    <x-input-label for="phone_number" :value="__('Phone Input')" />
-                    <x-text-input id="phone_number" name="phone_number" type="text" placeholder="phone_number"
-                        class="mt-1 block w-full" :value="old('phone_number')" required autofocus />
-                    <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
-                </div>
-                  <div>
-                    <x-input-label for="email_input" :value="__('Your Email')" />
-                    <x-text-input id="email_input" name="email_input" type="text" placeholder="Email Input"
-                        class="mt-1 block w-full" :value="old('email_input')" required autofocus />
-                    <x-input-error :messages="$errors->get('email_input')" class="mt-2" />
-                </div>
-                  <div>
-                    <x-input-label for="address_line_1" :value="__('Address Line 1')" /> 
-                    <x-text-input id="address_line_1" name="address_line_1" type="text" placeholder="Address Line 1"
-                        class="mt-1 block w-full" :value="old('address_line_1')" required autofocus />
-                    <x-input-error :messages="$errors->get('address_line_1')" class="mt-2" />
-                </div>
-                  <div>
-                    <x-input-label for="address_line_1" :value="__('Address Line 2')" /> 
-                    <x-text-input id="address_line_1" name="address_line_1" type="text" placeholder="Address Line 1"
-                        class="mt-1 block w-full" :value="old('address_line_1')" required autofocus />
-                    <x-input-error :messages="$errors->get('address_line_2')" class="mt-2" />
-                </div>
-                <div>
-                    <x-input-label for="address_line_1" :value="__('Address Line 2')" /> 
-                    <x-text-input id="address_line_1" name="address_line_1" type="text" placeholder="Address Line 1"
-                        class="mt-1 block w-full" :value="old('address_line_1')" required autofocus />
-                    <x-input-error :messages="$errors->get('address_line_2')" class="mt-2" />
+            <!-- Row with two inputs side by side -->
+            <div class="flex flex-col md:flex-row gap-4">
+                <!-- Title -->
+                <div class="w-full md:w-1/2">
+                    <x-input-label for="title" :value="__('Your Title')" />
+                    <x-text-input id="title" name="title" type="text" placeholder="About title"
+                        class="mt-1 block w-full" :value="old('title')" required autofocus />
+                    <x-input-error :messages="$errors->get('title')" class="mt-2" />
                 </div>
 
-                 <div class="mt-4">
-                    <x-input-label for="slider_content" :value="__('Slider Content')" />
-                    <textarea id="slider_content" name="slider_content" rows="4"
-                        class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                        placeholder="your content" required>{{ old('slider_content') }}</textarea>
-                    <x-input-error :messages="$errors->get('description')" class="mt-2" />
+                <!-- Subtitle or additional input -->
+                <div class="w-full md:w-1/2">
+                    <x-input-label for="subtitle" :value="__('Subtitle')" />
+                    <x-text-input id="subtitle" name="subtitle" type="text" placeholder="Optional subtitle"
+                        class="mt-1 block w-full" :value="old('subtitle')" />
+                    <x-input-error :messages="$errors->get('subtitle')" class="mt-2" />
                 </div>
-
-      <!-- Image Upload -->
-                <div class="mt-4">
-                    <x-input-label for="slider_image" :value="__('Upload Image')" />
-                    <input type="file" name="image" id="image"   
-                        class="block w-full mt-1 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-slate-800 file:text-white hover:file:bg-slate-700" />
-                    <x-input-error :messages="$errors->get('image')" class="mt-2" /> 
-               </div>
-                  <img id="preview" class="my-4 w-20 h-20" src="" alt="Image preview will appear here">
-
-                 <!-- Anchor Link -->
-            <div class="mt-4">
-                <x-input-label for="anchor_link" :value="__('Button Link (Optional)')" />
-                <x-text-input id="anchor_link" name="anchor_link" type="text" 
-                    :value="old('anchor_link')" 
-                    class="mt-1 block w-full" />
-                <x-input-error :messages="$errors->get('anchor_link')" class="mt-2" />
             </div>
 
-            <!-- Anchor Text -->
+            <!-- Content -->
             <div class="mt-4">
-                <x-input-label for="anchor_text" :value="__('Button Text (Optional)')" />
-                <x-text-input id="anchor_text" name="anchor_text" type="text" 
-                     :value="old('anchor_text')" 
-                     class="mt-1 block w-full" />
-                <x-input-error :messages="$errors->get('anchor_text')" class="mt-2" />
+                <x-input-label for="content" :value="__('Content')" />
+                <textarea id="content" name="content" rows="4"
+                    class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                    placeholder="Your content here" required>{{ old('footer_description') }}</textarea>
+                <x-input-error :messages="$errors->get('footer_description')" class="mt-2" />
             </div>
 
-                <!-- Submit Button -->
-                <div class="mt-6">
-                    <button type="submit"
-                        class="w-full px-4 py-3 font-bold text-white bg-slate-800 rounded-md hover:bg-slate-700 transition duration-200">
-                        {{ __('Add Footer') }}
-                    </button>
-                </div>
-            </form>
-     </div>
+            <!-- Image Upload -->
+            <div class="mt-4">
+                <x-input-label for="image" :value="__('Upload Image')" />
+                <input type="file" name="images" id="image"   
+                    class="block w-full mt-1 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 
+                           file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 
+                           file:text-sm file:font-semibold file:bg-slate-800 file:text-white 
+                           hover:file:bg-slate-700" />
+                <x-input-error :messages="$errors->get('images')" class="mt-2" /> 
+                <img id="preview" class="my-4 w-20 h-20" src="" alt="Image preview will appear here">
+            </div>
+
+            <!-- Submit Button -->
+            <div class="mt-6">
+                <button type="submit"
+                    class="w-full px-4 py-3 font-bold text-white bg-slate-800 rounded-md hover:bg-slate-700 transition duration-200">
+                    {{ __('Add') }}
+                </button>
+            </div>
+        </form>
+    </div>
+
 
     <!-- toggle button for small screen  -->
     <button class="fixed right-4 top-4 z-20 rounded-full bg-primary p-4 md:hidden text-on-primary dark:bg-primary-dark dark:text-on-primary-dark" x-on:click="showSidebar = ! showSidebar">
