@@ -59,4 +59,8 @@ class User extends Authenticatable
     public function menu(){
         return $this->hasMany(Menu::class);
     }
+
+    public function footerInfo(){
+        return $this->hasOne(RestaurantInformation::class);
+    }
 }

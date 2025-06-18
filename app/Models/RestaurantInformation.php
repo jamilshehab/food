@@ -16,7 +16,11 @@ class RestaurantInformation extends Model
     'address_line_1',           // e.g., "C/54 Northwest Freeway,"
     'address_line_2',           // e.g., "Suite 558, USA 485"
     'footer_description',       // The long text in the middle
-    'images',             // JSON: e.g., {"linkedin": "...", "facebook": "..."}
+    'user_id'            // JSON: e.g., {"linkedin": "...", "facebook": "..."}
 ];
+
+public function user(){
+    return $this->belongsTo(User::class);
+}
 
 }

@@ -4,48 +4,89 @@
     <x-dashboard.sidebar/>
     <!-- main content  -->
      <div id="main-content" class="h-svh w-full overflow-y-auto p-4 bg-white dark:bg-neutral-950">
-        <form method="POST" action="{{ route('about.store') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('footer.store') }}" enctype="multipart/form-data">
             @csrf
 
             <!-- Row with two inputs side by side -->
             <div class="flex flex-col md:flex-row gap-4">
                 <!-- Title -->
                 <div class="w-full md:w-1/2">
-                    <x-input-label for="title" :value="__('Your Title')" />
-                    <x-text-input id="title" name="title" type="text" placeholder="About title"
-                        class="mt-1 block w-full" :value="old('title')" required autofocus />
-                    <x-input-error :messages="$errors->get('title')" class="mt-2" />
+                    <x-input-label for="title" :value="__('Open Hours Weekdays')" />
+                    <x-text-input id="title" name="title" type="text" placeholder="Open Hours Weekdays"
+                        class="mt-1 block w-full" :value="old('open_hours_weekdays')" required autofocus />
+                    <x-input-error :messages="$errors->get('open_hours_weekdays')" class="mt-2" />
                 </div>
 
                 <!-- Subtitle or additional input -->
                 <div class="w-full md:w-1/2">
-                    <x-input-label for="subtitle" :value="__('Subtitle')" />
-                    <x-text-input id="subtitle" name="subtitle" type="text" placeholder="Optional subtitle"
-                        class="mt-1 block w-full" :value="old('subtitle')" />
-                    <x-input-error :messages="$errors->get('subtitle')" class="mt-2" />
+                    <x-input-label for="subtitle" :value="__('Open Hours Weekends')" />
+                    <x-text-input id="subtitle" name="open_hours_weekends" type="text" placeholder="Open Hours Weekends"
+                        class="mt-1 block w-full" :value="old('open_hours_weekends')" />
+                    <x-input-error :messages="$errors->get('open_hours_weekends')" class="mt-2" />
                 </div>
             </div>
+              <!-- Row with two inputs side by side -->
+            <div class="flex flex-col md:flex-row gap-4">
+                <!-- Title -->
+                <div class="w-full md:w-1/2">
+                    <x-input-label for="title" :value="__('Reservation Title')" />
+                    <x-text-input id="title" name="reservation_title" type="text" placeholder="About title"
+                        class="mt-1 block w-full" :value="old('reservation_title')" required autofocus />
+                    <x-input-error :messages="$errors->get('reservation_title')" class="mt-2" />
+                </div>
 
+                <!-- Subtitle or additional input -->
+                <div class="w-full md:w-1/2">
+                    <x-input-label for="phone_number" :value="__('Phone Number')" />
+                    <x-text-input id="phone_number" name="phone_number" type="text" placeholder="Phone Number"
+                        class="mt-1 block w-full" :value="old('phone_number')" />
+                    <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
+                </div>
+            </div>
+                 <div class="flex flex-col md:flex-row gap-4">
+                <!-- Title -->
+                <div class="w-full md:w-1/2">
+                    <x-input-label for="email_input" :value="__('Email Input')" />
+                    <x-text-input id="email_input" name="email_input" type="text" placeholder="Email Input"
+                        class="mt-1 block w-full" :value="old('email_input')" required autofocus />
+                    <x-input-error :messages="$errors->get('email_input')" class="mt-2" />
+                </div>
+
+                <!-- Subtitle or additional input -->
+                <div class="w-full md:w-1/2">
+                    <x-input-label for="phone_number" :value="__('Phone Number')" />
+                    <x-text-input id="phone_number" name="phone_number" type="text" placeholder="Phone Number"
+                        class="mt-1 block w-full" :value="old('phone_number')" />
+                    <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
+                </div>
+            </div>
+              <div class="flex flex-col md:flex-row gap-4">
+                <!-- Title -->
+                <div class="w-full md:w-1/2">
+                    <x-input-label for="address_line_1" :value="__('Email Input')" />
+                    <x-text-input id="address_line_1" name="address_line_1" type="text" placeholder="Email Input"
+                        class="mt-1 block w-full" :value="old('address_line_1')" required autofocus />
+                    <x-input-error :messages="$errors->get('address_line_1')" class="mt-2" />
+                </div>
+
+                <!-- Subtitle or additional input -->
+                <div class="w-full md:w-1/2">
+                    <x-input-label for="address_line_2" :value="__('Phone Number')" />
+                    <x-text-input id="address_line_2" name="address_line_2" type="text" placeholder="Address Line 2"
+                        class="mt-1 block w-full" :value="old('address_line_2')" />
+                    <x-input-error :messages="$errors->get('address_line_2')" class="mt-2" />
+                </div>
+            </div>
             <!-- Content -->
             <div class="mt-4">
                 <x-input-label for="content" :value="__('Content')" />
-                <textarea id="content" name="content" rows="4"
+                <textarea id="content" name="footer_description" rows="4"
                     class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     placeholder="Your content here" required>{{ old('footer_description') }}</textarea>
                 <x-input-error :messages="$errors->get('footer_description')" class="mt-2" />
             </div>
 
-            <!-- Image Upload -->
-            <div class="mt-4">
-                <x-input-label for="image" :value="__('Upload Image')" />
-                <input type="file" name="images" id="image"   
-                    class="block w-full mt-1 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 
-                           file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 
-                           file:text-sm file:font-semibold file:bg-slate-800 file:text-white 
-                           hover:file:bg-slate-700" />
-                <x-input-error :messages="$errors->get('images')" class="mt-2" /> 
-                <img id="preview" class="my-4 w-20 h-20" src="" alt="Image preview will appear here">
-            </div>
+            
 
             <!-- Submit Button -->
             <div class="mt-6">

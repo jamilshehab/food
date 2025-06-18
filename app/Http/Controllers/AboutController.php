@@ -20,7 +20,12 @@ class AboutController extends Controller
      */
     public function create()
     {
+       $userId=auth()->id();
+       $about = About::where(column: 'user_id', operator: '=', value: $userId)->get()->first();
        
+       if($$userId!==$about->user_id){
+         return abort(404,'anuthorized access');
+       }
 
        return view('about.add' );
     }
@@ -51,7 +56,8 @@ class AboutController extends Controller
     public function edit(string $id)
     {
         $about=About::findOrFail($id);
-         if($about->user_id !== auth()->user()->id){
+        $userId=auth()->user()->id;
+         if($about->user_id !==$userId){
         return redirect()->back()->with('error', 'Not Authourized');
         }
         return view('about.edit')->with(['about' => $about]);

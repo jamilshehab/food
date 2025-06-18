@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('restaurant_information', function (Blueprint $table) {
             $table->id();
-             $table->string('open_hours_weekdays')->nullable();    // e.g., "Monday - Friday: 10:00AM - 11:00PM"
-            $table->string('open_hours_weekends')->nullable();    // e.g., "Saturday - Sunday: 9:00AM - 1:00PM"
+            $table->foreignId('user_id')->constrained()->onDelete(action: 'cascade');
+            $table->text('open_hours_weekdays')->nullable();    // e.g., "Monday - Friday: 10:00AM - 11:00PM"
+            $table->text('open_hours_weekends')->nullable();    // e.g., "Saturday - Sunday: 9:00AM - 1:00PM"
             $table->string('reservation_title')->nullable();       // e.g., "Reservation"
-            $table->string('phone_number')->nullable();
-            $table->string('email_input')->nullable();
-            $table->string('address_line_1')->nullable();
-            $table->string('address_line_2')->nullable();
+            $table->text('phone_number')->nullable();
+            $table->text('email_input')->nullable();
+            $table->text('address_line_1')->nullable();
+            $table->text('address_line_2')->nullable();
             $table->text('footer_description')->nullable();  
-            $table->string('image')->nullable();      // full line under the sections
             $table->timestamps();
         });
     }

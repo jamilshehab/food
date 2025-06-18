@@ -4,8 +4,10 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RestaurantInformationController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\AboutController;
+use App\Models\RestaurantInformation;
 use Illuminate\Support\Facades\Route;
 
 
@@ -42,6 +44,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         'destroy' => 'menu.destroy',
      ])->except('show');
 
+     Route::resource('footer',RestaurantInformationController::class)->except('show');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

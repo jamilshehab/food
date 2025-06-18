@@ -23,7 +23,7 @@ class MenuController extends Controller
     public function create()
     {
         //
-          return view('menu.add');
+          return view(view: 'menu.add');
     }
 
     /**

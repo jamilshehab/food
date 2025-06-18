@@ -89,7 +89,7 @@ use Illuminate\Support\Facades\Storage;
 
     // Handle file upload
     if ($request->hasFile('slider_image')) {
-        $fileName = 'slider_'.md5(date('YmdHis')).'.'.$request->file('slider_image')->extension();
+        $fileName = 'slider_'.md5(string: date('YmdHis')).'.'.$request->file('slider_image')->extension();
         $request->file('slider_image')->storeAs('public/sliders', $fileName);
         $validated['slider_image'] = $fileName; // Store only filename
     }
