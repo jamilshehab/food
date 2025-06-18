@@ -19,17 +19,15 @@
                     </thead>
                     <tbody class="divide-y divide-gray-200">
                              <tr class="hover:bg-gray-50">
-                                <td class="px-6 py-4 text-sm text-gray-800">{{ Str::limit($footer->title, 4) }}</td>
-                                <td class="px-6 py-4 text-sm text-gray-800">{{ Str::limit($footer->content, limit: 15) }}</td>
-                                <td class="px-6 py-4 text-sm text-gray-800">
-                                    @if($about->images)
-                                    <img src="{{ asset('storage/' . $footer->images) }}" 
-                                    alt="About Image" 
-                                   class="w-16 h-auto rounded-md"/>
-                                  @else
-                                    —
-                                 @endif
-                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-800">{{ Str::limit($footer->open_hours_weekdays, 4) }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">{{ Str::limit($footer->open_hours_weekends, limit: 15) }}</td>                                  <td class="px-6 py-4 text-sm text-gray-800">{{ Str::limit($footer->open_hours_weekends, limit: 15) }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">{{ Str::limit($footer->reservation_title, limit: 15) }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">{{ Str::limit($footer->phone_number, limit: 15) }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">{{ Str::limit($footer->phone_number, limit: 15) }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">{{ Str::limit($footer->address_line_1, limit: 15) }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">{{ Str::limit($footer->address_line_2, limit: 15) }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">{{ Str::limit($footer->footer_description, limit: 15) }}</td>
+
                                 
                                 <td class="px-6 py-4 text-sm text-gray-600">
                                     {{ $footer->created_at->format('M d, Y H:i') }}

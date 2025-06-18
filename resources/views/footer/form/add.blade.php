@@ -43,7 +43,7 @@
                     <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
                 </div>
             </div>
-                 <div class="flex flex-col md:flex-row gap-4">
+            <div class="flex flex-col md:flex-row gap-4">
                 <!-- Title -->
                 <div class="w-full md:w-1/2">
                     <x-input-label for="email_input" :value="__('Email Input')" />
@@ -71,12 +71,12 @@
 
                 <!-- Subtitle or additional input -->
                 <div class="w-full md:w-1/2">
-                    <x-input-label for="address_line_2" :value="__('Phone Number')" />
+                    <x-input-label for="address_line_2" :value="__('Address Line 2')" />
                     <x-text-input id="address_line_2" name="address_line_2" type="text" placeholder="Address Line 2"
                         class="mt-1 block w-full" :value="old('address_line_2')" />
                     <x-input-error :messages="$errors->get('address_line_2')" class="mt-2" />
                 </div>
-            </div>
+              </div>
             <!-- Content -->
             <div class="mt-4">
                 <x-input-label for="content" :value="__('Content')" />

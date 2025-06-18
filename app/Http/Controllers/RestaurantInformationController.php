@@ -81,4 +81,13 @@ class RestaurantInformationController extends Controller
 
     return redirect()->back()->with('success', 'Footer updated successfully.');
 }
+
+public function destroy(string $id){
+    $footer=RestaurantInformation::findOrFail($id);
+    $user=auth()->user();
+    if ($footer->user_id!==$user->id){
+    return redirect()->route('footer.index')->with('success','footer deleted');
+
+    }
+}
 }
