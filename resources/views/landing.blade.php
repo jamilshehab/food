@@ -50,6 +50,9 @@
                     </li>
  
                    @endforeach
+                   <li class="menu-item">
+                    <a href="{{route('dashboard')}}">Dashboard</a>
+                   </li>
                  </ul> 
             </div> 
         </div> 

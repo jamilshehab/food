@@ -60,7 +60,7 @@ class NavigationController extends Controller
     public function update(Request $request, string $id)
     {
         //
-       $user = auth()->user();
+    $user = auth()->user();
     $navigation = Navigation::findOrFail($id);
 
     // Correct authorization check
