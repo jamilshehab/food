@@ -12,8 +12,7 @@
                         <tr>
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Navigation Links</th>
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Navigation Title</th>
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Navigation Logo</th>                           
-                        </tr>
+                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200">
                              <tr class="hover:bg-gray-50">
