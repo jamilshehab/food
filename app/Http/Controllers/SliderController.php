@@ -72,8 +72,6 @@ use Illuminate\Support\Facades\Storage;
     {
     $user = auth()->user();
     $slider = Slider::findOrFail($id);
-    
-
     // Authorization check (assuming sliders have a user_id column)
     if ($slider->user_id !== $user->id) {
         return redirect()->back()->with('error', 'Not Authorized');

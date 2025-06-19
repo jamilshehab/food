@@ -20,12 +20,7 @@ class AboutController extends Controller
      */
     public function create()
     {
-       $userId=auth()->id();
-       $about = About::where(column: 'user_id', operator: '=', value: $userId)->get()->first();
-       
-       if($$userId!==$about->user_id){
-         return abort(404,'anuthorized access');
-       }
+      
 
        return view('about.add' );
     }
@@ -57,8 +52,8 @@ class AboutController extends Controller
     {
         $about=About::findOrFail($id);
         $userId=auth()->user()->id;
-         if($about->user_id !==$userId){
-        return redirect()->back()->with('error', 'Not Authourized');
+        if($about->user_id !==$userId){
+          return redirect()->back()->with('error', 'Not Authourized');
         }
         return view('about.edit')->with(['about' => $about]);
     }
@@ -85,7 +80,7 @@ class AboutController extends Controller
    
     // Handle file upload
     if ($request->hasFile('images')) {
-        $fileName = 'about_'.md5(date('YmdHis')).'.'.$request->file('image')->extension();
+        $fileName = 'about_'.md5(date('YmdHis')).'.'.$request->file('images')->extension();
         $request->file('images')->storeAs('public/about', $fileName);
         $validated['images'] = $fileName; // Store only filename
     }

@@ -4,9 +4,8 @@
     <x-dashboard.sidebar/>
     <!-- main content  -->
     <div id="main-content" class="h-svh w-full overflow-y-auto p-4 bg-white dark:bg-neutral-950">
-          <form method="POST" action="{{ route('navbar.store') }}" enctype="multipart/form-data">
-                @csrf
-
+          <form method="POST" action="{{ route('header.store') }}" >
+            @csrf
                 <div>
                     <x-input-label for="title" :value="__('Your Title')" />
                     <x-text-input id="title" name="title" type="text" placeholder="title"
@@ -43,6 +42,5 @@
         <span class="sr-only">sidebar toggle</span>
     </button>
 </div>
-<script src="{{ asset(path: 'assets/js/image-display.js') }}"></script>
-
+ 
 </x-app-layout>

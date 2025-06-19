@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete(action: 'cascade');
             $table->text('open_hours_weekdays')->nullable();    // e.g., "Monday - Friday: 10:00AM - 11:00PM"
             $table->text('open_hours_weekends')->nullable();    // e.g., "Saturday - Sunday: 9:00AM - 1:00PM"
-            $table->string('reservation_title')->nullable();       // e.g., "Reservation"
             $table->text('phone_number')->nullable();
             $table->text('email_input')->nullable();
             $table->text('address_line_1')->nullable();

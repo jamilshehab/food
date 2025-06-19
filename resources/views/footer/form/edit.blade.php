@@ -1,81 +1,59 @@
 <x-app-layout>
 <div x-data="{ showSidebar: false }" class="relative flex w-full flex-col md:flex-row">
     <div x-cloak x-show="showSidebar" class="fixed inset-0 z-10 bg-surface-dark/10 backdrop-blur-xs md:hidden" aria-hidden="true" x-on:click="showSidebar = false" x-transition.opacity></div>
-
     <x-dashboard.sidebar/>
     <!-- main content  -->
-    <div id="main-content" class="h-svh w-full overflow-y-auto p-4 bg-white dark:bg-neutral-950">
-
-      
-    <div class="p-6">
-        <form method="POST" action="{{ route('about.update', $footer->id) }}" enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
-              <!-- Row with two inputs side by side -->
+     <div id="main-content" class="h-svh w-full overflow-y-auto p-4 bg-white dark:bg-neutral-950">
+        <form method="POST" action="{{ route('footer.update' , $footer->id) }}" >
+          @csrf
+           @method('PUT')
+            <!-- Row with two inputs side by side -->
             <div class="flex flex-col md:flex-row gap-4">
                 <!-- Title -->
                 <div class="w-full md:w-1/2">
-                    <x-input-label for="title" :value="__('Open Hours Weekdays')" />
-                    <x-text-input id="title" name="title" type="text" placeholder="Open Hours Weekdays"
-                        class="mt-1 block w-full" :value="old('open_hours_weekdays',$footer->open_hours_weekdays)" required autofocus />
+                    <x-input-label for="open_hours_weekdays" :value="__('Open Hours Weekdays')" />
+                    <x-text-input id="open_hours_weekdays" name="open_hours_weekdays" type="text" placeholder="Open Hours Weekdays"
+                        class="mt-1 block w-full" :value="old('open_hours_weekdays' , $footer->open_hours_weekdays)" required autofocus />
                     <x-input-error :messages="$errors->get('open_hours_weekdays')" class="mt-2" />
                 </div>
 
                 <!-- Subtitle or additional input -->
                 <div class="w-full md:w-1/2">
-                    <x-input-label for="subtitle" :value="__('Open Hours Weekends')" />
-                    <x-text-input id="subtitle" name="open_hours_weekends" type="text" placeholder="Open Hours Weekends"
+                    <x-input-label for="open_hours_weekends" :value="__('Open Hours Weekends')" />
+                    <x-text-input id="open_hours_weekends" name="open_hours_weekends" type="text" placeholder="Open Hours Weekends"
                         class="mt-1 block w-full" :value="old('open_hours_weekends',$footer->open_hours_weekends)" />
                     <x-input-error :messages="$errors->get('open_hours_weekends')" class="mt-2" />
                 </div>
             </div>
               <!-- Row with two inputs side by side -->
             <div class="flex flex-col md:flex-row gap-4">
-                <!-- Title -->
-                <div class="w-full md:w-1/2">
-                    <x-input-label for="title" :value="__('Reservation Title')" />
-                    <x-text-input id="title" name="reservation_title" type="text" placeholder="About title"
-                        class="mt-1 block w-full" :value="old('reservation_title',$footer->reservation_title)" required autofocus />
-                    <x-input-error :messages="$errors->get('reservation_title')" class="mt-2" />
-                </div>
-
-                <!-- Subtitle or additional input -->
+            
                 <div class="w-full md:w-1/2">
                     <x-input-label for="phone_number" :value="__('Phone Number')" />
                     <x-text-input id="phone_number" name="phone_number" type="text" placeholder="Phone Number"
                         class="mt-1 block w-full" :value="old('phone_number',$footer->phone_number)" />
                     <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
                 </div>
-            </div>
-            <div class="flex flex-col md:flex-row gap-4">
-                <!-- Title -->
-                <div class="w-full md:w-1/2">
+                 <div class="w-full md:w-1/2">
                     <x-input-label for="email_input" :value="__('Email Input')" />
                     <x-text-input id="email_input" name="email_input" type="text" placeholder="Email Input"
-                        class="mt-1 block w-full" :value="old('email_input',$footer->email_input)" required autofocus />
+                        class="mt-1 block w-full" :value="old('email_input' , $footer->email_input)" required autofocus />
                     <x-input-error :messages="$errors->get('email_input')" class="mt-2" />
                 </div>
-
-                <!-- Subtitle or additional input -->
-                <div class="w-full md:w-1/2">
-                    <x-input-label for="phone_number" :value="__('Phone Number')" />
-                    <x-text-input id="phone_number" name="phone_number" type="text" placeholder="Phone Number"
-                        class="mt-1 block w-full" :value="old('phone_number',$footer->phone_number)" />
-                    <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
-                </div>
             </div>
+          
               <div class="flex flex-col md:flex-row gap-4">
                 <!-- Title -->
                 <div class="w-full md:w-1/2">
-                    <x-input-label for="address_line_1" :value="__('Email Input')" />
-                    <x-text-input id="address_line_1" name="address_line_1" type="text" placeholder="Email Input"
-                        class="mt-1 block w-full" :value="old('address_line_1')" required autofocus />
-                    <x-input-error :messages="$errors->get('address_line_1',$footer->address_line_1)" class="mt-2" />
+                    <x-input-label for="address_line_1" :value="__('Address Line 1')" />
+                    <x-text-input id="address_line_1" name="address_line_1" type="text" placeholder="Address Line 1"
+                        class="mt-1 block w-full" :value="old('address_line_1',$footer->address_line_1)" required autofocus />
+                    <x-input-error :messages="$errors->get('address_line_1')" class="mt-2" />
                 </div>
 
                 <!-- Subtitle or additional input -->
                 <div class="w-full md:w-1/2">
-                    <x-input-label for="address_line_2" :value="__('Phone Number')" />
+                    <x-input-label for="address_line_2" :value="__('Address Line 2')" />
                     <x-text-input id="address_line_2" name="address_line_2" type="text" placeholder="Address Line 2"
                         class="mt-1 block w-full" :value="old('address_line_2',$footer->address_line_2)" />
                     <x-input-error :messages="$errors->get('address_line_2')" class="mt-2" />
@@ -83,21 +61,26 @@
               </div>
             <!-- Content -->
             <div class="mt-4">
-                <x-input-label for="content" :value="__('Content')" />
-                <textarea id="content" name="footer_description" rows="4"
+                <x-input-label for="content" :value="__('Footer Description')" />
+                <textarea id="footer_description" name="footer_description" rows="4"
                     class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     placeholder="Your content here" required>{{ old('footer_description',$footer->footer_description) }}</textarea>
                 <x-input-error :messages="$errors->get('footer_description')" class="mt-2" />
             </div>
+
+            
+
+            <!-- Submit Button -->
             <div class="mt-6">
                 <button type="submit"
                     class="w-full px-4 py-3 font-bold text-white bg-slate-800 rounded-md hover:bg-slate-700 transition duration-200">
-                    {{ __('Update Footer') }}
+                    {{ __('Update') }}
                 </button>
             </div>
         </form>
     </div>
-      </div>
+
+
     <!-- toggle button for small screen  -->
     <button class="fixed right-4 top-4 z-20 rounded-full bg-primary p-4 md:hidden text-on-primary dark:bg-primary-dark dark:text-on-primary-dark" x-on:click="showSidebar = ! showSidebar">
         <svg x-show="showSidebar" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-5" aria-hidden="true">
@@ -109,6 +92,5 @@
         <span class="sr-only">sidebar toggle</span>
     </button>
 </div>
-</x-app-layout>
-
  
+</x-app-layout>

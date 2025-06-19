@@ -44,15 +44,12 @@
             <div id="navigation">
                 <!-- Navigation Menu-->
                 <ul class="navigation-menu nav-light justify-end">
+                   @foreach ($navigation as $nav)
                     <li class="menu-item active">
-                        <a href="#home">Home</a> 
+                        <a href="{{$nav->url}}">{{$nav->title}}</a> 
                     </li>
-
-                    <li class="menu-item"><a href="#about">Our Story</a></li>
-
-                    <li class="menu-item"><a href="#menu"> Menus </a><span></li>
-                    <li ><a href="{{route('dashboard')}}" > Dashboard </a><span></li>
-
+ 
+                   @endforeach
                  </ul> 
             </div> 
         </div> 
@@ -183,8 +180,8 @@
                             </div>
 
                             <div class="text-center">
-                                <h5 class="tracking-[1px] text-gray-100 font-medium text-lg mb-4">{{$footer->reservation_title }}</h5>
-                                <p class="mb-2"><a href="{{$footer->phone_number }}" class="text-gray-200/80">+152
+                                <h5 class="tracking-[1px] text-gray-100 font-medium text-lg mb-4">Reservation</h5>
+                                <p class="mb-2"><a href="{{$footer->phone_number }}" class="text-gray-200/80"> 
                                         {{$footer->phone_number }}</a></p>
                                 <p class="mb-0"><a href="{{$footer->email_input}}"
                                         class="text-gray-200/80">{{$footer->email_input}}</a></p>

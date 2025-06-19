@@ -12,7 +12,6 @@ class NavigationController extends Controller
      */
     public function index()
     {
-        //
         $userId=auth()->id();
         $navigation = Navigation::where('user_id', $userId)->latest()->paginate(8);
         return view('navigation.navbar',compact('navigation'));
@@ -32,7 +31,7 @@ class NavigationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
         $validated=$request->validate([
             'title'=>'required|string',
             'url'=>'required|string',
@@ -40,7 +39,7 @@ class NavigationController extends Controller
           
         $validated['user_id'] = auth()->id();
         Navigation::create($validated);
-        return redirect()->route('navigation.navbar')->with('success','created successfully');
+        return redirect()->route('header.index')->with('success','created successfully');
         
     }
  
@@ -52,7 +51,7 @@ class NavigationController extends Controller
         if ($navigation->user_id !==$user->id){
           abort(403,'anuthorized access');
         }
-        return view('navigation.navbar',compact('navigation'));
+        return view('navigation.form.edit',compact('navigation'));
     }
 
     /**
@@ -61,20 +60,22 @@ class NavigationController extends Controller
     public function update(Request $request, string $id)
     {
         //
-        $user=auth()->user();
-        $navigation=Navigation::findOrFail($id);
-        if($navigation!==$user->id){
-            abort(403,'anuthorized user access');
-        }
-        $validated=$request->validate([
-            'title'=>'required|string|max:255',
-            'url'=>'required|string'
-             
-        ]);
-       
-        $validated['user_id'] = auth()->id();
-        $navigation->update($validated);
+       $user = auth()->user();
+    $navigation = Navigation::findOrFail($id);
 
+    // Correct authorization check
+    if ($navigation->user_id !== $user->id) {
+        abort(403, 'Unauthorized user access');
+    }
+
+    $validated = $request->validate([
+        'title' => 'required|string',
+        'url' => 'required|string',
+    ]);
+
+    $navigation->update($validated);
+
+    return redirect()->route('header.index')->with('success', 'Navigation updated successfully.');  
     }
 
     /**

@@ -10,8 +10,8 @@ class RestaurantInformationController extends Controller
     //
     public function index(){
         $userId=auth()->id();
-        $footerInfo = RestaurantInformation::where(column: 'user_id', operator: '=', value: $userId)->get()->first();
-        return view('footer.footer',compact('footerInfo'));
+        $footer = RestaurantInformation::where(column: 'user_id', operator: '=', value: $userId)->get()->first();
+        return view('footer.footer',compact('footer'));
     }
     public function create(){
         return view('footer.form.add');
@@ -21,31 +21,30 @@ class RestaurantInformationController extends Controller
     $validated=$request->validate([
     'open_hours_weekdays'=>'required|string',       
     'open_hours_weekends'=>'required|string',       
-    'reservation_title'=>'required|string',        
     'phone_number'=>'required|string',             
     'email_input'=>'required|string',              
     'address_line_1'=>'required|string',         
     'address_line_2'=>'required|string',     
     'footer_description'=>'required|string',      
     'images'=>'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    'social_links'=>'required|string'              
-    ]);
+     ]);
     if ($request->hasFile('images')){
        $validated['images'] = $request->file('images')->store('footer/images', 'public');         
     }
     $userId=auth()->id();
     $validated['user_id'] =$userId;
     RestaurantInformation::create($validated);
+    return redirect()->route('footer.index')->with('success','Information created successfully');
     }
 
     public function edit($id){
         $user=auth()->user();
-        $footerInfo=RestaurantInformation::findOrFail($id);
-        if($footerInfo->user_id !== $user->id){
+        $footer=RestaurantInformation::findOrFail($id);
+        if($footer->user_id !== $user->id){
            return redirect()->back()->with('error', 'Not Authourized');
         }
 
-        return view('footer.form.edit');
+        return view('footer.form.edit',compact('footer'));
 
     }
 
@@ -55,17 +54,15 @@ class RestaurantInformationController extends Controller
     $footer =RestaurantInformation::findOrFail($id);
 
     $validated = $request->validate([
-        'open_hours_weekdays'   => 'required|string',
-        'open_hours_weekends'   => 'required|string',
-        'reservation_title'     => 'required|string',
-        'phone_number'          => 'required|string',
-        'email_input'           => 'required|string|email',
-        'address_line_1'        => 'required|string',
-        'address_line_2'        => 'required|string',
-        'footer_description'    => 'required|string',
-        'images'                => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'social_links'          => 'required|string'
-    ]);
+    'open_hours_weekdays'=>'required|string',       
+    'open_hours_weekends'=>'required|string',       
+    'phone_number'=>'required|string',             
+    'email_input'=>'required|string',              
+    'address_line_1'=>'required|string',         
+    'address_line_2'=>'required|string',     
+    'footer_description'=>'required|string',      
+    'images'=>'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+     ]);
 
     // Find the model by ID
 
@@ -79,14 +76,14 @@ class RestaurantInformationController extends Controller
     // Update the model
     $footer->update($validated);
 
-    return redirect()->back()->with('success', 'Footer updated successfully.');
+    return redirect()->route('footer.index')->with('success', 'Footer updated successfully.');
 }
 
 public function destroy(string $id){
     $footer=RestaurantInformation::findOrFail($id);
     $user=auth()->user();
     if ($footer->user_id!==$user->id){
-    return redirect()->route('footer.index')->with('success','footer deleted');
+      return redirect()->route('footer.index')->with('success','footer deleted');
 
     }
 }

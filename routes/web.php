@@ -8,7 +8,6 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RestaurantInformationController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\AboutController;
-use App\Models\RestaurantInformation;
 use Illuminate\Support\Facades\Route;
 
 
@@ -17,9 +16,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/',  [HomeController::class,'index'])->name('home');
     
     Route::get('/dashboard', [DashboardController::class,'dashboard'])->name('dashboard');
-    
-       Route::resource('slider',NavigationController::class)->except('show');
-
+    Route::resource('header',NavigationController::class)->except('show');
     Route::resource('slider',SliderController::class)->names([
         'index'   => 'slider.view',
         'create'  => 'slider.create',
@@ -47,7 +44,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         'destroy' => 'menu.destroy',
      ])->except('show');
 
-     Route::resource('footer',RestaurantInformationController::class)->except('show');
+    Route::resource('footer',RestaurantInformationController::class)->except('show');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

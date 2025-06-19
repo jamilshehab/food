@@ -5,7 +5,7 @@
     <!-- main content  -->
     <div id="main-content" class="h-svh w-full overflow-y-auto p-4 bg-white dark:bg-neutral-950">
         <div class="container px-4 mx-auto py-12">
-        @if($footer)
+        @if($navigation->count()>0)
             <div class="overflow-x-auto">
                 <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-sm">
                     <thead class="bg-gray-100">
@@ -15,21 +15,22 @@
                          </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200">
+                            @foreach ($navigation as $nav)
                              <tr class="hover:bg-gray-50">
-                                <td class="px-6 py-4 text-sm text-gray-800">{{ Str::limit($navigation->title, 4) }}</td>
-                                <td class="px-6 py-4 text-sm text-gray-800">{{ Str::limit($navigation->url, limit: 15) }}</td>                                    
+                                <td class="px-6 py-4 text-sm text-gray-800">{{ $nav->url }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">{{ $nav->title }}</td>                                    
                                 <td class="px-6 py-4 text-sm text-gray-600">
-                                    {{ $navigation->created_at->format('M d, Y H:i') }}
+                                    {{ $nav->created_at->format('M d, Y H:i') }}
                                 </td>
                                 <td class="px-6 py-4 text-center space-x-2">
                                     
-                                    <a href="{{ route('navigation.edit', $navigation->id) }}" 
+                                    <a href="{{ route('header.edit', $nav->id) }}" 
                                        class="inline-block px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700">
                                         Edit
                                     </a>
 
 
-                                    <form action="{{ route('footer.destroy', $navigation->id) }}" method="POST"
+                                    <form action="{{ route('header.destroy', $nav->id)}}" method="POST"
                                           onsubmit="return confirm('Are you sure you want to delete this?');"
                                           class="inline-block">
                                         @csrf
@@ -40,10 +41,10 @@
                                     </form>
                                 </td>
                             </tr>
+                            @endforeach
                      </tbody>
                 </table>
             </div>
- 
         @else
             <p class="text-gray-600 text-center text-xl mt-8">No Items Found.</p>
         @endif

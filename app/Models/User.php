@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Slider;
 use App\Models\Menu;
+use App\Models\Navigation;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -65,6 +66,6 @@ class User extends Authenticatable
     }
    
     public function navigation(){
-        return $this->hasMany(Menu::class);
+        return $this->hasMany(Navigation::class);
     }
 }
