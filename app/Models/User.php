@@ -73,4 +73,6 @@ class User extends Authenticatable
     public function logo(){
         return $this->hasOne(Logo::class);
     }
+
+    
 }

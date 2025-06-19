@@ -255,7 +255,7 @@
             &times;
         </button>
 
-        <img id="modalImage" class="w-full object-cover rounded-full" src="" alt="Modal Image">
+        <img id="modalImage" class="w-full h-48 object-cover rounded-full" src="" alt="Modal Image">
 
         <div class="px-6 py-4">
             <div id="modalTitle" class="font-bold text-xl mb-2"></div>
