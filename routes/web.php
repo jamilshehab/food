@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\NavigationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RestaurantInformationController;
 use App\Http\Controllers\SliderController;
@@ -17,6 +18,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     
     Route::get('/dashboard', [DashboardController::class,'dashboard'])->name('dashboard');
     
+       Route::resource('slider',NavigationController::class)->except('show');
+
     Route::resource('slider',SliderController::class)->names([
         'index'   => 'slider.view',
         'create'  => 'slider.create',

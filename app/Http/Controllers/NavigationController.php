@@ -13,8 +13,9 @@ class NavigationController extends Controller
     public function index()
     {
         //
-        $user=auth()->user();
-        
+        $userId=auth()->id();
+        $navigation = Navigation::where('user_id', $userId)->latest()->paginate(8);
+        return view('navigation.navbar',compact('navigation'));
     }
 
     /**
@@ -23,6 +24,7 @@ class NavigationController extends Controller
     public function create()
     {
         //
+        return view('navigation.form.add');
     }
 
     /**
@@ -31,37 +33,62 @@ class NavigationController extends Controller
     public function store(Request $request)
     {
         //
+        $validated=$request->validate([
+            'title'=>'required|string',
+            'url'=>'required|string',
+        ]);
+          
+        $validated['user_id'] = auth()->id();
+        Navigation::create($validated);
+        return redirect()->route('navigation.navbar')->with('success','created successfully');
+        
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Navigation $navigation)
+ 
+    public function edit(string $id)
     {
         //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Navigation $navigation)
-    {
-        //
+        $user=auth()->user();
+        $navigation=Navigation::findOrFail($id);
+        if ($navigation->user_id !==$user->id){
+          abort(403,'anuthorized access');
+        }
+        return view('navigation.navbar',compact('navigation'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Navigation $navigation)
+    public function update(Request $request, string $id)
     {
         //
+        $user=auth()->user();
+        $navigation=Navigation::findOrFail($id);
+        if($navigation!==$user->id){
+            abort(403,'anuthorized user access');
+        }
+        $validated=$request->validate([
+            'title'=>'required|string|max:255',
+            'url'=>'required|string'
+             
+        ]);
+       
+        $validated['user_id'] = auth()->id();
+        $navigation->update($validated);
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Navigation $navigation)
+    public function destroy(string $id)
     {
         //
+        $navigation=Navigation::findOrFail($id);
+        $user=auth()->user();
+        if($navigation->user_id !==$user->id){
+            abort(403,'unauthorized access');
+        }
+        $navigation->delete();
+        return redirect()->route('navigation.navbar')->with('success','navigation links deleted');
     }
 }

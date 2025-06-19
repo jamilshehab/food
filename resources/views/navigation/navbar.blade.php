@@ -10,40 +10,27 @@
                 <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-sm">
                     <thead class="bg-gray-100">
                         <tr>
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Open Hours Weekdays</th>
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Open Hours Weekends</th>
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Reservation Title</th>
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Phone Number</th>
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Email Input</th>
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Address Line 1</th>
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Address Line 2</th>
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Footer Description</th>
-                            <th class="px-6 py-3 text-center text-sm font-semibold text-gray-700">Actions</th>
+                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Navigation Links</th>
+                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Navigation Title</th>
+                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Navigation Logo</th>                           
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200">
                              <tr class="hover:bg-gray-50">
-                                <td class="px-6 py-4 text-sm text-gray-800">{{ Str::limit($footer->open_hours_weekdays, 4) }}</td>
-                                <td class="px-6 py-4 text-sm text-gray-800">{{ Str::limit($footer->open_hours_weekends, limit: 15) }}</td>                                   
-                                <td class="px-6 py-4 text-sm text-gray-800">{{ Str::limit($footer->reservation_title, limit: 15) }}</td>
-                                <td class="px-6 py-4 text-sm text-gray-800">{{ Str::limit($footer->phone_number, limit: 15) }}</td>
-                                <td class="px-6 py-4 text-sm text-gray-800">{{ Str::limit($footer->email_input, limit: 15) }}</td>
-                                <td class="px-6 py-4 text-sm text-gray-800">{{ Str::limit($footer->address_line_1, limit: 15) }}</td>
-                                <td class="px-6 py-4 text-sm text-gray-800">{{ Str::limit(value: $footer->address_line_2, limit: 15) }}</td>
-                                <td class="px-6 py-4 text-sm text-gray-800">{{ Str::limit($footer->footer_description, limit: 15) }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">{{ Str::limit($navigation->title, 4) }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">{{ Str::limit($navigation->url, limit: 15) }}</td>                                    
                                 <td class="px-6 py-4 text-sm text-gray-600">
-                                    {{ $footer->created_at->format('M d, Y H:i') }}
+                                    {{ $navigation->created_at->format('M d, Y H:i') }}
                                 </td>
                                 <td class="px-6 py-4 text-center space-x-2">
                                     
-                                    
-                                    <a href="{{ route('footer.edit', $footer->id) }}" 
+                                    <a href="{{ route('navigation.edit', $navigation->id) }}" 
                                        class="inline-block px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700">
                                         Edit
                                     </a>
 
 
-                                    <form action="{{ route('footer.destroy', $footer->id) }}" method="POST"
+                                    <form action="{{ route('footer.destroy', $navigation->id) }}" method="POST"
                                           onsubmit="return confirm('Are you sure you want to delete this?');"
                                           class="inline-block">
                                         @csrf
