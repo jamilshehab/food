@@ -18,13 +18,15 @@
                     <tbody class="divide-y divide-gray-200">
                              <tr class="hover:bg-gray-50">
                                 <td class="px-6 py-4 text-sm text-gray-800">
-                                    @if($logo->images)
-                                    <img src="{{ asset('storage/' . $logo->images) }}" 
-                                    alt="Logo Image" 
-                                   class="w-16 h-auto rounded-md"/>
+                                     @if($logo->images)
+                                     @foreach ($logo->image as $img)
+                                      <img src="{{ asset('storage/' . $img) }}" 
+                                      alt="Logo Image" 
+                                      class="w-16 h-auto rounded-md"/>
+                                     @endforeach
                                   @else
                                     —
-                                 @endif
+                                  @endif
                                 </td>
                                 
                                 <td class="px-6 py-4 text-sm text-gray-600">

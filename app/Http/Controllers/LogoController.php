@@ -21,23 +21,33 @@ class LogoController extends Controller
     }
      
 
-   public function store(Request $request)
-   {
+  public function store(Request $request)
+{
+    // Validate: 'image.*' means each image in array
     $validated = $request->validate([  
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'class' => 'required|string',
     ]);
 
-    // Handle file upload
-    if ($request->hasFile('image')) {
-     $validated['image'] = $request->file('image')->store('logo/images', 'public');         
+    $imageNames = [];
 
+    // Check if there are any uploaded files
+    if ($request->hasFile('image')) {
+        foreach ($request->file('image') as $file) {
+            $name = time().'_'.$file->getClientOriginalName();
+            $file->storeAs('logo/images', $name, 'public');
+            $imageNames[] = $name;
+        }
     }
 
-    // Add user_id to validated data
+    // Add user ID
     $validated['user_id'] = auth()->id();
 
+    // Convert array of image names to string (you can use JSON if preferred)
+    $validated['image'] = implode(',', $imageNames);
+
     Logo::create($validated);
-    
+
     return redirect()->route('logo.index')->with('success', 'Logo created successfully!');
 }
 
