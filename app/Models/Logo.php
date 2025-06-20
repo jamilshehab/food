@@ -7,10 +7,12 @@ use App\Models\User;
 class Logo extends Model
 {
     //
-    protected $fillable=['image','user_id'];
+    protected $fillable=['image','user_id','class','class_dark'];
 
 
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    
 }

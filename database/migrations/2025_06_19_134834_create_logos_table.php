@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('logos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->nullable()->constrained();
+            $table->string('logo_light')->nullable();
+            $table->string('class')->nullable();
+            $table->string('class_dark')->nullable();
+            $table->string('logo_dark')->nullable();
             $table->timestamps();
         });
     }

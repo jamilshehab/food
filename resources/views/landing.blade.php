@@ -16,8 +16,8 @@
             <!-- Logo container-->
             <a class="logo" href="#home">
                 <span class="inline-block dark:hidden">
-                    <img src="{{asset('assets/images/logo/logo-dark.png')}}" class="l-dark" alt="">
-                    <img src="{{asset('assets/images/logo/logo-light.png')}}" class="l-light" alt="">
+                     <img src="{{asset('assets/images/logo/logo-dark.png')}}" class="l-dark" alt="">
+                     <img src="{{asset('assets/images/logo/logo-light.png')}}" class="l-light" alt="">
                 </span>
                 <img src="{{asset('assets/images/logo-light.png')}}" class="hidden dark:inline-block" alt="">
             </a>

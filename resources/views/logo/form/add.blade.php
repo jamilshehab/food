@@ -8,11 +8,16 @@
                 @csrf
                 <div>
                     <x-input-label for="class" :value="__('Logo Class')" />
-                    <x-text-input id="class" name="class" type="text" placeholder="slider title"
+                    <x-text-input id="class" name="class" type="text" placeholder="Class Default"
                         class="mt-1 block w-full" :value="old('class')" required autofocus />
-                    <x-input-error :messages="$errors->get('slider_title')" class="mt-2" />
+                    <x-input-error :messages="$errors->get('class')" class="mt-2" />
                 </div>
-
+                 <div>
+                    <x-input-label for="class" :value="__('Logo Class Dark')" />
+                    <x-text-input id="class_dark" name="class_dark" type="text" placeholder="Class Dark"
+                        class="mt-1 block w-full" :value="old('class_dark')" required autofocus />
+                    <x-input-error :messages="$errors->get('class_dark')" class="mt-2" />
+                </div>
                 <div class="mt-4">
                     <x-input-label for="slider_image" :value="__('Upload Image')" />
                     <input type="file" name="image[]" id="image" multiple  

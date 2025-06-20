@@ -18,24 +18,26 @@
                     <tbody class="divide-y divide-gray-200">
                              <tr class="hover:bg-gray-50">
                                 <td class="px-6 py-4 text-sm text-gray-800">
-                                     @if($logo->images)
-                                     @foreach ($logo->image as $img)
-                                      <img src="{{ asset('storage/' . $img) }}" 
-                                      alt="Logo Image" 
-                                      class="w-16 h-auto rounded-md"/>
-                                     @endforeach
-                                  @else
-                                    —
-                                  @endif
+                                    @if($logo->image)
+                                 @php
+                                  $images = explode(',', $logo->image);
+                                 @endphp
+                                 @foreach ($images as $img)
+                                 <img src="{{ asset('storage/logo/images/' . $img) }}" 
+                                  alt="Logo Image" 
+                                  class="w-16 h-auto rounded-md"/>
+                                 @endforeach
+                                 @else
+                                 —
+                                 @endif
                                 </td>
                                 
                                 <td class="px-6 py-4 text-sm text-gray-600">
-                                    {{ $about->created_at->format('M d, Y H:i') }}
+                                    {{ $logo->created_at->format('M d, Y H:i') }}
                                 </td>
                                 <td class="px-6 py-4 text-center space-x-2">
-                                    
-                                    
-                                    <a href="{{ route('logo.edit', $about->id) }}" 
+                            
+                                    <a href="{{ route('logo.edit', $logo->id) }}" 
                                        class="inline-block px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700">
                                         Edit
                                     </a>
