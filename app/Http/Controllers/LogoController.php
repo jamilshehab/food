@@ -24,29 +24,21 @@ class LogoController extends Controller
   public function store(Request $request)
 {
     // Validate: 'image.*' means each image in array
-    $validated = $request->validate([  
-        'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'class' => 'required|string',
-        'class_dark'=>'required|string'
+    $validated = $request->validate([
+        'logo_light' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'logo_dark' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
     ]);
+    
+  if ($request->hasFile('logo_light')) {
+     $validated['logo_light'] = $request->file('logo_light')->store('logo_light/images', 'public');         
 
-    $imageNames = [];
-
-    // Check if there are any uploaded files
-    if ($request->hasFile('image')) {
-        foreach ($request->file('image') as $file) {
-            $name = time().'_'.$file->getClientOriginalName();
-            $file->storeAs('logo/images', $name, 'public');
-            $imageNames[] = $name;
-        }
     }
+  if ($request->hasFile('logo_dark')) {
+     $validated['logo_dark'] = $request->file('logo_dark')->store('logo_dark/images', 'public');         
 
-    // Add user ID
+    }
     $validated['user_id'] = auth()->id();
-
-    // Convert array of image names to string 
-    $validated['image'] = implode(',', $imageNames);
-
+ 
     Logo::create($validated);
 
     return redirect()->route('logo.index')->with('success', 'Logo created successfully!');
@@ -59,60 +51,49 @@ class LogoController extends Controller
         if($logo->user_id !==$userId){
           return redirect()->back()->with('error', 'Not Authourized');
         }
-        return view('logo.edit')->with(['logo' => $logo]);
+        return view('logo.form.edit')->with(['logo' => $logo]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-   public function update(Request $request, string $id)
-   {
-    $user = auth()->user();
-    $logo = Logo::findOrFail($id);
+  public function update(Request $request, $id)
+{
+    $logo = Logo::findOrFail($id); // 1. Get the existing record
 
-    // Check user ownership
-    if ($logo->user_id !== $user->id) {
-        return redirect()->back()->with('error', 'Not Authorized');
-    }
-
-    // Validate multiple images and other fields
+    // 2. Validate the new images (optional)
     $validated = $request->validate([
-        'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'class' => 'required|string',
-        'class_dark' => 'required|string'
+        'logo_light' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'logo_dark' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
     ]);
 
-    $newImageNames = [];
-
-    if ($request->hasFile('image')) {
-        // Delete old images
-        if ($logo->image) {
-            $oldImages = explode(',', $logo->image);
-            foreach ($oldImages as $oldImg) {
-                $path = 'logo/images/' . $oldImg;
-                if (Storage::disk('public')->exists($path)) {
-                    Storage::disk('public')->delete($path);
-                }
-            }
+    // 3. If new logo_light uploaded
+    if ($request->hasFile('logo_light')) {
+        // Delete old one if exists
+        if ($logo->logo_light && Storage::disk('public')->exists($logo->logo_light)) {
+            Storage::disk('public')->delete($logo->logo_light);
         }
 
-        // Upload new images
-        foreach ($request->file('image') as $file) {
-            $name = time() . '_' . $file->getClientOriginalName();
-            $file->storeAs('logo/images', $name, 'public');
-            $newImageNames[] = $name;
-        }
-
-        // Save new image paths to validated data
-        $validated['image'] = implode(',', $newImageNames);
+        // Store new one
+        $validated['logo_light'] = $request->file('logo_light')->store('logo_light/images', 'public');
     }
 
-    // Update the logo with new validated data
+    // 4. If new logo_dark uploaded
+    if ($request->hasFile('logo_dark')) {
+        // Delete old one if exists
+        if ($logo->logo_dark && Storage::disk('public')->exists($logo->logo_dark)) {
+            Storage::disk('public')->delete($logo->logo_dark);
+        }
+
+        // Store new one
+        $validated['logo_dark'] = $request->file('logo_dark')->store('logo_dark/images', 'public');
+    }
+
+    // 5. Update the model with new image paths (if any)
     $logo->update($validated);
 
-    return redirect()->route('logo.index')->with('success', 'Logo updated successfully!');
+    return redirect()->back()->with('success', 'Logo updated successfully!');
 }
-
     /**
      * Remove the specified resource from storage.
      */

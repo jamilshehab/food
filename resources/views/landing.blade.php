@@ -14,13 +14,34 @@
     <nav id="topnav" class="defaultscroll is-sticky">
         <div class="container relative">
             <!-- Logo container-->
-            <a class="logo" href="#home">
+            {{-- <a class="logo" href="#home">
                 <span class="inline-block dark:hidden">
-                     <img src="{{asset('assets/images/logo/logo-dark.png')}}" class="l-dark" alt="">
-                     <img src="{{asset('assets/images/logo/logo-light.png')}}" class="l-light" alt="">
+                     <img src="{{ asset('storage/' . $logo->logo_dark) }}" class="l-dark" alt="">
+                     <img src="{{ asset('storage/' . $logo->logo_light) }}" class="l-light" alt="">
                 </span>
                 <img src="{{asset('assets/images/logo-light.png')}}" class="hidden dark:inline-block" alt="">
-            </a>
+            </a> --}}
+
+            <a class="logo" href="#home">
+    {{-- Light mode logo --}}
+    <span class="inline-block dark:hidden">
+        @if($logo->logo_light)
+            <img src="{{ asset('storage/' . $logo->logo_light) }}" class="l-light" alt="Logo Light">
+        @else
+            <img src="{{ asset('assets/images/logo-light.png') }}" class="l-light" alt="Default Logo Light">
+        @endif
+    </span>
+
+    {{-- Dark mode logo --}}
+    <span class="hidden dark:inline-block">
+        @if($logo->logo_dark)
+            <img src="{{ asset('storage/' . $logo->logo_dark) }}" class="l-dark" alt="Logo Dark">
+        @else
+            <img src="{{ asset('storage/' . $logo->logo_light) }}" class="l-dark" alt="Fallback Logo Dark">
+        @endif
+    </span>
+</a>
+
             <!-- End Logo container-->
 
             <!-- Start Mobile Toggle -->
@@ -64,7 +85,7 @@
                 <div class="swiper-wrapper">
                     @foreach ($sliders as $slider)
                         <div class="swiper-slide flex items-center overflow-hidden">
-                        <div class="slide-inner absolute end-0 top-0 w-full h-full slide-bg-image flex items-center bg-center;"                         style="background-image: url('{{ asset('storage/' . $slider->slider_image) }}')">  
+                        <div class="slide-inner absolute end-0 top-0 w-full h-full slide-bg-image flex items-center bg-center;" style="background-image: url('{{ asset('storage/' . $slider->slider_image) }}')">  
 >
                             <div class="absolute inset-0 bg-slate-900/60"></div>
                             <div class="container relative">

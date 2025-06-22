@@ -10,7 +10,7 @@
                 <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-sm">
                     <thead class="bg-gray-100">
                         <tr>
-                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Image</th>
+                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Logo Light</th>
                              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Submitted On</th>
                             {{-- <th class="px-6 py-3 text-center text-sm font-semibold text-gray-700">Actions</th> --}}
                         </tr>
@@ -18,18 +18,19 @@
                     <tbody class="divide-y divide-gray-200">
                              <tr class="hover:bg-gray-50">
                                 <td class="px-6 py-4 text-sm text-gray-800">
-                                    @if($logo->image)
-                                 @php
-                                  $images = explode(',', $logo->image);
-                                 @endphp
-                                 @foreach ($images as $img)
-                                 <img src="{{ asset('storage/logo/images/' . $img) }}" 
-                                  alt="Logo Image" 
-                                  class="w-16 h-auto rounded-md"/>
-                                 @endforeach
-                                 @else
-                                 —
-                                 @endif
+                                     @if($logo->logo_light)
+                                        <img src="{{ asset('storage/' . $logo->logo_light) }}" 
+                                             alt="Logo Image" 
+                                             class="w-16 h-auto rounded-md">
+                                    @endif
+                                </td>
+
+                                     <td class="px-6 py-4 text-sm text-gray-800">
+                                     @if($logo->logo_dark)
+                                        <img src="{{ asset('storage/' . $logo->logo_dark) }}" 
+                                             alt="Logo Image" 
+                                             class="w-16 h-auto rounded-md">
+                                    @endif
                                 </td>
                                 
                                 <td class="px-6 py-4 text-sm text-gray-600">
