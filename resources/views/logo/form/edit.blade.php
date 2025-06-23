@@ -4,7 +4,7 @@
     <x-dashboard.sidebar/>
     <!-- main content  -->
     <div id="main-content" class="h-svh w-full overflow-y-auto p-4 bg-white dark:bg-neutral-950">
-          <form method="POST" action="{{ route('logo.update') }}" enctype="multipart/form-data">
+          <form method="POST" action="{{ route('logo.update', $logo->update) }}" enctype="multipart/form-data">
              @csrf
             @method('PUT')
 
