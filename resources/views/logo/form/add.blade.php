@@ -7,7 +7,7 @@
           <form method="POST" action="{{ route('logo.store') }}" enctype="multipart/form-data">
                 @csrf
             <div class="mt-4">
-                    <x-input-label for="logo_light" :value="__('Upload Image')" />
+                    <x-input-label for="logo_light" :value="__('Upload Logo Light')" />
                     <input type="file" name="logo_light" id="logo_light"    
                         class="block w-full mt-1 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-slate-800 file:text-white hover:file:bg-slate-700" />
                     <x-input-error :messages="$errors->get('logo_light')" class="mt-2" /> 
@@ -16,7 +16,7 @@
 
         
             <div class="mt-4">
-                    <x-input-label for="logo_dark" :value="__('Upload Image')" />
+                    <x-input-label for="logo_dark" :value="__('Upload Logo Dark')" />
                     <input type="file" name="logo_dark" id="logo_dark" multiple  
                         class="block w-full mt-1 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-slate-800 file:text-white hover:file:bg-slate-700" />
                     <x-input-error :messages="$errors->get('logo_dark')" class="mt-2" /> 

@@ -14,13 +14,13 @@
     <nav id="topnav" class="defaultscroll is-sticky">
         <div class="container relative">
             <!-- Logo container-->
-            {{-- <a class="logo" href="#home">
+            <a class="logo" href="#home">
                 <span class="inline-block dark:hidden">
                      <img src="{{ asset('storage/' . $logo->logo_dark) }}" class="l-dark" alt="">
                      <img src="{{ asset('storage/' . $logo->logo_light) }}" class="l-light" alt="">
                 </span>
                 <img src="{{asset('assets/images/logo-light.png')}}" class="hidden dark:inline-block" alt="">
-            </a> --}}
+            </a>
 
             <a class="logo" href="#home">
     {{-- Light mode logo --}}
@@ -28,16 +28,16 @@
         @if($logo->logo_light)
             <img src="{{ asset('storage/' . $logo->logo_light) }}" class="l-light" alt="Logo Light">
         @else
-            <img src="{{ asset('assets/images/logo-light.png') }}" class="l-light" alt="Default Logo Light">
+            <img src="{{ asset('storage/' . $logo->logo_light) }}" class="l-light" alt="Logo Light">
         @endif
     </span>
 
     {{-- Dark mode logo --}}
     <span class="hidden dark:inline-block">
-        @if($logo->logo_dark)
-            <img src="{{ asset('storage/' . $logo->logo_dark) }}" class="l-dark" alt="Logo Dark">
+        @if($logo->logo_light)
+            <img src="{{ asset('storage/' . $logo->logo_light) }}" class="l-light" alt="Logo Dark">
         @else
-            <img src="{{ asset('storage/' . $logo->logo_light) }}" class="l-dark" alt="Fallback Logo Dark">
+            <img src="{{ asset('storage/' . $logo->logo_light) }}" class="l-light" alt="Fallback Logo Dark">
         @endif
     </span>
 </a>

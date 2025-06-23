@@ -10,7 +10,10 @@
                 <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-sm">
                     <thead class="bg-gray-100">
                         <tr>
+                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Logo Dark</th>
                              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Logo Light</th>
+
+
                              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Submitted On</th>
                             {{-- <th class="px-6 py-3 text-center text-sm font-semibold text-gray-700">Actions</th> --}}
                         </tr>
