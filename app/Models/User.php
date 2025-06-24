@@ -74,5 +74,8 @@ class User extends Authenticatable
         return $this->hasOne(Logo::class);
     }
 
+    public function cart(){
+        return $this->hasMany(Cart::class);
+    }
     
 }

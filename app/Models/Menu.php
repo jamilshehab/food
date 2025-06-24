@@ -12,4 +12,9 @@ class Menu extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    public function cart(){
+        return $this->hasMany(Cart::class); //so a product or a menu has many cart items
+    }
+
 }

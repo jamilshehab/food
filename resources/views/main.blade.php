@@ -27,11 +27,11 @@
         <link href="{{ asset(path: 'assets/css/tailwind.min.css') }}" rel="stylesheet" type="text/css">
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
         <link href="{{ asset('assets/libs/swiper/css/swiper.min.css') }}" rel="stylesheet">
-        @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+       
+        <link href="{{ asset(path: 'assets/css/style.min.css') }}" rel="stylesheet" type="text/css">
+          @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
             @vite(['resources/css/app.css', 'resources/js/app.js'])  
         @endif
-        <link href="{{ asset(path: 'assets/css/style.min.css') }}" rel="stylesheet" type="text/css">
-
         <!-- #region -->
         <!-- Styles / Scripts -->
       
