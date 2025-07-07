@@ -66,7 +66,7 @@
     </nav> 
  
      
-<section class="swiper-slider-hero relative block h-screen restaurant-section" id="home">
+       <section class="swiper-slider-hero relative block h-screen restaurant-section" id="home">
             <div class="swiper-container absolute end-0 top-0 w-full h-full">
                 <div class="swiper-wrapper">
                     @foreach ($sliders as $slider)
@@ -104,11 +104,8 @@
 
                         <h6 class="uppercase text-3xl font-semibold">{{$about->title}}</h6>
                           <p class="text-slate-400 mt-3">{{$about->content}}</p>
-                        
                     </div>
                 </div>
-
-               
                 <div class="lg:col-span-6 md:col-span-6 lg:order-3" data-aos="fade-down">
                     <img src="{{ asset('storage/' . $about->images) }}" class="rounded shadow dark:shadow-gray-800" alt="">
                 </div>
@@ -127,7 +124,7 @@
             Our Menus
         </h4>
     </div>
-</section>
+    </section>
 
     <!-- Start -->
       <section class="restaurant-section relative md:py-24 py-16">
@@ -258,7 +255,7 @@
             &times;
         </button>
 
-        <img id="modalImage" class="w-full h-48 object-cover rounded-full" src="" alt="Modal Image">
+        <img id="modalImage" class="w-full h-48 object-cover  " src="" alt="Modal Image">
 
         <div class="px-6 py-4">
             <div id="modalTitle" class="font-bold text-xl mb-2"></div>

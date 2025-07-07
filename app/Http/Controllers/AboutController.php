@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\About;
 use Illuminate\Http\Request;
-use App\Models\AboutImage;
-class AboutController extends Controller
+ class AboutController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +12,7 @@ class AboutController extends Controller
     public function index()
 {
     $about = About::where(column: 'user_id', operator: '=', value: auth()->id())->get()->first();
-     return view('about.view', compact('about'));
+     return view('about.index', compact('about'));
 }
     /**
      * Show the form for creating a new resource.
@@ -42,7 +41,7 @@ class AboutController extends Controller
     }
 
     About::create($validated);
-    return redirect()->route('about.view')->with('success', 'About created successfully with images.');
+    return redirect()->route('about.index')->with('success', 'About created successfully with images.');
 }
 
     /**
@@ -86,7 +85,7 @@ class AboutController extends Controller
     }
 
     $about->update($validated);
-    return redirect()->route('about.view')->with('success', 'About Updated Successfully!');
+    return redirect()->route('about.index')->with('success', 'About Updated Successfully!');
     }
 
     /**
@@ -101,6 +100,6 @@ class AboutController extends Controller
             return redirect()->back()->with('error', 'Not Authorized');
        }
        $about->delete();
-       return redirect()->route('about.view')->with('success','about deleted');
+       return redirect()->route('about.index')->with('success','about deleted');
     }
 }

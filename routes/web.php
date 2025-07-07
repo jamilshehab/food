@@ -19,24 +19,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class,'dashboard'])->name('dashboard');
     Route::resource('header',NavigationController::class)->except('show');
     Route::resource('slider',SliderController::class)->except('show');
-    Route::resource('about',AboutController::class)->names([
-        'index'   => 'about.view',
-        'create'  => 'about.create',
-        'store'   => 'about.store',
-        'edit'    => 'about.edit',
-        'update'  => 'about.update',
-        'destroy' => 'about.destroy',
-     ])->except('show');
-        
-       Route::resource('menu',MenuController::class)->names([
-        'index'   => 'menu.view',
-        'create'  => 'menu.create',
-        'store'   => 'menu.store',
-        'edit'    => 'menu.edit',
-        'update'  => 'menu.update',
-        'destroy' => 'menu.destroy',
-     ])->except('show');
-
+    Route::resource('about',AboutController::class)->except('show');   
+    Route::resource('menu',MenuController::class)->except('show');
     Route::resource('footer',RestaurantInformationController::class)->except('show');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

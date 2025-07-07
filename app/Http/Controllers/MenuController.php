@@ -14,7 +14,7 @@ class MenuController extends Controller
     {
         //
         $menus = Menu::where('user_id', auth()->id())->latest()->paginate(8);
-        return view('menu.view', compact('menus'));
+        return view('menu.index', compact('menus'));
     }
 
     /**
@@ -49,7 +49,7 @@ class MenuController extends Controller
 
     Menu::create($validated);
     
-    return redirect()->route('menu.view')->with('success', 'Menu Created Successfully!');
+    return redirect()->route('menu.index')->with('success', 'Menu Created Successfully!');
 }
 
     /**
@@ -104,7 +104,7 @@ class MenuController extends Controller
     }
 
     $menu->update($validated);
-    return redirect()->route('menu.view')->with('success', 'Menu Updated Successfully!');
+    return redirect()->route('menu.index')->with('success', 'Menu Updated Successfully!');
     }
 
     /**
@@ -118,6 +118,6 @@ class MenuController extends Controller
             return redirect()->back()->with('error', 'Not Authorized');
        }
        $menu->delete();
-       return redirect()->route('menu.view')->with('success','menu deleted');
+       return redirect()->route('menu.index')->with('success','menu deleted');
     }
 }

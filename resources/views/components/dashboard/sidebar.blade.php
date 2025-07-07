@@ -54,7 +54,7 @@
 
                 <ul x-cloak x-collapse x-show="isExpanded" aria-labelledby="products-btn" id="products">
                     <li class="px-1 py-0.5 first:mt-2">
-                        <a href="{{ route('about.view')}}" class="flex items-center rounded-radius gap-2 px-2 py-1.5 text-sm text-on-surface underline-offset-2 hover:bg-primary/5 hover:text-on-surface-strong focus:outline-hidden focus-visible:underline">View About</a>
+                        <a href="{{ route('about.index')}}" class="flex items-center rounded-radius gap-2 px-2 py-1.5 text-sm text-on-surface underline-offset-2 hover:bg-primary/5 hover:text-on-surface-strong focus:outline-hidden focus-visible:underline">View About</a>
                     </li>
                     <li class="px-1 py-0.5 first:mt-2">
                         <a href="{{ route('about.create')}}" class="flex items-center rounded-radius gap-2 px-2 py-1.5 text-sm text-on-surface underline-offset-2 hover:bg-primary/5 hover:text-on-surface-strong focus:outline-hidden focus-visible:underline">Add About</a>
@@ -92,7 +92,7 @@
 
                 <ul x-cloak x-collapse x-show="isExpanded" aria-labelledby="products-btn" id="products">
                     <li class="px-1 py-0.5 first:mt-2">
-                        <a href="{{ route('menu.view')}}" class="flex items-center rounded-radius gap-2 px-2 py-1.5 text-sm text-on-surface underline-offset-2 hover:bg-primary/5 hover:text-on-surface-strong focus:outline-hidden focus-visible:underline">View Menu</a>
+                        <a href="{{ route('menu.index')}}" class="flex items-center rounded-radius gap-2 px-2 py-1.5 text-sm text-on-surface underline-offset-2 hover:bg-primary/5 hover:text-on-surface-strong focus:outline-hidden focus-visible:underline">View Menu</a>
                     </li>
                     <li class="px-1 py-0.5 first:mt-2">
                         <a href="{{ route('menu.create')}}" class="flex items-center rounded-radius gap-2 px-2 py-1.5 text-sm text-on-surface underline-offset-2 hover:bg-primary/5 hover:text-on-surface-strong focus:outline-hidden focus-visible:underline">Add Menu</a>
