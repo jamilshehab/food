@@ -32,7 +32,7 @@
 
                 <ul x-cloak x-collapse x-show="isExpanded" aria-labelledby="products-btn" id="products">
                     <li class="px-1 py-0.5 first:mt-2">
-                        <a href="{{ route('slider.view') }}" class="flex items-center rounded-radius gap-2 px-2 py-1.5 text-sm text-on-surface underline-offset-2 hover:bg-primary/5 hover:text-on-surface-strong focus:outline-hidden focus-visible:underline">View Slider</a>
+                        <a href="{{ route('slider.index') }}" class="flex items-center rounded-radius gap-2 px-2 py-1.5 text-sm text-on-surface underline-offset-2 hover:bg-primary/5 hover:text-on-surface-strong focus:outline-hidden focus-visible:underline">View Slider</a>
                     </li>
                     <li class="px-1 py-0.5 first:mt-2">
                         <a href="{{ route('slider.create') }}" class="flex items-center rounded-radius gap-2 px-2 py-1.5 text-sm text-on-surface underline-offset-2 hover:bg-primary/5 hover:text-on-surface-strong focus:outline-hidden focus-visible:underline">Add Slider</a>

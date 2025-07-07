@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Storage;
     public function index()
     {
        $sliders = Slider::where(column: 'user_id', operator: '=', value: auth()->id())->latest()->paginate(8);
-        return view('slider.slider', compact('sliders'));
+        return view('slider.index', compact('sliders'));
     }
 
     /**
@@ -45,7 +45,7 @@ use Illuminate\Support\Facades\Storage;
 
     Slider::create($validated);
     
-    return redirect()->route('slider.view')->with('success', 'Slider created successfully!');
+    return redirect()->route('slider.index')->with('success', 'Slider created successfully!');
 }
     /**
      * Show the form for editing the specified resource.
@@ -91,7 +91,7 @@ use Illuminate\Support\Facades\Storage;
     }
 
     $slider->update($validated);
-    return redirect()->route('slider.view')->with('success', 'Slider updated successfully!');
+    return redirect()->route('slider.index')->with('success', 'Slider updated successfully!');
     }
 
     /**
@@ -106,6 +106,6 @@ use Illuminate\Support\Facades\Storage;
             return redirect()->back()->with('error', 'Not Authorized');
     }
         $slider->delete();
-       return redirect()->route('slider.view')->with('success','slider deleted');
+       return redirect()->route('slider.index')->with('success','slider deleted');
     }
 }
