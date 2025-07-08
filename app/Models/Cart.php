@@ -10,7 +10,7 @@ class Cart extends Model
     protected $fillable=['user_id','menu_id','quantity'];
 
     public function menu(){
-        return $this->belongsTo(Menu::class);
+        return $this->belongsToMany(Menu::class);
     }
 
     public function user(){

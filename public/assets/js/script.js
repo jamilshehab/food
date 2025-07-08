@@ -2,34 +2,36 @@ AOS.init({
     duration: 1200,
 });
 
-const buttons = document.querySelectorAll(".openModal");
-const modal = document.getElementById("modal");
-const modalImage = document.getElementById("modalImage");
-const modalTitle = document.getElementById("modalTitle");
-const modalDescription = document.getElementById("modalDescription");
-const modalIngredients = document.getElementById("modalIngredients");
-const closeModal = document.getElementById("closeModal");
-const closeModalButton = document.getElementById("closeModalButton");
-
-buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-        const title = button.dataset.title;
-        const description = button.dataset.description;
-        const ingredients = button.dataset.ingredients;
-        const image = button.dataset.image;
-
-        modalImage.src = image;
-        modalTitle.textContent = title;
-        modalDescription.textContent = description;
-        modalIngredients.textContent = "Ingredients: " + ingredients;
-
-        modal.classList.remove("hidden");
+function addToCart(menuId) {
+    // Show loading state (optional)
+    const button = event.target;
+    button.disabled = true;
+    button.textContent = 'Adding...';
+    
+    // Make the Axios request
+    axios.post('/addToCart', {
+        menu_id: menuId,
+        quantity: 1 // You can modify this if you have quantity selection
+    })
+    .then(response => {
+        // Success handling
+        button.textContent = 'Added!';
+        
+        // Optional: Update cart counter in your UI
+        if (response.data.cart_count) {
+            document.getElementById('cart-count').textContent = response.data.cart_count;
+        }
+        
+        // Reset button after a delay
+        setTimeout(() => {
+            button.textContent = 'Add To Cart';
+            button.disabled = false;
+        }, 1500);
+    })
+    .catch(error => {
+        // Error handling
+        console.error('Error adding to cart:', error);
+        button.textContent = 'Failed, Try Again';
+        button.disabled = false;
     });
-});
-
-closeModal.addEventListener("click", () => {
-    modal.classList.add("hidden");
-});
-closeModalButton.addEventListener("click", () => {
-    modal.classList.add("hidden");
-});
+} 

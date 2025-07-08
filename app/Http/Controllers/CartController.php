@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Menu;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -28,7 +29,28 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // 
+         
+    $request->validate([
+        'menu_id' => 'required|exists:menus,id'
+    ]);
+
+    // Add item to cart logic here — this is just an example
+$user = auth()->user();
+$cart = $user->cart;
+
+foreach($cart)
+
+
+    $cart = Cart::where('user_id',auth()->id())->where('menu_id',$request->menu_id)->find();
+    
+    Cart::create([
+        'user_id' => auth()->id(),
+        'menu_id' => $request->menu_id,
+        'quantity' => 1
+    ]);
+
+    return response()->json(['message' => 'Item added to cart']);
     }
 
     /**
