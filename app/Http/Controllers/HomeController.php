@@ -14,14 +14,12 @@ class HomeController extends Controller
 {
     //
    public function index() {
-     $logo=Logo::where('user_id',auth()->id())->get()->first();
- 
-    $navigation = Navigation::where(column: 'user_id', operator: '=', value: auth()->id())->get();
-    $sliders = Slider::where('user_id', auth()->id())->latest()->get();
-    $about = About::where(column: 'user_id', operator: '=', value: auth()->id())->get()->first();
-    $menus = Menu::where(column: 'user_id', operator: '=', value: auth()->id())->latest()->get();
-    $footer = RestaurantInformation::where(column: 'user_id', operator: '=', value: auth()->id())->get()->first();
-
+    $logo=Logo::get()->first();
+    $navigation = Navigation::get();
+    $sliders = Slider::get();
+    $about = About::get()->first();
+    $menus = Menu::all();
+    $footer = RestaurantInformation::get()->first();
     return view('landing', ['logo'=>$logo, 'navigation'=>$navigation,'sliders' => $sliders, 'about'=> $about, 'menus' => $menus , 'footer'=>$footer]); // Explicit variable passing
 }
   

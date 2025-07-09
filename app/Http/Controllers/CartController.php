@@ -13,7 +13,8 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        $cart = auth()->user()->cart;
+        return view('views.landing', compact('cart'));
     }
 
     /**
@@ -28,30 +29,34 @@ class CartController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        // 
-         
+{
     $request->validate([
-        'menu_id' => 'required|exists:menus,id'
+        'menu_id' => 'required|exists:menus,id',
     ]);
 
-    // Add item to cart logic here — this is just an example
-$user = auth()->user();
-$cart = $user->cart;
+    // Get or create the user's cart
+    $cart = auth()->user()->cart ?? Cart::create(['user_id' => auth()->id()]);
 
-foreach($cart)
+    // Check if the item is already attached to the cart
+    $existing = $cart->menus()->where('menu_id', $request->menu_id)->first();
 
-
-    $cart = Cart::where('user_id',auth()->id())->where('menu_id',$request->menu_id)->find();
-    
-    Cart::create([
-        'user_id' => auth()->id(),
-        'menu_id' => $request->menu_id,
-        'quantity' => 1
-    ]);
-
-    return response()->json(['message' => 'Item added to cart']);
+    if ($existing) {
+        // If exists, increment the quantity
+        $currentQty = $existing->pivot->quantity;
+        $cart->menus()->updateExistingPivot($request->menu_id, [
+            'quantity' => $currentQty + 1
+        ]);
+    } else {
+        // If not, attach it with quantity = 1
+        $cart->menus()->attach($request->menu_id, ['quantity' => 1]);
     }
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Item added to cart!',
+    ]);
+}
+
 
     /**
      * Display the specified resource.
