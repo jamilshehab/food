@@ -20,7 +20,9 @@ class HomeController extends Controller
     $about = About::get()->first();
     $menus = Menu::all();
     $footer = RestaurantInformation::get()->first();
-    return view('landing', ['logo'=>$logo, 'navigation'=>$navigation,'sliders' => $sliders, 'about'=> $about, 'menus' => $menus , 'footer'=>$footer]); // Explicit variable passing
+    $cart = auth()->user()->cart;
+    $cartItems = $cart ? $cart->menus()->withPivot('quantity')->get() : collect();
+    return view('landing', ['logo'=>$logo, 'navigation'=>$navigation,'sliders' => $sliders, 'about'=> $about, 'menus' => $menus , 'footer'=>$footer , 'cartItems'=>$cartItems]); // Explicit variable passing
 }
   
 }
