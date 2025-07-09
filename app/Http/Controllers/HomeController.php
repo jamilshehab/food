@@ -16,7 +16,7 @@ class HomeController extends Controller
    public function index() {
     $logo=Logo::get()->first();
     $navigation = Navigation::get();
-    $sliders = Slider::get();
+    $sliders = Slider::limit(3)->get();
     $about = About::get()->first();
     $menus = Menu::all();
     $footer = RestaurantInformation::get()->first();
