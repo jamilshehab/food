@@ -303,7 +303,49 @@
                         </button>
                     </div>
                     <div class="mt-4">
-                        <p>Cart items will appear here</p>
+                        <div class="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-xl mt-10">
+    <h2 class="text-2xl font-semibold mb-6">🛒 Your Cart</h2>
+
+    
+        <table class="w-full text-left border-collapse">
+            <thead class="bg-gray-100 text-gray-700">
+                <tr>
+                    <th class="p-3">Product</th>
+                    <th class="p-3">Price</th>
+                    <th class="p-3">Quantity</th>
+                    <th class="p-3">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @php $total = 0; @endphp
+                @foreach($cartItems as $item)
+                    @php
+                        $lineTotal = $item->price * $item->pivot->quantity;
+                        $total += $lineTotal;
+                    @endphp
+                    <tr class="border-b hover:bg-gray-50 transition">
+                        <td class="p-3 flex items-center gap-4">
+                            <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}" class="w-16 h-16 object-cover rounded">
+                            <div>
+                                <p class="font-medium">{{ $item->name }}</p>
+                            </div>
+                        </td>
+                        <td class="p-3">${{ number_format($item->price, 2) }}</td>
+                        <td class="p-3">{{ $item->pivot->quantity }}</td>
+                        <td class="p-3 font-semibold">${{ number_format($lineTotal, 2) }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+
+        <div class="text-right mt-6">
+            <p class="text-xl font-bold">Total: ${{ number_format($total, 2) }}</p>
+            <a href="#" class="mt-4 inline-block bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">
+                Proceed to Checkout
+            </a>
+        </div>
+    
+</div>
                     </div>
                 </div>
             </div>

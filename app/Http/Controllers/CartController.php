@@ -13,8 +13,14 @@ class CartController extends Controller
      */
     public function index()
     {
-        $cart = auth()->user()->cart;
-        return view('views.landing', compact('cart'));
+       $cart = auth()->user()->cart;
+
+    // Assign cart items or empty collection
+    $cartItems = $cart
+        ? $cart->menus()->withPivot('quantity')->get()
+        : collect();
+
+    return view('landing', compact('cartItems'));
     }
 
     /**
