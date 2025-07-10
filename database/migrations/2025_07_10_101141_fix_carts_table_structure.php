@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
+        //
         Schema::table('carts', function (Blueprint $table) {
-            //
-        $table->dropForeign(['menu_id']); // Drop the foreign key constraint
-        $table->dropColumn(['menu_id', 'quantity']);
-
-        });
+        $table->dropForeign(['menu_id']);
+        $table->dropColumn('menu_id');
+    });
     }
 
     /**
@@ -24,8 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('carts', function (Blueprint $table) {
-            //
-        });
+        //
     }
 };

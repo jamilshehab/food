@@ -27,17 +27,31 @@ AOS.init({
 
 //delete cart 
 
- async function removeItem(menuId) {
-    let confirm=prompt("Do You Want to Delete Your Cart");
+  async function removeItem(id) {
+    let confirmDelete = prompt("Do You Want to Delete Your Cart Item? Type 'yes' to confirm");
+    
     try {
-    if(confirm =="yes"){
-      await axios.delete(`/deleteCart/${menuId}`);
-      alert(`menu item deleted ${menuId}`);
-    }
-    else {
-      return;
-    }
+        if (confirmDelete?.toLowerCase() === "yes") {
+            const response = await axios.delete(`/deleteCart/${id}`);
+            
+            if (response.data.success) {
+                alert(`Menu item deleted successfully! New total: $${response.data.newTotal}`);
+                // Optional: Refresh the cart or update the UI
+                window.location.reload(); // or update the cart dynamically
+            } else {
+                alert('Failed to delete item: ' + (response.data.message || 'Unknown error'));
+            }
+        }
     } catch (error) {
-        alert("error found " , error);
+        console.error('Error deleting item:', error);
+        alert('Error deleting item: ' + 
+              (error.response?.data?.message || 
+               error.message || 
+               'Something went wrong'));
     }
+}
+
+async function getItems(){
+  const response = await axios.get('/viewCart');
+  alert(JSON.stringify(response.data.cart));
 }

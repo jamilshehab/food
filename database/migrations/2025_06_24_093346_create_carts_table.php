@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('menu_id')->constrained()->onDelete('cascade');
-            $table->decimal('total')->default(0.0);
+            $table->decimal('total')->default(0.00);
             $table->timestamps();
         });
     }

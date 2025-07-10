@@ -12,15 +12,13 @@ class CartController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-       $cart = auth()->user()->cart;
+    {     
+      $cart = auth()->user()->cart;
+      
+      return response()->json([
+        'cart' => $cart
+      ]);
 
-    // Assign cart items or empty collection
-    $cartItems = $cart
-        ? $cart->menus()->withPivot('quantity')->get()
-        : collect();
-
-    return view('landing', compact('cartItems'));
     }
 
     /**
@@ -35,7 +33,7 @@ class CartController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-{
+    {
     $request->validate([
         'menu_id' => 'required|exists:menus,id',
     ]);
@@ -91,12 +89,24 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Cart $cart)
+    public function destroy($id)  // Can accept either Menu $menu or $id
     {
-    $cart=auth()->user()->cart;
-    $cart->menus()->detach(Menu::where('menu_id'));
-    return response()->json(['success' => true]);
-    }
-
-   
+    // If you want to use route model binding:
+    // $menu = Menu::findOrFail($id);
+    
+    $cart = auth()->user()->cart;
+    
+    $cart->menus()->detach($id);
+    
+    $cart->update([
+        'total' => $cart->menus->sum(function($item) {
+            return $item->pivot->price_at_addition * $item->pivot->quantity;
+        })
+    ]);
+    
+    return response()->json([
+        'success' => true,
+        'newTotal' => $cart->total
+    ]);
+}
 }
