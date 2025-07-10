@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Cart extends Model
 {
     //
-    protected $fillable=['user_id'];
+    protected $fillable=['user_id','total'];
  
 
     public function user(){
@@ -18,5 +18,5 @@ class Cart extends Model
     return $this->belongsToMany(Menu::class, 'cart_items')
         ->withPivot('quantity')
         ->withTimestamps();
-}
+    }
 }

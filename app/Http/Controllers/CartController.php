@@ -93,6 +93,10 @@ class CartController extends Controller
      */
     public function destroy(Cart $cart)
     {
-        //
+    $cart=auth()->user()->cart;
+    $cart->menus()->detach(Menu::where('menu_id'));
+    return response()->json(['success' => true]);
     }
+
+   
 }

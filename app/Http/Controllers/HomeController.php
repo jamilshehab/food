@@ -21,7 +21,7 @@ class HomeController extends Controller
     $menus = Menu::all();
     $footer = RestaurantInformation::get()->first();
     $cart = auth()->user()->cart;
-    $cartItems = $cart ? $cart->menus()->withPivot('quantity')->get() : collect();
+    $cartItems = $cart ? $cart->menus()->get() : collect();
     return view('landing', ['logo'=>$logo, 'navigation'=>$navigation,'sliders' => $sliders, 'about'=> $about, 'menus' => $menus , 'footer'=>$footer , 'cartItems'=>$cartItems]); // Explicit variable passing
 }
   

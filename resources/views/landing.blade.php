@@ -281,75 +281,93 @@
             </svg>
         </button>
 
-        <!-- Cart Sidebar -->
         <div x-show="sidebarIsOpen" @click.away="sidebarIsOpen = false" @keydown.escape.window="sidebarIsOpen = false"
-            x-cloak class="fixed inset-0 z-[999] bg-[#0000002b] bg-opacity-50 transition-opacity"
-            x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
-            x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
-            x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
-            <div class="fixed right-0 top-0 h-full w-80 bg-white shadow-xl"
-                x-transition:enter="transform transition ease-in-out duration-500"
-                x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
-                x-transition:leave="transform transition ease-in-out duration-500" x-transition:leave-start="translate-x-0"
-                x-transition:leave-end="translate-x-full">
-                <div class="p-4">
-                    <div class="flex justify-between items-center">
-                        <h3 class="text-lg font-bold">Your Cart</h3>
-                        <button @click="sidebarIsOpen = false" class="text-gray-500 hover:text-gray-700">
-                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="mt-4">
-                        <div class="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-xl mt-10">
-    <h2 class="text-2xl font-semibold mb-6">🛒 Your Cart</h2>
-
+    x-cloak class="fixed inset-0 z-[999] bg-[#0000002b] bg-opacity-50 transition-opacity"
+    x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
+    x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
+    x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
     
-        <table class="w-full text-left border-collapse">
-            <thead class="bg-gray-100 text-gray-700">
-                <tr>
-                    <th class="p-3">Product</th>
-                    <th class="p-3">Price</th>
-                    <th class="p-3">Quantity</th>
-                    <th class="p-3">Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                @php $total = 0; @endphp
-                @foreach($cartItems as $item)
-                    @php
-                        $lineTotal = $item->price * $item->pivot->quantity;
-                        $total += $lineTotal;
-                    @endphp
-                    <tr class="border-b hover:bg-gray-50 transition">
-                        <td class="p-3 flex items-center gap-4">
-                            <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}" class="w-16 h-16 object-cover rounded">
-                            <div>
-                                <p class="font-medium">{{ $item->name }}</p>
-                            </div>
-                        </td>
-                        <td class="p-3">${{ number_format($item->price, 2) }}</td>
-                        <td class="p-3">{{ $item->pivot->quantity }}</td>
-                        <td class="p-3 font-semibold">${{ number_format($lineTotal, 2) }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-
-        <div class="text-right mt-6">
-            <p class="text-xl font-bold">Total: ${{ number_format($total, 2) }}</p>
-            <a href="#" class="mt-4 inline-block bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">
-                Proceed to Checkout
-            </a>
-        </div>
-    
-</div>
-                    </div>
-                </div>
+    <div class="fixed right-0 top-0 h-full w-80 md:w-96 bg-white shadow-xl flex flex-col"
+        x-transition:enter="transform transition ease-in-out duration-500"
+        x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
+        x-transition:leave="transform transition ease-in-out duration-500" x-transition:leave-start="translate-x-0"
+        x-transition:leave-end="translate-x-full">
+        
+        <!-- Header -->
+        <div class="p-4 border-b">
+            <div class="flex justify-between items-center">
+                <h3 class="text-lg font-bold text-gray-800">Your Cart ({{ count($cartItems) }})</h3>
+                <button @click="sidebarIsOpen = false" class="text-gray-500 hover:text-gray-700 transition">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
             </div>
         </div>
+        
+        <!-- Cart Items -->
+        <div class="flex-1 overflow-y-auto p-4">
+            @if(count($cartItems) > 0)
+                <div class="space-y-4">
+                    @php $total = 0; @endphp
+                    @foreach($cartItems as $item)
+                        {{-- @php
+                            $lineTotal = $item->price * $item->pivot->quantity;
+                            $total += $lineTotal;
+                        @endphp --}}
+                        <div class="flex gap-4 pb-4 border-b">
+                            <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}" 
+                                class="w-20 h-20 object-cover rounded-lg flex-shrink-0">
+                            <div class="flex-1">
+                                <div class="flex justify-between">
+                                    <h4 class="font-medium text-gray-800">{{ $item->name }}</h4>
+                                    <span class="font-semibold">${{ number_format($lineTotal, 2) }}</span>
+                                </div>
+                                <p class="text-sm text-gray-600">${{ number_format($item->price, 2) }} each</p>
+                                <div class="mt-2 flex items-center justify-between">
+                                    <div class="flex items-center border rounded">
+                                        <button class="px-2 py-1 text-gray-600 hover:bg-gray-100">-</button>
+                                        <span class="px-2">{{ $item->pivot->quantity }}</span>
+                                        <button class="px-2 py-1 text-gray-600 hover:bg-gray-100">+</button>
+                                    </div>
+                                    <button class="text-red-500 hover:text-red-700 text-sm" @click="removeItem({{ $item->id }})">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @else
+                <div class="h-full flex flex-col items-center justify-center text-center p-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    <h4 class="mt-4 text-lg font-medium text-gray-700">Your cart is empty</h4>
+                    <p class="mt-1 text-gray-500">Start shopping to add items to your cart</p>
+                </div>
+            @endif
+        </div>
+        
+        <!-- Footer -->
+        @if(count($cartItems) > 0)
+        <div class="p-4 border-t bg-gray-50">
+            <div class="flex justify-between items-center mb-4">
+                <span class="font-medium text-gray-700">Subtotal</span>
+                {{-- <span class="font-bold text-lg">${{ number_format($total, 2) }}</span> --}}
+            </div>
+            <button class="w-full bg-black hover:bg-slate-900 text-white py-3 px-4 rounded-lg font-medium transition duration-200">
+                Proceed to Checkout
+            </button>
+            <div class="mt-3 text-center">
+                <a href="#" class="text-sm text-slate-900 hover:text-text-800 hover:underline">Continue shopping</a>
+            </div>
+        </div>
+        @endif
+    </div>
+</div>
     </div>
 
 
