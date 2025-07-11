@@ -16,9 +16,6 @@ use Illuminate\Support\Facades\Route;
  
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/viewCart', [CartController::class, 'index'])->name('cart.index');
-
-
-
     Route::get('/',  [HomeController::class,'index'])->name('home');
     Route::resource('logo',LogoController::class)->except('show'); 
     Route::get('/dashboard', [DashboardController::class,'dashboard'])->name('dashboard');

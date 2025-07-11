@@ -269,58 +269,7 @@
 
 
     <!-- Add this style to hide elements with x-cloak before Alpine loads -->
-
-   <div x-data="{
-    sidebarIsOpen: false,
-    cartItems: [],
-    loading: true,
-    total: 0,
-    itemCount: 0,
-
-    async fetchCart() {
-        this.loading = true;
-        try {
-            const response = await axios.get('/viewCart');
-            this.cartItems = response.data.cart.items || [];
-            this.calculateTotals();
-        } catch (error) {
-            console.error('Error fetching cart:', error);
-        }
-        this.loading = false;
-    },
-
-    calculateTotals() {
-        this.total = this.cartItems.reduce((sum, item) => {
-            return sum + (item.price * item.pivot.quantity);
-        }, 0);
-        this.itemCount = this.cartItems.reduce((count, item) => {
-            return count + item.pivot.quantity;
-        }, 0);
-    },
-
-    async updateQuantity(item, change) {
-        const newQuantity = item.pivot.quantity + change;
-        if (newQuantity < 1) return;
-        
-        try {
-            await axios.patch(`/cart/${item.id}`, { quantity: newQuantity });
-            item.pivot.quantity = newQuantity;
-            this.calculateTotals();
-        } catch (error) {
-            console.error('Error updating quantity:', error);
-        }
-    },
-
-    async removeItem(itemId) {
-        try {
-            await axios.delete(`/cart/${itemId}`);
-            this.cartItems = this.cartItems.filter(item => item.id !== itemId);
-            this.calculateTotals();
-        } catch (error) {
-            console.error('Error removing item:', error);
-        }
-    }
-}" 
+   <div x-data="cartComponent()" 
 x-init="fetchCart()">
 
     <!-- Cart Toggle Button -->
@@ -351,7 +300,7 @@ x-init="fetchCart()">
             <div class="p-4 border-b">
                 <div class="flex justify-between items-center">
                     <h3 class="text-lg font-bold text-gray-800">Your Cart (<span x-text="itemCount"></span>)</h3>
-                    <button @click="sidebarIsOpen = false" class="text-gray-500 hover:text-gray-700 transition">
+                    <button @click="sidebarIsOpen=false" class="text-gray-500 hover:text-gray-700 transition">
                         <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                         </svg>
@@ -362,15 +311,7 @@ x-init="fetchCart()">
             <!-- Cart Items -->
             <div class="flex-1 overflow-y-auto p-4">
                 <!-- Loading State -->
-                <template x-if="loading">
-                    <div class="h-full flex flex-col items-center justify-center text-center p-6">
-                        <svg class="animate-spin h-8 w-8 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        <p class="mt-2 text-gray-500">Loading your cart...</p>
-                    </div>
-                </template>
+              
 
                 <!-- Empty State -->
                 <template x-if="!loading && cartItems.length === 0">
@@ -449,11 +390,7 @@ x-init="fetchCart()">
     <a href="#" onclick="topFunction()" id="back-to-top"
         class="back-to-top fixed hidden text-lg rounded-full z-10 bottom-5 end-5 size-9 text-center bg-amber-500 text-white justify-center items-center"><i
             class="mdi mdi-arrow-up"></i></a>
-
-            <script>
-   
-</script>
-
+ 
 
 
     <!---->
