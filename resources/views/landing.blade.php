@@ -269,92 +269,93 @@
 
 
     <!-- Add this style to hide elements with x-cloak before Alpine loads -->
-   <div x-data="cartComponent()" 
-x-init="fetchCart()">
-
-    <!-- Cart Toggle Button -->
-    <button @click="sidebarIsOpen = true; fetchCart()" class="fixed bottom-16 right-4 z-40 rounded-full bg-black p-4 text-white"
+  <div x-data="cartComponent()" x-init="getItems()">
+    <button @click="openCart()" class="fixed bottom-16 right-4 z-40 rounded-full bg-black p-4 text-white"
         aria-label="Open cart">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5"
             class="size-6">
             <path stroke-linecap="round" stroke-linejoin="round"
                 d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
         </svg>
-        <span x-show="itemCount > 0" x-text="itemCount" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center"></span>
+        <span x-show="itemCount > 0" x-text="itemCount"
+            class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center"></span>
     </button>
 
-    <!-- Cart Sidebar -->
     <div x-show="sidebarIsOpen" @click.away="sidebarIsOpen = false" @keydown.escape.window="sidebarIsOpen = false"
         x-cloak class="fixed inset-0 z-[999] bg-[#0000002b] bg-opacity-50 transition-opacity"
         x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
         x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
         x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
-        
+
         <div class="fixed right-0 top-0 h-full w-80 md:w-96 bg-white shadow-xl flex flex-col"
             x-transition:enter="transform transition ease-in-out duration-500"
             x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
             x-transition:leave="transform transition ease-in-out duration-500" x-transition:leave-start="translate-x-0"
             x-transition:leave-end="translate-x-full">
-            
-            <!-- Header -->
+
             <div class="p-4 border-b">
                 <div class="flex justify-between items-center">
                     <h3 class="text-lg font-bold text-gray-800">Your Cart (<span x-text="itemCount"></span>)</h3>
                     <button @click="sidebarIsOpen=false" class="text-gray-500 hover:text-gray-700 transition">
                         <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
                 </div>
             </div>
-            
-            <!-- Cart Items -->
-            <div class="flex-1 overflow-y-auto p-4">
-                <!-- Loading State -->
-              
 
-                <!-- Empty State -->
+            <div class="flex-1 overflow-y-auto p-4">
+                <template x-if="loading">
+                    <div class="h-full flex items-center justify-center">
+                        <p class="text-gray-500">Loading cart...</p>
+                    </div>
+                </template>
+
                 <template x-if="!loading && cartItems.length === 0">
                     <div class="h-full flex flex-col items-center justify-center text-center p-6">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-400" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                         </svg>
                         <h4 class="mt-4 text-lg font-medium text-gray-700">Your cart is empty</h4>
                         <p class="mt-1 text-gray-500">Start shopping to add items to your cart</p>
                     </div>
                 </template>
 
-                <!-- Cart Items -->
                 <template x-if="!loading && cartItems.length > 0">
                     <div class="space-y-4">
                         <template x-for="item in cartItems" :key="item.id">
                             <div class="flex gap-4 pb-4 border-b">
-                                <img :src="`/storage/${item.image}`" :alt="item.name" 
+                                <img :src="/storage/item.image}" :alt="item.name"
                                     class="w-20 h-20 object-cover rounded-lg flex-shrink-0">
                                 <div class="flex-1">
                                     <div class="flex justify-between">
-                                        <h4 class="font-medium text-gray-800" x-text="item.name"></h4>
-                                        <span class="font-semibold" x-text="`$${(item.price * item.pivot.quantity).toFixed(2)}`"></span>
+                                        <h4 class="font-medium text-gray-800" x-text="name"></h4>
+                                        <span class="font-semibold"
+                                            x-text="item.price * item.pivot.quantity.toFixed(2)"></span>
                                     </div>
-                                    <p class="text-sm text-gray-600" x-text="`$${item.price.toFixed(2)} each`"></p>
+                                    <p class="text-sm text-gray-600" x-text="item.price.toFixed(2) each"></p>
                                     <div class="mt-2 flex items-center justify-between">
                                         <div class="flex items-center border rounded">
-                                            <button 
-                                                @click="updateQuantity(item, -1)" 
+                                            <button @click="updateQuantity(item, -1)"
                                                 class="px-2 py-1 text-gray-600 hover:bg-gray-100"
                                                 :disabled="item.pivot.quantity <= 1">
                                                 -
                                             </button>
                                             <span class="px-2" x-text="item.pivot.quantity"></span>
-                                            <button 
-                                                @click="updateQuantity(item, 1)" 
+                                            <button @click="updateQuantity(item, 1)"
                                                 class="px-2 py-1 text-gray-600 hover:bg-gray-100">
                                                 +
                                             </button>
                                         </div>
-                                        <button @click="removeItem(item.id)" class="text-red-500 hover:text-red-700 text-sm">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        <button @click="removeItem(item.id)"
+                                            class="text-red-500 hover:text-red-700 text-sm">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                             </svg>
                                         </button>
                                     </div>
@@ -364,25 +365,27 @@ x-init="fetchCart()">
                     </div>
                 </template>
             </div>
-            
-            <!-- Footer -->
+
             <template x-if="!loading && cartItems.length > 0">
                 <div class="p-4 border-t bg-gray-50">
                     <div class="flex justify-between items-center mb-4">
                         <span class="font-medium text-gray-700">Subtotal</span>
-                        <span class="font-bold text-lg" x-text="`$${total.toFixed(2)}`"></span>
+                        <span class="font-bold text-lg" x-text="total.toFixed(2)"></span>
                     </div>
-                    <button class="w-full bg-black hover:bg-slate-900 text-white py-3 px-4 rounded-lg font-medium transition duration-200">
+                    <button
+                        class="w-full bg-black hover:bg-slate-900 text-white py-3 px-4 rounded-lg font-medium transition duration-200">
                         Proceed to Checkout
                     </button>
                     <div class="mt-3 text-center">
-                        <a href="#" @click="sidebarIsOpen = false" class="text-sm text-slate-900 hover:text-text-800 hover:underline">Continue shopping</a>
+                        <a href="#" @click="sidebarIsOpen = false"
+                            class="text-sm text-slate-900 hover:text-text-800 hover:underline">Continue shopping</a>
                     </div>
                 </div>
             </template>
         </div>
     </div>
 </div>
+
 
 
 
