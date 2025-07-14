@@ -21,72 +21,38 @@ async function addToCart(menuId) {
 //update cart
 
 //delete cart
+ 
 
-async function removeItem(id) {
-    let confirmDelete = prompt(
-        "Do You Want to Delete Your Cart Item? Type 'yes' to confirm"
-    );
 
-    try {
-        if (confirmDelete?.toLowerCase() === "yes") {
-            const response = await axios.delete(`/deleteCart/${id}`);
-
-            if (response.data.success) {
-                alert(
-                    `Menu item deleted successfully! New total: $${response.data.newTotal}`
-                );
-                // Optional: Refresh the cart or update the UI
-                window.location.reload(); // or update the cart dynamically
-            } else {
-                alert(
-                    "Failed to delete item: " +
-                        (response.data.message || "Unknown error")
-                );
-            }
-        }
-    } catch (error) {
-        console.error("Error deleting item:", error);
-        alert(
-            "Error deleting item: " +
-                (error.response?.data?.message ||
-                    error.message ||
-                    "Something went wrong")
-        );
-    }
-}
-
-async function getItems() {
-    const response = await axios.get("/viewCart");
-    alert(JSON.stringify(response.data.cart));
-}
 
 function cartComponent() {
     return {
         sidebarIsOpen: false,
-        cartItems: [],
+        updatingItems: {}, // Track items being updated
+
+        cart: null,
         loading: true,
         total: 0,
         itemCount: 0,
-
+        autoIncrement:0,
         // Methods
         openCart() {
             this.sidebarIsOpen = true;
             this.fetchCart();
         },
 
-        async fetchCart() {
-            this.loading = true;
-            try {
-                const response = await axios.get("/viewCart");
-                this.cartItems = response.data.cart.items || [];
-                this.calculateTotals();
-            } catch (error) {
-                console.error("Error fetching cart:", error);
-                // Optionally show error to user
-            }
-            this.loading = false;
-        },
+        async  fetchCart() {
+          const response = await axios.get("/viewCart");
+          this.cart = response.data.cart;
+          this.loading = false;
 
+          // Update item count
+        this.itemCount = this.cart.menus.reduce((count, item) => {
+            return count + item.pivot.quantity;
+        }, 0);
+        //   alert(JSON.stringify(this.cart))
+           console.log(JSON.stringify(this.cart));
+          },
         calculateTotals() {
             this.total = this.cartItems.reduce((sum, item) => {
                 return sum + item.price * item.pivot.quantity;
@@ -97,31 +63,49 @@ function cartComponent() {
             }, 0);
         },
 
-        async updateQuantity(item, change) {
-            const newQuantity = item.pivot.quantity + change;
-            if (newQuantity < 1) return;
+   async updateQuantity(item, change) {
+           
+           const newQuantity = item.pivot.quantity + change;
+           if (newQuantity < 1) return;
+           this.updatingItems[item.id] = true;
 
             try {
-                await axios.patch(`/cart/${item.id}`, {
-                    quantity: newQuantity,
-                });
-                item.pivot.quantity = newQuantity;
-                this.calculateTotals();
-            } catch (error) {
-                console.error("Error updating quantity:", error);
-            }
-        },
-
-        async removeItem(itemId) {
-            try {
-                await axios.delete(`/cart/${itemId}`);
-                this.cartItems = this.cartItems.filter(
-                    (item) => item.id !== itemId
-                );
-                this.calculateTotals();
-            } catch (error) {
-                console.error("Error removing item:", error);
-            }
-        },
+             const response = await axios.patch(`/updateCart/${item.id}`, {
+             quantity: newQuantity,
+             menu_id: item.id  // Add this line to send menu_id
+            });
+        
+        // Update local state with the response data
+       
+             this.cart = response.data.cart;
+             this.total = this.cart.total;
+        
+        // Update item count
+            this.itemCount = this.cart.menus.reduce((count, item) => {
+            return count + item.pivot.quantity;
+        }, 0);
+    } catch (error) {
+        console.error("Error updating quantity:", error);
+    }
+},
+      async removeItem(itemId) {
+    try {
+        const response = await axios.delete(`/deleteCart/${itemId}`, {
+            data: { menu_id: itemId } // Ensure menu_id is sent
+        });
+        
+        // Update from server response instead of local filtering
+        this.cart = response.data.cart;
+        this.total = response.data.cart.total;
+        this.itemCount = this.cart.menus.reduce(
+            (count, item) => count + item.pivot.quantity, 
+            0
+        );
+        
+    } catch (error) {
+        console.error("Error removing item:", error);
+        // Optional: Show error to user
+    }
+},
     };
 }

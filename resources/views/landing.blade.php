@@ -142,7 +142,7 @@
 
             @foreach ($menus as $menu)
                 <div class="flex items-center" key="{{ $menu->id }}" data-aos="fade-down">
-                    <img src="{{ asset('storage/' . $menu->image) }}"
+                    <img src="{{ $menu->image }}"
                          class="rounded-full size-16 mx-auto group-hover:animate-[spin_10s_linear_infinite]" alt="">
 
                     <div class="ms-3 w-full">
@@ -269,7 +269,7 @@
 
 
     <!-- Add this style to hide elements with x-cloak before Alpine loads -->
-  <div x-data="cartComponent()" x-init="getItems()">
+  <div x-data="cartComponent()" x-init="fetchCart()">
     <button @click="openCart()" class="fixed bottom-16 right-4 z-40 rounded-full bg-black p-4 text-white"
         aria-label="Open cart">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5"
@@ -312,7 +312,7 @@
                     </div>
                 </template>
 
-                <template x-if="!loading && cartItems.length === 0">
+                <template x-if="!loading && cart?.menus?.length === 0">
                     <div class="h-full flex flex-col items-center justify-center text-center p-6">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-400" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor">
@@ -324,19 +324,19 @@
                     </div>
                 </template>
 
-                <template x-if="!loading && cartItems.length > 0">
+                <template x-if="!loading && cart?.menus?.length > 0">
                     <div class="space-y-4">
-                        <template x-for="item in cartItems" :key="item.id">
+                        <template x-for="item in cart?.menus" :key="item.id">
                             <div class="flex gap-4 pb-4 border-b">
-                                <img :src="/storage/item.image}" :alt="item.name"
+                                <img :src="item.image"  
                                     class="w-20 h-20 object-cover rounded-lg flex-shrink-0">
                                 <div class="flex-1">
                                     <div class="flex justify-between">
-                                        <h4 class="font-medium text-gray-800" x-text="name"></h4>
+                                        <h4 class="font-medium text-gray-800" x-text="item.title"></h4>
                                         <span class="font-semibold"
                                             x-text="item.price * item.pivot.quantity.toFixed(2)"></span>
                                     </div>
-                                    <p class="text-sm text-gray-600" x-text="item.price.toFixed(2) each"></p>
+                                    <p class="text-sm text-gray-600" x-text="item.price.toFixed(2) $"></p>
                                     <div class="mt-2 flex items-center justify-between">
                                         <div class="flex items-center border rounded">
                                             <button @click="updateQuantity(item, -1)"
@@ -366,18 +366,18 @@
                 </template>
             </div>
 
-            <template x-if="!loading && cartItems.length > 0">
+            <template x-if="!loading && cart?.menus?.length > 0">
                 <div class="p-4 border-t bg-gray-50">
                     <div class="flex justify-between items-center mb-4">
                         <span class="font-medium text-gray-700">Subtotal</span>
-                        <span class="font-bold text-lg" x-text="total.toFixed(2)"></span>
+                        <span class="font-bold text-lg" x-text="total.toFixed(2)">$</span>
                     </div>
                     <button
                         class="w-full bg-black hover:bg-slate-900 text-white py-3 px-4 rounded-lg font-medium transition duration-200">
                         Proceed to Checkout
                     </button>
                     <div class="mt-3 text-center">
-                        <a href="#" @click="sidebarIsOpen = false"
+                        <a href="#" @click="sidebarIsOpen=false"
                             class="text-sm text-slate-900 hover:text-text-800 hover:underline">Continue shopping</a>
                     </div>
                 </div>

@@ -100,7 +100,7 @@ class MenuController extends Controller
     if ($request->hasFile('image')) {
         $fileName = 'slider_'.md5(date('YmdHis')).'.'.$request->file('image')->extension();
         $request->file('image')->storeAs('public/menu', $fileName);
-        $validated['image'] = $fileName; // Store only filename
+        $validated['image'] = '/storage/'.$fileName; // Store only filename
     }
 
     $menu->update($validated);

@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
  
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/viewCart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/addToCart', [CartController::class, 'store'])->name('cart.store');
+    Route::patch('/updateCart/{id}',[CartController::class,'update'])->name('cart.update');
+    Route::delete('/deleteCart/{id}',[CartController::class,'destroy'])->name('cart.destroy');
     Route::get('/',  [HomeController::class,'index'])->name('home');
     Route::resource('logo',LogoController::class)->except('show'); 
     Route::get('/dashboard', [DashboardController::class,'dashboard'])->name('dashboard');
@@ -24,9 +27,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('about',AboutController::class)->except('show');   
     Route::resource('menu',MenuController::class)->except('show');
     Route::resource('footer',RestaurantInformationController::class)->except('show');
-    Route::post('/addToCart', [CartController::class, 'store'])->name('cart.store');
-    Route::delete('/deleteCart/{menu}', [CartController::class, 'destroy'])->name('cart.delete');
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
