@@ -29,14 +29,12 @@ function cartComponent() {
     return {
         sidebarIsOpen: false,
         updatingItems: {}, // Track items being updated
-
         cart: null,
         loading: true,
         total: 0,
         itemCount: 0,
         autoIncrement:0,
-        // Methods
-        openCart() {
+         openCart() {
             this.sidebarIsOpen = true;
             this.fetchCart();
         },

@@ -42,19 +42,19 @@ class CartController extends Controller
     $cart = auth()->user()->cart ?? Cart::create(['user_id' => auth()->id()]);
 
     // Check if the item is already attached to the cart
-     $existing = $cart->menus()->where('menu_id', $request->menu_id)->first();
+     $cartItem = $cart->menus()->where('menu_id', $request->menu_id)->first();
 
-    if ($existing) {
+    if ($cartItem) {
         // If exists, increment the quantity
-        $currentQty = $existing->pivot->quantity;
+        $currentQty = $cartItem->pivot->quantity;
         $cart->menus()->updateExistingPivot($request->menu_id, [
             'quantity' => $currentQty + 1
         ]);
      } else {
         // If not, attach it with quantity = 1
         $cart->menus()->attach($request->menu_id, ['quantity' => 1]);
+        $cart->menus()->price + $cartItem->total;
     }
-
     return response()->json([
         'success' => true,
         'cart' => $cart,
@@ -101,9 +101,9 @@ class CartController extends Controller
     $cart = $user->cart;
     
     // Check if item exists in cart
-    $existing = $cart->menus()->where('menu_id', $request->menu_id)->first();
+    $cartItem = $cart->menus()->where('menu_id', $request->menu_id)->first();
 
-    if (!$existing) {
+    if (!$cartItem) {
         return response()->json([
             'success' => false,
             'message' => 'Item not found in cart'
@@ -117,11 +117,13 @@ class CartController extends Controller
     ]);
 
     // Refresh and calculate totals
-    $cart->load(relations: ['menus']);
-    $total = $cart->menus->sum(function($menu) {
-        return $menu->price * $menu->pivot->quantity;
-    });
-    $cart->update(['total' => $total]);
+    $cart->load('menus');
+    
+    // $total = $cart->menus->sum(function($menu) {
+    //     return $menu->price * $menu->pivot->quantity;
+    // });
+    // $cart->total += $cartItem->price;
+     $cart->update(['total' => $cart->total]);
 
     return response()->json([
         'success' => true,
@@ -137,8 +139,7 @@ public function destroy($id)
 {
     $user = auth()->user();
     $cart = $user->cart;
-    
-    if (!$cart) {
+     if (!$cart) {
         return response()->json([
             'success' => false,
             'message' => 'Cart not found'
@@ -150,11 +151,12 @@ public function destroy($id)
     
     // Refresh relationships and calculate total
     $cart->load('menus');
-    $total = $cart->menus->sum(function($menu) {
-        return $menu->price * $menu->pivot->quantity;
-    });
+    // $total = $cart->menus->sum(function($menu) {
+    //     return $cart->total + $cart->pivot->quantity;
+        
+    // });
     
-    $cart->update(['total' => $total]);
+    $cart->update(values: ['cart' => $cart]);
     
     return response()->json([
         'success' => true,
