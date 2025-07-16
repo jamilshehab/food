@@ -42,8 +42,7 @@ class CartController extends Controller
     $cart = auth()->user()->cart ?? Cart::create(['user_id' => auth()->id()]);
 
     // Check if the item is already attached to the cart
-     $cartItem = $cart->menus()->where('menu_id', $request->menu_id)->first();
-
+    $cartItem = $cart->menus()->where('menu_id', $request->menu_id)->first();
     if ($cartItem) {
         // If exists, increment the quantity
         $currentQty = $cartItem->pivot->quantity;
@@ -53,8 +52,8 @@ class CartController extends Controller
      } else {
         // If not, attach it with quantity = 1
         $cart->menus()->attach($request->menu_id, ['quantity' => 1]);
-        $cart->menus()->price + $cartItem->total;
-    }
+        
+     }
     return response()->json([
         'success' => true,
         'cart' => $cart,
@@ -86,7 +85,8 @@ class CartController extends Controller
     {
         //
          $request->validate([
-        'quantity' => 'required|integer|min:1'
+        'quantity' => 'required|integer|min:1',
+        'change'=> 'required|integer'
          ]);
 
     $user = auth()->user();
@@ -99,7 +99,7 @@ class CartController extends Controller
     }
 
     $cart = $user->cart;
-    
+    $menu=Menu::where('menu_id');
     // Check if item exists in cart
     $cartItem = $cart->menus()->where('menu_id', $request->menu_id)->first();
 
@@ -122,7 +122,7 @@ class CartController extends Controller
     // $total = $cart->menus->sum(function($menu) {
     //     return $menu->price * $menu->pivot->quantity;
     // });
-    // $cart->total += $cartItem->price;
+    $cart->total+= $cartItem->price * $request->change;
      $cart->update(['total' => $cart->total]);
 
     return response()->json([

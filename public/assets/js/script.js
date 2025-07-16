@@ -62,13 +62,13 @@ function cartComponent() {
         },
 
    async updateQuantity(item, change) {
-           
            const newQuantity = item.pivot.quantity + change;
            if (newQuantity < 1) return;
            this.updatingItems[item.id] = true;
 
             try {
              const response = await axios.patch(`/updateCart/${item.id}`, {
+             change,
              quantity: newQuantity,
              menu_id: item.id  // Add this line to send menu_id
             });
