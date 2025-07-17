@@ -37,7 +37,6 @@ function cartComponent() {
         autoIncrement: 0,
         async openCart() {
             this.sidebarIsOpen = true;
-    
             await this.fetchCart();
         },
 
@@ -47,8 +46,7 @@ function cartComponent() {
             this.cart = response?.data?.cart;
    
             this.total = response?.data?.cart?.total ?? 0;
-            alert(response?.data?.cart?.total)
-            
+             
 
             // Update item count
             this.itemCount = this.cart.menus.reduce((count, item) => {

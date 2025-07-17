@@ -19,4 +19,8 @@ class Cart extends Model
         ->withPivot('quantity')
         ->withTimestamps();
     }
+
+    public function checkout(){
+        return $this->hasOne(Checkout::class);
+    }
 }
