@@ -145,7 +145,7 @@
                     <div class="flex items-center" key="{{ $menu->id }}" data-aos="fade-down">
                         <img src="{{ $menu->image }}"
                             class="rounded-full size-16 mx-auto group-hover:animate-[spin_10s_linear_infinite]" alt="">
-
+                         
                         <div class="ms-3 w-full">
                             <div class="flex justify-between items-center pb-2 border-b border-gray-100 dark:border-gray-800">
                                 <button class="text-left hover:text-amber-500 transition-colors">

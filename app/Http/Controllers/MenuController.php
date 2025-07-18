@@ -41,7 +41,9 @@ class MenuController extends Controller
 ]);
     // Handle file upload
     if ($request->hasFile('image')) {
-      $validated['image'] = $request->file('image')->store('menu/images', 'public');         
+        $fileName = 'menu_'.md5(date('YmdHis')).'.'.$request->file('image')->extension();
+        $request->file('image')->storeAs('public/menu/', $fileName);
+        $validated['image'] = '/storage/'. $fileName; // Store only filename
     }
 
     // Add user_id to validated data
@@ -99,10 +101,9 @@ class MenuController extends Controller
     // Handle file upload
     if ($request->hasFile('image')) {
         $fileName = 'slider_'.md5(date('YmdHis')).'.'.$request->file('image')->extension();
-        $request->file('image')->storeAs('public/menu', $fileName);
-        $validated['image'] = '/storage/'.$fileName; // Store only filename
+        $request->file('image')->storeAs('public/menu/', $fileName);
+        $validated['image'] = '/storage/'. $fileName; // Store only filename
     }
-
     $menu->update($validated);
     return redirect()->route('menu.index')->with('success', 'Menu Updated Successfully!');
     }

@@ -20,7 +20,5 @@ class Cart extends Model
         ->withTimestamps();
     }
 
-    public function checkout(){
-        return $this->hasOne(Checkout::class);
-    }
+   
 }
