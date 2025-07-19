@@ -27,7 +27,7 @@
                                 <td class="px-6 py-4 text-sm text-gray-800">{{ Str::limit($menu->price, limit: 15) }}</td>
                                 <td class="px-6 py-4 text-sm text-gray-800">
                                     @if($menu->image)
-                                        <img src="{{ asset('storage/' . $menu->image) }}" 
+                                        <img src="{{ asset($menu->image) }}" 
                                              alt="Slider Image" 
                                              class="w-16 h-auto rounded-md">
                                     
