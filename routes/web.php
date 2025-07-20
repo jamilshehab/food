@@ -1,24 +1,24 @@
 <?php
 
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LogoController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\NavigationController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RestaurantInformationController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\AboutController;
-use App\Models\Checkout;
+ 
 use Illuminate\Support\Facades\Route;
 
 
  
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/viewCart', [CartController::class, 'index'])->name('cart.index');
-    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::get('/checkout', [OrderController::class, 'index'])->name('checkout.index');
     Route::post('/addToCart', [CartController::class, 'store'])->name('cart.store');
     Route::patch('/updateCart/{id}',[CartController::class,'update'])->name('cart.update');
     Route::delete('/deleteCart/{id}',[CartController::class,'destroy'])->name('cart.destroy');
