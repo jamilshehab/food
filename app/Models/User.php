@@ -78,5 +78,9 @@ class User extends Authenticatable
         return $this->hasOne(Cart::class)
         ->with('menus');
     }
+
+    public function order(){
+        return $this->hasMany(Order::class)->with('menus');;
+    }
     
 }

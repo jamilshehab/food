@@ -39,7 +39,7 @@
             <!-- Current Image -->
             <div class="mt-4">
                 <x-input-label :value="__('Current Image')" />
-                <img src="{{ asset('storage/' . $menu->image) }}" 
+                <img src="{{ $menu->image }}" 
                      alt="Current Slider Image" class="h-40 mt-2 rounded">
             </div>
 

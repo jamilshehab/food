@@ -4,12 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Menu;
 use Illuminate\Http\Request;
+use Storage;
 
 class MenuController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
         //
@@ -29,28 +28,28 @@ class MenuController extends Controller
     /**
      * Store a newly created resource in storage.
      */
- public function store(Request $request)
-   {
-     
-  $validated = $request->validate([
-    'title' => 'required|string|max:255',
-    'description' => 'required|string',
-    'ingredients'=>'required|string',
-    'price' => 'nullable|integer',
-    'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-]);
-    // Handle file upload
-    if ($request->hasFile('image')) {
-        $fileName = 'menu_'.md5(date('YmdHis')).'.'.$request->file('image')->extension();
-        $request->file('image')->storeAs('public/menu/', $fileName);
-        $validated['image'] = '/storage/'. $fileName; // Store only filename
-    }
+public function store(Request $request)
+{
+    $validated = $request->validate([
+        'title' => 'required|string|max:255',
+        'description' => 'required|string',
+        'ingredients' => 'required|string',
+        'price' => 'nullable|integer',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ]);
 
-    // Add user_id to validated data
+    if ($request->hasFile('image')) {
+        // Generate a unique filename
+        $fileName = 'menu_' . time() . '.' . $request->file('image')->extension();
+        // Store the file in the 'public' disk (usually storage/app/public)
+        $path = $request->file('image')->storeAs('images', $fileName, 'public');
+        // Save the public URL to the database
+        $validated['image'] = Storage::url($path);
+    }
     $validated['user_id'] = auth()->id();
 
     Menu::create($validated);
-    
+
     return redirect()->route('menu.index')->with('success', 'Menu Created Successfully!');
 }
 
@@ -100,9 +99,12 @@ class MenuController extends Controller
    
     // Handle file upload
     if ($request->hasFile('image')) {
-        $fileName = 'slider_'.md5(date('YmdHis')).'.'.$request->file('image')->extension();
-        $request->file('image')->storeAs('public/menu', $fileName);
-        $validated['image'] = '/storage/'. $fileName; // Store only filename
+         // Generate a unique filename
+        $fileName = 'menu_' . time() . '.' . $request->file('image')->extension();
+        // Store the file in the 'public' disk (usually storage/app/public)
+        $path = $request->file('image')->storeAs('images', $fileName, 'public');
+        // Save the public URL to the database
+        $validated['image'] = Storage::url($path);
     }
     $menu->update($validated);
     return redirect()->route('menu.index')->with('success', 'Menu Updated Successfully!');

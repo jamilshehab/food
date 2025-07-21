@@ -31,11 +31,19 @@ class LogoController extends Controller
     
   if ($request->hasFile('logo_light')) {
      $validated['logo_light'] = $request->file('logo_light')->store('logo_light/images', 'public');         
-
+     $fileName = 'menu_' . time() . '.' . $request->file('image')->extension();
+        // Store the file in the 'public' disk (usually storage/app/public)
+      $path = $request->file('image')->storeAs('images', $fileName, 'public');
+        // Save the public URL to the database
+      $validated['image'] = Storage::url($path);
     }
   if ($request->hasFile('logo_dark')) {
      $validated['logo_dark'] = $request->file('logo_dark')->store('logo_dark/images', 'public');         
-
+     $fileName = 'menu_' . time() . '.' . $request->file('image')->extension();
+        // Store the file in the 'public' disk (usually storage/app/public)
+        $path = $request->file('image')->storeAs('images', $fileName, 'public');
+        // Save the public URL to the database
+        $validated['image'] = Storage::url($path);
     }
     $validated['user_id'] = auth()->id();
  
