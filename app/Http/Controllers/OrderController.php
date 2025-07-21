@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Logo;
 use App\Models\Navigation;
+use App\Models\Order;
 use App\Models\RestaurantInformation;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,10 @@ class OrderController extends Controller
     $footer = RestaurantInformation::get()->first();
     $cart = auth()->user()->cart;
     $cartItems = $cart ? $cart->menus()->get() : collect();
-    return view('checkout', ['logo'=>$logo,'navigation'=>$navigation , 'footer'=>$footer , 'cartItems'=>$cartItems]); // Explicit variable passing
+    $cartTotal = $cartItems->sum(function ($item) {
+        return $item->price * $item->pivot->quantity;
+    });
+    return view('checkout', ['logo'=>$logo,'navigation'=>$navigation , 'footer'=>$footer , 'cartItems'=>$cartItems,'cartTotal'=>$cartTotal]); // Explicit variable passing
  
     }
 
@@ -37,30 +41,24 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $total=0;
-        $validated = $request->validate([
-        'first_name'    => 'required|string|max:255',
-        'last_name'     => 'required|string|max:255',
-        'address'       => 'required|string|max:255',
-        'city'          => 'required|string|max:255',
-        'country'       => 'required|string|max:255',
-        'email'         => 'required|email|unique:users,email',
-        'company'       => 'nullable|string|max:255',
-        'phone_number'  => 'required|string|max:20',
-        'payment'       => 'required|integer',
-        'delivery'      => 'required|integer',
-    ]);
-    if($validated['payment']==="paypal"){
-     $total+=10;
-    } 
-    else if ($validated['payment'] === "Payment Gateway"){
-        $total+=12;
-    }
-    else{
-        $total+=20;
-    }
+        dd($request->all());
+         $validated = $request->validate([
+        'first_name' =>'required|string|max:255',
+        'last_name'=>'required|string|max:255',
+        'email'=>'required|email|unique:users,email',
+        'country'=>'required|string|max:255',
+        'city'=> 'required|string|max:255',
+        'company'=>'nullable|string|max:255',
+        'phone_number'=>'required|string|max:20',
+        'address'=>'required|string|max:255',
+        'payment'=> 'required|string',
+      ]);
+     if($validated["payment"]){
+        $validated["payment"]="Cash On Delivery";
+     }
     Order::create($validated);
+     
+     
     }
 
     /**

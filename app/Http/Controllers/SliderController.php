@@ -97,11 +97,11 @@ use Illuminate\Support\Facades\Storage;
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Slider $slider)
     {
         //
         $user = auth()->user();
-        $slider=Slider::findOrFail($id);
+         
         if ($slider->user_id !== $user->id) {
             return redirect()->back()->with('error', 'Not Authorized');
     }

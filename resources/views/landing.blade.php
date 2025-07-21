@@ -15,16 +15,14 @@
         <div class="container relative">
             <a class="logo" href="#home">
                 <span class="inline-block dark:hidden">
-                    <img src="{{ asset('storage/' . $logo->logo_dark) }}" class="l-dark" alt="">
+                    <img src="{{$logo->logo_dark}}" class="l-dark" alt="">
                 </span>
             </a>
 
             <a class="logo" href="#home">
                 {{-- Light mode logo --}}
                 <span class="inline-block dark:hidden">
-                    @if($logo->logo_light)
-                        <img src="{{ asset('storage/' . $logo->logo_light) }}" class="l-light" alt="Logo Light">
-                    @endif
+                 <img src="{{$logo->logo_light }}" class="l-light" alt="Logo Light">       
                 </span>
 
                 <!-- End Logo container-->
@@ -335,7 +333,7 @@
                                         <div class="flex justify-between">
                                             <h4 class="font-medium text-gray-800" x-text="item.title"></h4>
                                             <span class="font-semibold"
-                                                x-text="item.price * item.pivot.quantity.toFixed(2)"></span>
+                                                x-text="item.price * item.pivot.quantity.toFixed(2)" ></span>
                                         </div>
                                         <p class="text-sm text-gray-600" x-text="item.price.toFixed(2)"></p>
                                         <div class="mt-2 flex items-center justify-between">
@@ -373,14 +371,18 @@
                             <span class="font-medium text-gray-700">Subtotal</span>
                             <span class="font-bold text-lg" x-text="total">$</span>
                         </div>
-                        <button
+                        {{-- <button
                             class="w-full bg-black hover:bg-slate-900 text-white py-3 px-4 rounded-lg font-medium transition duration-200">
                             Proceed to Checkout
-                        </button>
-                        <div class="mt-3 text-center">
+                        </button> --}}
+                           <a href="{{route('checkout.index')}}"
+                            class="w-full block text-center bg-black hover:bg-slate-900 text-white py-3 px-4 rounded-lg font-medium transition duration-200">
+                            Proceed to Checkout
+                    </a>
+                        {{-- <div class="mt-3 text-center">
                             <a href="#" @click="sidebarIsOpen=false"
                                 class="text-sm text-slate-900 hover:text-text-800 hover:underline">Continue shopping</a>
-                        </div>
+                        </div> --}}
                     </div>
                 </template>
             </div>

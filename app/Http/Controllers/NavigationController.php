@@ -43,11 +43,10 @@ class NavigationController extends Controller
         
     }
  
-    public function edit(string $id)
+    public function edit(Navigation $navigation)
     {
         //
         $user=auth()->user();
-        $navigation=Navigation::findOrFail($id);
         if ($navigation->user_id !==$user->id){
           abort(403,'anuthorized access');
         }
@@ -57,11 +56,11 @@ class NavigationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Navigation $navigation)
     {
         //
     $user = auth()->user();
-    $navigation = Navigation::findOrFail($id);
+   
 
     // Correct authorization check
     if ($navigation->user_id !== $user->id) {

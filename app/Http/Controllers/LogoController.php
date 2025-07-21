@@ -21,41 +21,51 @@ class LogoController extends Controller
     }
      
 
-  public function store(Request $request)
-{
-    // Validate: 'image.*' means each image in array
-    $validated = $request->validate([
-        'logo_light' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'logo_dark' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    ]);
-    
-  if ($request->hasFile('logo_light')) {
-     $validated['logo_light'] = $request->file('logo_light')->store('logo_light/images', 'public');         
-     $fileName = 'menu_' . time() . '.' . $request->file('image')->extension();
-        // Store the file in the 'public' disk (usually storage/app/public)
-      $path = $request->file('image')->storeAs('images', $fileName, 'public');
-        // Save the public URL to the database
-      $validated['image'] = Storage::url($path);
-    }
-  if ($request->hasFile('logo_dark')) {
-     $validated['logo_dark'] = $request->file('logo_dark')->store('logo_dark/images', 'public');         
-     $fileName = 'menu_' . time() . '.' . $request->file('image')->extension();
-        // Store the file in the 'public' disk (usually storage/app/public)
-        $path = $request->file('image')->storeAs('images', $fileName, 'public');
-        // Save the public URL to the database
-        $validated['image'] = Storage::url($path);
-    }
-    $validated['user_id'] = auth()->id();
- 
-    Logo::create($validated);
-
-    return redirect()->route('logo.index')->with('success', 'Logo created successfully!');
-}
-
-   public function edit(string $id)
+    public function store(Request $request)
     {
-        $logo=Logo::findOrFail($id);
+        // Validate: 'image.*' means each image in array
+        $validated = $request->validate([
+            'logo_light' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'logo_dark' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+       
+        ]);
+
+        // Handle logo_light upload
+        if ($request->hasFile('logo_light')) {
+            $logoLightFile = $request->file('logo_light'); // Get the actual file object for logo_light
+            $fileNameLight = 'logo_light_' . time() . '.' . $logoLightFile->extension(); // Use $logoLightFile
+            
+            // Store the file in the 'public' disk (usually storage/app/public)
+            $pathLight = $logoLightFile->storeAs('logos', $fileNameLight, 'public'); // Store in 'logos' directory
+            
+            // Save the public URL to the database for logo_light
+            $validated['logo_light'] = Storage::url($pathLight);
+        }
+
+        // Handle logo_dark upload
+        if ($request->hasFile('logo_dark')) {
+            $logoDarkFile = $request->file('logo_dark'); // Get the actual file object for logo_dark
+            $fileNameDark = 'logo_dark_' . time() . '.' . $logoDarkFile->extension(); // Use $logoDarkFile
+            
+            // Store the file in the 'public' disk (usually storage/app/public)
+            $pathDark = $logoDarkFile->storeAs('logos', $fileNameDark, 'public'); // Store in 'logos' directory
+            
+            // Save the public URL to the database for logo_dark
+            $validated['logo_dark'] = Storage::url($pathDark);
+        }
+         
+
+        $validated['user_id'] = auth()->id();
+
+        Logo::create($validated);
+
+        return redirect()->route('logo.index')->with('success', 'Logo created successfully!');
+    }
+
+   public function edit(Logo $logo)
+    {
         $userId=auth()->user()->id;
+        
         if($logo->user_id !==$userId){
           return redirect()->back()->with('error', 'Not Authourized');
         }
@@ -65,10 +75,8 @@ class LogoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-  public function update(Request $request, $id)
-{
-    $logo = Logo::findOrFail($id); // 1. Get the existing record
-
+  public function update(Request $request, Logo $logo)
+{ 
     // 2. Validate the new images (optional)
     $validated = $request->validate([
         'logo_light' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -81,7 +89,6 @@ class LogoController extends Controller
         if ($logo->logo_light && Storage::disk('public')->exists($logo->logo_light)) {
             Storage::disk('public')->delete($logo->logo_light);
         }
-
         // Store new one
         $validated['logo_light'] = $request->file('logo_light')->store('logo_light/images', 'public');
     }
@@ -100,7 +107,7 @@ class LogoController extends Controller
     // 5. Update the model with new image paths (if any)
     $logo->update($validated);
 
-    return redirect()->back()->with('success', 'Logo updated successfully!');
+    return redirect()->route('logo.index')->with('success', 'Logo updated successfully!');
 }
     /**
      * Remove the specified resource from storage.

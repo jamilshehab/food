@@ -64,13 +64,12 @@ public function store(Request $request)
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Menu $menu)
     {
         //
         $user=auth()->user();
-        $menu = Menu::findOrFail($id);
-        if($menu->user_id !== $user->id){
-        return redirect()->back()->with('error', 'Not Authourized');
+       if($menu->user_id !== $user->id){
+        return abort(404 , 'UnAuthorized Access');
         }
         return view('menu.edit')->with(['menu' => $menu]);
     }
@@ -78,15 +77,15 @@ public function store(Request $request)
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Menu $menu)
     {
         //
     $user = auth()->user();
-    $menu = Menu::findOrFail($id);
   
     // Authorization check (assuming sliders have a user_id column)
     if ($menu->user_id !== $user->id) {
-        return redirect()->back()->with('error', 'Not Authorized');
+        return abort(404 , 'UnAuthorized Access');
+
     }
 
    $validated = $request->validate([
@@ -113,9 +112,8 @@ public function store(Request $request)
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        $menu=Menu::findOrFail($id);
+    public function destroy(Menu $menu)
+    { 
         $user = auth()->user();
         if ($menu->user_id !== $user->id) {
             return redirect()->back()->with('error', 'Not Authorized');

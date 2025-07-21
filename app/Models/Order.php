@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     //
-protected $fillable=['menu_id','user_id','order_id','total','firstName','lastName','country','city','email','phone_number','country','billing','address'];
+protected $fillable=['user_id','order_id','total','first_name','last_name','country','city','email','phone_number','address'];
 
 
 public function menus() {

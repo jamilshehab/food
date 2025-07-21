@@ -52,7 +52,7 @@ class CartController extends Controller
                 'quantity' => $currentQty + 1
             ]);
 
-            $total = $cart->total +  $cartItem->price;
+            $total = $cart->total + $cartItem->price;
             $cart->update(['total' => $total]);
 
         } else {

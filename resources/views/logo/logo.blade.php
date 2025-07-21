@@ -21,19 +21,19 @@
                     <tbody class="divide-y divide-gray-200">
                              <tr class="hover:bg-gray-50">
                                 <td class="px-6 py-4 text-sm text-gray-800">
-                                     @if($logo->logo_light)
-                                        <img src="{{ asset('storage/' . $logo->logo_light) }}" 
+                                   
+                                        <img src=" {{$logo->logo_light}}" 
                                              alt="Logo Image" 
                                              class="w-16 h-auto rounded-md">
-                                    @endif
+                             
                                 </td>
 
                                      <td class="px-6 py-4 text-sm text-gray-800">
-                                     @if($logo->logo_dark)
-                                        <img src="{{ asset('storage/' . $logo->logo_dark) }}" 
+                                     
+                                        <img src="{{$logo->logo_dark}}" 
                                              alt="Logo Image" 
                                              class="w-16 h-auto rounded-md">
-                                    @endif
+                                  
                                 </td>
                                 
                                 <td class="px-6 py-4 text-sm text-gray-600">

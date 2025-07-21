@@ -4,7 +4,7 @@
     <x-dashboard.sidebar/>
     <!-- main content  -->
     <div id="main-content" class="h-svh w-full overflow-y-auto p-4 bg-white dark:bg-neutral-950">
-          <form method="POST" action="{{ route('logo.update', $logo->update) }}" enctype="multipart/form-data">
+          <form method="POST" action="{{ route('logo.update', $logo) }}" enctype="multipart/form-data">
              @csrf
             @method('PUT')
 
@@ -17,8 +17,8 @@
                </div>
                    <div class="mt-4">
                 <x-input-label :value="__('Current Image')" />
-                <img src="{{ asset('storage/' . $logo->logo_light) }}" 
-                     alt="Current Slider Image" class="h-40 mt-2 rounded">
+                <img src="{{$logo->logo_light}}" 
+                     alt="Current Slider Image" class="h-20 mt-2 w-35  rounded">
             </div>
 
                  <div class="mt-4">
@@ -29,8 +29,8 @@
                </div> 
                 <div class="mt-4">
                 <x-input-label :value="__('Current Image')" />
-                <img src="{{ asset('storage/' . $logo->logo_dark) }}" 
-                     alt="Current Logo Image" class="h-40 mt-2 rounded">
+                <img src="{{ $logo->logo_dark }}" 
+                     alt="Current Logo Image" class="h-40 w-35 mt-2 rounded">
             </div>
 
          
