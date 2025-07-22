@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/viewCart', [CartController::class, 'index'])->name('cart.index');
     Route::get('/checkout', [OrderController::class, 'index'])->name('checkout.index');
+    Route::get('/order/confirmation/{order}', [OrderController::class, 'confirmation'])
+    ->name('order.confirmation');
     Route::match(['get', 'post'], '/storeCheckout', [OrderController::class,'store'])->name('checkout.store');
     Route::post('/addToCart', [CartController::class, 'store'])->name('cart.store');
     Route::patch('/updateCart/{id}',[CartController::class,'update'])->name('cart.update');

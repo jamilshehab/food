@@ -51,7 +51,7 @@
                     <ul class="navigation-menu nav-light justify-end">
                         @foreach ($navigation as $nav)
                             <li class="menu-item active">
-                                <a href="{{$nav->url}}">{{$nav->title}}</a>
+                                <a href="/{{$nav->url}}">{{$nav->title}}</a>
                             </li>
 
                         @endforeach
@@ -97,40 +97,35 @@
             <div>
               <label for="your_city" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"> Your City</label>
               <input type="text" id="city" name="city" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500" placeholder="Beirut" required />
-              
             </div>
-
+              <div>
+              <label for="company" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"> Company name </label>
+              <input type="text" name="company" id="company" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500" placeholder="Twister" required />
+            </div>
             <div>
-              <label for="phone-input-3" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"> Phone Number </label>
+              <label for="phone-input" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"> Phone Number </label>
                <div class="relative w-full">
                   <input type="text" id="phone_number" name="phone_number" class="z-20 block w-full rounded-e-lg border border-s-0 border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:border-s-gray-700  dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500"  placeholder="123-456-7890" required />
                 </div>
             </div>
-
-            
-
-            <div>
-              <label for="company" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"> Company name </label>
-              <input type="text" name="company" id="company" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500" placeholder="Twister" required />
-            </div>
-
             <div>
               <label for="address" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"> Address Name </label>
               <input type="text" id="address" name="address" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500" placeholder="Zeidaneye Street" required />
-            </div>
+            </div> 
           </div>
         </div>
 
         <div class="space-y-4">
           <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Payment</h3>
-           <div class="flex items-center py-5">
-<fieldset class="fieldset bg-base-100 border-base-300 rounded-box w-64 border p-4">
-  <legend class="fieldset-legend">Payment Options</legend>
-  <label class="label">
-    <input type="checkbox"  name="payment" class="checkbox" />
-     Cash On Delivery
-  </label>
-</fieldset>
+           <div class="flex items-center py-2">
+             <input 
+              type="text" 
+              name="payment" 
+              placeholder="Cash On Delivery"
+              class="block w-full rounded-lg border border-gray-300 bg-gray-100 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400" 
+              disabled 
+              readonly
+             />
            </div>
         </div>
 

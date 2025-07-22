@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('restaurant_information', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete(action: 'cascade');
-            $table->text('open_hours_weekdays')->nullable();    // e.g., "Monday - Friday: 10:00AM - 11:00PM"
-            $table->text('open_hours_weekends')->nullable();    // e.g., "Saturday - Sunday: 9:00AM - 1:00PM"
+            $table->text('open_hours_weekdays')->nullable();    
+            $table->text('open_hours_weekends')->nullable();   
             $table->text('phone_number')->nullable();
             $table->text('email_input')->nullable();
             $table->text('address_line_1')->nullable();

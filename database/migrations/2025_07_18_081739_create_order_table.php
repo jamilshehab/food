@@ -17,9 +17,12 @@ return new class extends Migration
              $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique();
-            $table->string('address');
+            $table->string('address'); 
+            $table->string('phone_number');
             $table->string('company');
-            $table->string('payments');
+            $table->string('country');
+            $table->string('city');
+            $table->string('payment')->default('cash_on_delivery');
             $table->decimal(column: 'total')->default(0.00);
             $table->timestamps();
         });

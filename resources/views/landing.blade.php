@@ -50,12 +50,12 @@
                     <ul class="navigation-menu nav-light justify-end">
                         @foreach ($navigation as $nav)
                             <li class="menu-item active">
-                                <a href="{{$nav->url}}">{{$nav->title}}</a>
+                                <a href="/{{$nav->url}}">{{$nav->title}}</a>
                             </li>
 
                         @endforeach
                         <li class="menu-item">
-                            <a href="{{route('dashboard')}}">Dashboard</a>
+                            <a href="/dashboard">Dashboard</a>
                         </li>
 
                     </ul>
@@ -104,6 +104,7 @@
     <!-- End Hero -->
 
     <section class="restaurant-section relative md:py-24 py-16" id="about">
+       @if ($about)
         <div class="container relative">
             <div class="grid md:grid-cols-12 grid-cols-1 gap-6  ">
                 <div class="lg:col-span-6 md:col-span-12 lg:order-2" data-aos="fade-down">
@@ -118,7 +119,10 @@
                     <img src="{{ asset('storage/' . $about->images) }}" class="rounded shadow dark:shadow-gray-800" alt="">
                 </div>
             </div>
-        </div>
+        </div>  
+       @else
+       <div class="  ">  </div>
+      @endif
     </section>
 
 
@@ -176,11 +180,7 @@
 
 
     <!-- Optional: add this in <head> for x-cloak support -->
-    <style>
-        [x-cloak] {
-            display: none !important;
-        }
-    </style>
+    
 
     <!--end section-->
     <!-- End -->
