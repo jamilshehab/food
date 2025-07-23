@@ -49,7 +49,7 @@
                     <!-- Navigation Menu-->
                     <ul class="navigation-menu nav-light justify-end">
                         @foreach ($navigation as $nav)
-                            <li class="menu-item active">
+                            <li class="menu-item">
                                 <a href="/{{$nav->url}}">{{$nav->title}}</a>
                             </li>
 
@@ -112,7 +112,7 @@
                         <!-- <h6 class="uppercase font-semibold">About Us</h6> -->
 
                         <h6 class="uppercase text-3xl font-semibold">{{$about->title}}</h6>
-                        <p class="text-slate-400 mt-3">{{$about->content}}</p>
+                        <p class="text-slate-400 mt-3 text-wrap">{{$about->content}}</p>
                     </div>
                 </div>
                 <div class="lg:col-span-6 md:col-span-6 lg:order-3" data-aos="fade-down">

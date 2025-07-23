@@ -3,14 +3,14 @@ const navigation = document.getElementById('navigation');
     const menuLinks = navigation.querySelectorAll('.menu-item a');
     const sections = document.querySelectorAll('.restaurant-section');
     
-    // Remove all active classes initially
+//     // Remove all active classes initially
     function removeActiveClasses() {
         menuItems.forEach(item => {
             item.classList.remove('active');
         });
     }
     
-    // Set active class to corresponding menu item
+//     // Set active class to corresponding menu item
     function setActiveMenuItem(id) {
         removeActiveClasses();
         menuLinks.forEach(link => {
@@ -37,40 +37,78 @@ const navigation = document.getElementById('navigation');
     }
     
     // Handle click events on menu items
-    menuLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            // Skip for dashboard link
-            if (this.getAttribute('href').startsWith('{{route')) {
-                return;
-            }
+    // menuLinks.forEach(link => {
+    //     link.addEventListener('click', function(e) {
+    //         // Skip for dashboard link
+    //         // if (this.getAttribute('href').startsWith('{{route}}')) {
+    //         //     return;
+    //         // }
             
+    //         // e.preventDefault();
+    //         // const targetId = this.getAttribute('href').substring(1);
+    //         // const targetSection = document.getElementById(targetId);
+            
+    //         // if (targetSection) {
+    //         //     window.scrollTo({
+    //         //         top: targetSection.offsetTop,
+    //         //         behavior: 'smooth'
+    //         //     });
+                
+    //         //     history.pushState(null, null, `#${targetId}`);
+    //         // }
+    //     });
+    // });
+    
+    // Check hash on page load
+    // if (window.location.hash) {
+    //     const hash = window.location.hash.substring(1);
+    //     setActiveMenuItem(hash);
+    // }
+    
+    // // Add scroll event listener
+    // window.addEventListener('scroll', onScroll);
+    
+    // Add hashchange event listener
+    // window.addEventListener('hashchange', function() {
+    //     const hash = window.location.hash.substring(1);
+    //     setActiveMenuItem(hash);
+    // });
+
+ 
+menuLinks.forEach(link => {
+    link.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+
+        // Only handle internal hash links (e.g., #about)
+        if (href.startsWith('#')) {
             e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
+            const targetId = window.location.hash.substring(1);
             const targetSection = document.getElementById(targetId);
-            
+
             if (targetSection) {
                 window.scrollTo({
                     top: targetSection.offsetTop,
                     behavior: 'smooth'
                 });
-                
-                // Update URL hash
+
                 history.pushState(null, null, `#${targetId}`);
+                setActiveMenuItem(targetId);
             }
-        });
+        }
     });
-    
-    // Check hash on page load
-    if (window.location.hash) {
-        const hash = window.location.hash.substring(1);
-        setActiveMenuItem(hash);
-    }
-    
-    // Add scroll event listener
-    window.addEventListener('scroll', onScroll);
-    
-    // Add hashchange event listener
-    window.addEventListener('hashchange', function() {
-        const hash = window.location.hash.substring(1);
-        setActiveMenuItem(hash);
-    });
+});
+
+// On load
+if (window.location.hash) {
+    const hash = window.location.hash.substring(1);
+    setActiveMenuItem(hash);
+}
+
+// Optional: on scroll update active
+window.addEventListener('scroll', onScroll);
+
+// Optional: on hash change (back/forward buttons)
+window.addEventListener('hashchange', function () {
+    const hash = window.location.hash.substring(1);
+    setActiveMenuItem(hash);
+});
