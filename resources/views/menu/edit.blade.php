@@ -11,7 +11,6 @@
         <form method="POST" action="{{ route('menu.update', $menu->id) }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-
             <div>
                 <x-input-label for="title" :value="__('Slider Title')" />
                 <x-text-input id="title" name="title" type="text" 

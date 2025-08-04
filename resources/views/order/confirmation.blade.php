@@ -25,7 +25,7 @@
         <!-- Invoice Card -->
         <div class="bg-white shadow-xl rounded-lg overflow-hidden">
             <!-- Header -->
-            <div class="bg-gradient-to-r from-blue-600 to-indigo-700 p-6 text-white">
+            <div class="bg-gradient-to-r from-yellow-600 to-yellow-700 p-6 text-white">
                 <div class="flex justify-between items-start">
                     <div>
                         <h2 class="text-2xl font-bold">INVOICE</h2>

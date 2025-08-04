@@ -89,6 +89,6 @@ class NavigationController extends Controller
             abort(403,'unauthorized access');
         }
         $navigation->delete();
-        return redirect()->route('navigation.navbar')->with('success','navigation links deleted');
+        return redirect()->route('header.index')->with('success','navigation links deleted');
     }
 }

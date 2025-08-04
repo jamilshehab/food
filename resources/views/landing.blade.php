@@ -11,19 +11,19 @@
     </div>
     <!-- Loader End -->
     <!-- Start Navbar -->
-    <nav id="topnav" class="defaultscroll is-sticky">
+      <nav id="topnav" class="defaultscroll is-sticky">
         <div class="container relative">
-            <a class="logo" href="#home">
+            {{-- <a class="logo" href="#home">
                 <span class="inline-block dark:hidden">
                     <img src="{{$logo->logo_dark}}" class="l-dark" alt="">
                 </span>
-            </a>
+            </a> --}}
 
             <a class="logo" href="#home">
                 {{-- Light mode logo --}}
-                <span class="inline-block dark:hidden">
+                {{-- <span class="inline-block dark:hidden">
                  <img src="{{$logo->logo_light }}" class="l-light" alt="Logo Light">       
-                </span>
+                </span> --}}
 
                 <!-- End Logo container-->
 
@@ -48,20 +48,54 @@
                 <div id="navigation">
                     <!-- Navigation Menu-->
                     <ul class="navigation-menu nav-light justify-end">
-                        @foreach ($navigation as $nav)
+                        {{-- @foreach ($navigation as $nav)
                             <li class="menu-item">
-                                <a href="/{{$nav->url}}">{{$nav->title}}</a>
+                                <a href="#{{$nav->url}}">{{$nav->title}}</a>
                             </li>
 
-                        @endforeach
+                        @endforeach --}}
+                        <li class="menu-item">
+                                <a href="/checkout">Checkout</a>
+                            </li>
+                       @can('is-admin')
                         <li class="menu-item">
                             <a href="/dashboard">Dashboard</a>
                         </li>
+                       @endcan
+                       @can('is-client')
+                           <div class="hidden sm:flex sm:items-center sm:ms-6">
+                <x-dropdown align="right" width="48">
+                    <x-slot name="trigger">
+                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                            <div>{{ Auth::user()->first_name  . ' ' . Auth::user()->last_name}}</div>
 
+                            <div class="ms-1">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </button>
+                    </x-slot>
+
+                    <x-slot name="content">
+   <!-- Authentication -->
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+
+                            <x-dropdown-link :href="route('logout')"
+                                    onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                {{ __('Log Out') }}
+                            </x-dropdown-link>
+                        </form>
+                    </x-slot>
+                </x-dropdown>
+            </div>
+                      @endcan
                     </ul>
                 </div>
         </div>
-    </nav>
+    </nav>  
 
 
     <section class="swiper-slider-hero relative block h-screen restaurant-section" id="home">
@@ -187,7 +221,7 @@
 
     <!-- Footer Start -->
     <section x-data="cartComponent()" x-init="fetchCart()">
-    <footer class="relative bg-slate-950 dark:bg-slate-950/20 text-gray-200">
+    {{-- <footer class="relative bg-slate-950 dark:bg-slate-950/20 text-gray-200">
         <div class="container relative">
             <div class="grid grid-cols-12">
                 <div class="col-span-12">
@@ -262,7 +296,7 @@
                 </div><!--end grid-->
             </div><!--end container-->
         </div>
-    </footer><!--end footer-->
+    </footer><!--end footer--> --}}
     <!-- Footer End -->
     <!-- Switcher -->
 
