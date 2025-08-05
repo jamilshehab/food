@@ -57,9 +57,15 @@
                      </tbody>
                 </table>
             </div>
- 
         @else
-            <p class="text-gray-600 text-center text-xl mt-8">No Items Found.</p>
+        <div class="flex justify-between items-center">
+            <div class="">
+                <h1 class="text-xl ">No About Content</h1>
+            </div>
+        <div class="">
+           <a href="{{ route('about.create') }}" class="py-2 px-2 bg-black text-white rounded-lg"> Add About</a>
+        </div>
+        </div>
         @endif
     </div>
     </div>
