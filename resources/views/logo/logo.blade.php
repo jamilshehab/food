@@ -11,8 +11,6 @@
                     <thead class="bg-gray-100">
                         <tr>
                              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Logo</th>
-
-
                              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Submitted On</th>
                             {{-- <th class="px-6 py-3 text-center text-sm font-semibold text-gray-700">Actions</th> --}}
                         </tr>
@@ -33,9 +31,7 @@
                                        class="inline-block px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700">
                                         Edit
                                     </a>
-
-
-                                    <form action="{{ route('logo.destroy', $logo->id) }}" method="POST"
+                              <form action="{{ route('logo.destroy', $logo->id) }}" method="POST"
                                           onsubmit="return confirm('Are you sure you want to delete this?');"
                                           class="inline-block">
                                         @csrf
@@ -49,10 +45,16 @@
                      </tbody>
                 </table>
             </div>
- 
         @else
-            <p class="text-gray-600 text-center text-xl mt-8">No Items Found.</p>
-        @endif
+        <div class="flex justify-between items-center ">
+            <div class="">
+                <h1 class="text-xl">No Logo Found</h1>
+            </div>
+           <div class="">
+           <a href="{{ route('logo.create') }}" class="py-2 px-2 bg-black text-white rounded-lg"> Add Your Logo</a>
+        </div>
+        </div>
+         @endif
     </div>
     </div>
 

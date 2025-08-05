@@ -14,10 +14,7 @@
                     <li class="px-1 py-0.5 first:mt-2">
                         <a href="{{ route('logo.index')}}" class="flex items-center rounded-radius gap-2 px-2 py-1.5 text-sm text-on-surface underline-offset-2 hover:bg-primary/5 hover:text-on-surface-strong focus:outline-hidden focus-visible:underline">Logo</a>
                     </li>
-                    <li class="px-1 py-0.5 first:mt-2">
-                        <a href="{{ route('logo.create')}}" class="flex items-center rounded-radius gap-2 px-2 py-1.5 text-sm text-on-surface underline-offset-2 hover:bg-primary/5 hover:text-on-surface-strong focus:outline-hidden focus-visible:underline">Add Logo</a>
-                    </li>
-                    
+                  
                 </ul>
                </div>
             <!-- collapsible item  -->

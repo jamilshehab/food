@@ -7,8 +7,6 @@
           <form method="POST" action="{{ route('logo.update', $logo) }}" enctype="multipart/form-data">
              @csrf
             @method('PUT')
-
-
                 <div class="mt-4">
                     <x-input-label for="Logo" :value="__('Edit Image')" />
                     <input type="file" name="image" id="image"    

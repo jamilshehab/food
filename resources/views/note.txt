@@ -1,0 +1,7 @@
+footer links : 
+
+open hours | phone number | email | content | social links
+
+open hours : make it flexible 
+
+closed hours : make it flexible

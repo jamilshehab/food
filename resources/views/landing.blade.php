@@ -101,7 +101,7 @@
             <div class="swiper-wrapper">
                 @foreach ($sliders as $slider)
                     <div class="swiper-slide flex items-center overflow-hidden">
-                        <div class="slide-inner absolute end-0 top-0 w-full h-full slide-bg-image flex items-center bg-center;"
+                        <div class="slide-inner absolute end-0 top-0 w-full h-full slide-bg-image flex items-center bg-center bg-no-repeat"
                             style="background-image: url('{{ asset('storage/' . $slider->slider_image) }}')">
                             >
                             <div class="absolute inset-0 bg-slate-900/60"></div>
@@ -235,7 +235,7 @@
                                 <h5 class="tracking-[1px] text-gray-100 font-medium text-lg mb-4">Reservation</h5>
                                 <p class="mb-2"><a href="{{$footer->phone_number }}" class="text-gray-200/80">
                                         {{$footer->phone_number }}</a></p>
-                                <p class="mb-0"><a href="{{$footer->email_input}}"
+                                <p class="mb-0"><a href="mailto:{{$footer->email_input}}"
                                         class="text-gray-200/80">{{$footer->email_input}}</a></p>
                             </div>
 
