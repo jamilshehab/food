@@ -1,7 +1,7 @@
  <nav x-cloak class="fixed left-0 z-20 flex h-svh w-60 shrink-0 flex-col border-r border-outline bg-surface-alt p-4 transition-transform duration-300 md:w-64 md:translate-x-0 md:relative dark:border-outline-dark dark:bg-surface-dark-alt" x-bind:class="showSidebar ? 'translate-x-0' : '-translate-x-60'" aria-label="sidebar navigation">
  <!-- sidebar links  -->
         <div class="flex flex-col gap-2 overflow-y-auto pb-6">
-           {{-- <div x-data="{ isExpanded: false }" class="flex flex-col">
+           <div x-data="{ isExpanded: false }" class="flex flex-col">
                 <button type="button" x-on:click="isExpanded = ! isExpanded" id="products-btn" aria-controls="products" x-bind:aria-expanded="isExpanded ? 'true' : 'false'" class="flex items-center justify-between rounded-radius gap-2 px-2 py-1.5 text-sm font-medium underline-offset-2 focus:outline-hidden focus-visible:underline" x-bind:class="isExpanded ? 'text-on-surface-strong bg-primary/10 dark:text-on-surface-dark-strong dark:bg-primary-dark/10' :  'text-on-surface hover:bg-primary/5 hover:text-on-surface-strong dark:text-on-surface-dark dark:hover:text-on-surface-dark-strong dark:hover:bg-primary-dark/5'">
                     
                     <span class="mr-auto text-left">Logo</span>
@@ -19,7 +19,7 @@
                     </li>
                     
                 </ul>
-               </div> --}}
+               </div>
             <!-- collapsible item  -->
             <div x-data="{ isExpanded: false }" class="flex flex-col">
                 <button type="button" x-on:click="isExpanded = ! isExpanded" id="products-btn" aria-controls="products" x-bind:aria-expanded="isExpanded ? 'true' : 'false'" class="flex items-center justify-between rounded-radius gap-2 px-2 py-1.5 text-sm font-medium underline-offset-2 focus:outline-hidden focus-visible:underline" x-bind:class="isExpanded ? 'text-on-surface-strong bg-primary/10 dark:text-on-surface-dark-strong dark:bg-primary-dark/10' :  'text-on-surface hover:bg-primary/5 hover:text-on-surface-strong dark:text-on-surface-dark dark:hover:text-on-surface-dark-strong dark:hover:bg-primary-dark/5'">

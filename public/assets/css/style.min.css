@@ -10,5 +10,16 @@
     -webkit-animation: 2s ease-in-out infinite sk-bounce;
     animation: 2s ease-in-out infinite sk-bounce;
 }
+#topnav {
+    background-color: #ffffff87;
+}
+#topnav .navigation-menu.nav-light > li > a{
+    color: black;
+}
+#topnav .navigation-menu.nav-light > li > a:hover{
+    color: #f59e0b !important;
+} 
 
- 
+#topnav.nav-sticky .navigation-menu.nav-light>li.active>a, #topnav.nav-sticky .navigation-menu.nav-light>li:hover>a{
+    color: #f59e0b !important;
+}

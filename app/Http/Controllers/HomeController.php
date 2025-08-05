@@ -14,7 +14,7 @@ class HomeController extends Controller
 {
     //
    public function index() {
-    // $logo=Logo::get()->first();
+    $logo=Logo::get()->first();
     // $navigation = Navigation::get();
     $sliders = Slider::limit(3)->get();
     $about = About::get()->first();
@@ -29,7 +29,7 @@ class HomeController extends Controller
     $cartItems = $cart ? $cart->menus()->get() : collect();
     }
     
-    return view('landing', ['sliders' => $sliders, 'about'=> $about, 'menus' => $menus , 'footer'=>$footer , 'cartItems'=>$cartItems]); // Explicit variable passing
+    return view('landing', ['logo'=>$logo,'sliders' => $sliders, 'about'=> $about, 'menus' => $menus , 'footer'=>$footer , 'cartItems'=>$cartItems]); // Explicit variable passing
 }
   
 }

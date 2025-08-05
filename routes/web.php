@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
@@ -14,12 +15,12 @@ use App\Http\Controllers\AboutController;
  
 use Illuminate\Support\Facades\Route; 
 
-Route::get('/',  [HomeController::class,'index'])->name('home');
+Route::get('/',  [HomeController::class,'index'])->middleware(['auth','verified'])->name('home');
 
 Route::middleware(['auth','verified','can:is-admin'])->group(function(){
      
      Route::get('/dashboard', [DashboardController::class,'dashboard'])->name('dashboard');
-    //   Route::resource('logo',LogoController::class)->except('show'); 
+      Route::resource('logo',LogoController::class)->except('show'); 
     //   Route::resource('header',NavigationController::class)->except('show');
       Route::resource('slider',SliderController::class)->except('show');
       Route::resource('about',AboutController::class)->except('show');   
@@ -38,8 +39,19 @@ Route::middleware(['auth','verified','can:is-admin'])->group(function(){
     Route::delete('/deleteCart/{id}',[CartController::class,'destroy'])->name('cart.destroy');
 });
 
+Route::middleware(['auth','verified','can:is-client'])->group(function(){
+Route::match(['get', 'post'], 'logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+Route::get('/viewCart', [CartController::class, 'index'])->name('cart.index');
+Route::get('/checkout', [OrderController::class, 'index'])->name('checkout.index');
+Route::get('/order/confirmation/{order}', [OrderController::class, 'confirmation'])
+    ->name('order.confirmation');
+Route::match(['get', 'post'], '/storeCheckout', [OrderController::class,'store'])->name('checkout.store');
+Route::post('/addToCart', [CartController::class, 'store'])->name('cart.store');
+Route::patch('/updateCart/{id}',[CartController::class,'update'])->name('cart.update');
+Route::delete('/deleteCart/{id}',[CartController::class,'destroy'])->name('cart.destroy');
 
-
+});
+ 
   
 
 require __DIR__.'/auth.php';

@@ -10,27 +10,15 @@
 
 
                 <div class="mt-4">
-                    <x-input-label for="logo_light" :value="__('Upload Image')" />
-                    <input type="file" name="logo_light" id="logo_light"    
+                    <x-input-label for="Logo" :value="__('Edit Image')" />
+                    <input type="file" name="image" id="image"    
                         class="block w-full mt-1 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-slate-800 file:text-white hover:file:bg-slate-700" />
-                    <x-input-error :messages="$errors->get('logo_light')" class="mt-2" /> 
+                    <x-input-error :messages="$errors->get('image')" class="mt-2" /> 
                </div>
-                   <div class="mt-4">
+            <div class="mt-4">
                 <x-input-label :value="__('Current Image')" />
-                <img src="{{$logo->logo_light}}" 
-                     alt="Current Slider Image" class="h-20 mt-2 w-35  rounded">
-            </div>
-
-                 <div class="mt-4">
-                    <x-input-label for="logo_dark" :value="__('Upload Image')" />
-                    <input type="file" name="logo_dark" id="logo_dark"    
-                        class="block w-full mt-1 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-slate-800 file:text-white hover:file:bg-slate-700" />
-                    <x-input-error :messages="$errors->get('logo_light')" class="mt-2" /> 
-               </div> 
-                <div class="mt-4">
-                <x-input-label :value="__('Current Image')" />
-                <img src="{{ $logo->logo_dark }}" 
-                     alt="Current Logo Image" class="h-40 w-35 mt-2 rounded">
+                  <img src="{{ asset('storage/' . $logo->image) }}" 
+                     alt="Current Logo Image" class="w-42 h-12 mt-2 rounded">
             </div>
 
          

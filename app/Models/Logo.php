@@ -7,7 +7,7 @@ use App\Models\User;
 class Logo extends Model
 {
     //
-    protected $fillable=['logo_light','user_id','logo_dark'];
+    protected $fillable=['image','user_id'];
 
 
     public function user(){
@@ -16,3 +16,4 @@ class Logo extends Model
 
     
 }
+

@@ -5,21 +5,12 @@
     <!-- main content  -->
     <div id="main-content" class="h-svh w-full overflow-y-auto p-4 bg-white dark:bg-neutral-950">
           <form method="POST" action="{{ route('logo.store') }}" enctype="multipart/form-data">
-                @csrf
+            @csrf
             <div class="mt-4">
-                    <x-input-label for="logo_light" :value="__('Upload Logo Light')" />
-                    <input type="file" name="logo_light" id="logo_light"    
+                    <x-input-label for="logo" :value="__('Upload Logo ')" />
+                    <input type="file" name="image" id="image" multiple  
                         class="block w-full mt-1 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-slate-800 file:text-white hover:file:bg-slate-700" />
-                    <x-input-error :messages="$errors->get('logo_light')" class="mt-2" /> 
-               </div>
-                  <img id="previewOne" class="my-4 w-20 h-20" src="" alt="Image preview will appear here">
-
-        
-            <div class="mt-4">
-                    <x-input-label for="logo_dark" :value="__('Upload Logo Dark')" />
-                    <input type="file" name="logo_dark" id="logo_dark" multiple  
-                        class="block w-full mt-1 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-slate-800 file:text-white hover:file:bg-slate-700" />
-                    <x-input-error :messages="$errors->get('logo_dark')" class="mt-2" /> 
+                    <x-input-error :messages="$errors->get('image')" class="mt-2" /> 
                </div>
                   <img id="previewTwo" class="my-4 w-20 h-20" src="" alt="Image preview will appear here">
 

@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('logos', function (Blueprint $table) {
+            //
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained();
-            $table->string('logo_light')->nullable();
-            $table->string('logo_dark')->nullable();
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +25,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('logos');
+    Schema::dropIfExists(table: 'logos');
+
     }
 };

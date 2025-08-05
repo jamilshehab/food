@@ -13,17 +13,16 @@
     <!-- Start Navbar -->
       <nav id="topnav" class="defaultscroll is-sticky">
         <div class="container relative">
-            {{-- <a class="logo" href="#home">
+            <a class="logo" href="#home">
                 <span class="inline-block dark:hidden">
-                    <img src="{{$logo->logo_dark}}" class="l-dark" alt="">
+                    <img src="{{ asset('storage/' . $logo->image) }}" class="l-dark" alt="">
                 </span>
-            </a> --}}
+            </a>
 
             <a class="logo" href="#home">
-                {{-- Light mode logo --}}
-                {{-- <span class="inline-block dark:hidden">
-                 <img src="{{$logo->logo_light }}" class="l-light" alt="Logo Light">       
-                </span> --}}
+                 <span class="inline-block dark:hidden">
+                 <img src="{{ asset('storage/' . $logo->image) }}" class="l-light" alt="Logo Light">       
+                </span>
 
                 <!-- End Logo container-->
 
@@ -63,7 +62,7 @@
                         </li>
                        @endcan
                        @can('is-client')
-                           <div class="hidden sm:flex sm:items-center sm:ms-6">
+                           <div class="  sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
@@ -81,7 +80,6 @@
    <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
@@ -90,7 +88,7 @@
                         </form>
                     </x-slot>
                 </x-dropdown>
-            </div>
+                       </div>
                       @endcan
                     </ul>
                 </div>

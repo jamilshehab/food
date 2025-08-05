@@ -10,8 +10,7 @@
                 <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-sm">
                     <thead class="bg-gray-100">
                         <tr>
-                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Logo Dark</th>
-                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Logo Light</th>
+                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Logo</th>
 
 
                              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Submitted On</th>
@@ -21,21 +20,10 @@
                     <tbody class="divide-y divide-gray-200">
                              <tr class="hover:bg-gray-50">
                                 <td class="px-6 py-4 text-sm text-gray-800">
-                                   
-                                        <img src=" {{$logo->logo_light}}" 
-                                             alt="Logo Image" 
-                                             class="w-16 h-auto rounded-md">
-                             
-                                </td>
-
-                                     <td class="px-6 py-4 text-sm text-gray-800">
-                                     
-                                        <img src="{{$logo->logo_dark}}" 
-                                             alt="Logo Image" 
-                                             class="w-16 h-auto rounded-md">
-                                  
-                                </td>
-                                
+                                  <img src="{{ asset('storage/' . $logo->image) }}" 
+                                   alt="Logo Image" 
+                                   class="w-32 h-auto rounded-md">
+                                </td>            
                                 <td class="px-6 py-4 text-sm text-gray-600">
                                     {{ $logo->created_at->format('M d, Y H:i') }}
                                 </td>
