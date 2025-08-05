@@ -5,3 +5,7 @@ open hours | phone number | email | content | social links
 open hours : make it flexible 
 
 closed hours : make it flexible
+
+add social links that are dynamic using images that are svg
+
+make the menu customizable and flexible so I can add and edit the items 
